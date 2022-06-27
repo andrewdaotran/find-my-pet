@@ -14,6 +14,7 @@ const PetSchema = mongoose.Schema({
 	lostOrFound: String,
 	city: String,
 	state: String,
+	user: String,
 	// 	comments: {
 	//    type: Schema.Types.ObjectId,
 	//    ref: 'users'
