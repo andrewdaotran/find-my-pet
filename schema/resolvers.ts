@@ -53,6 +53,14 @@ const resolvers = {
 				console.log(error)
 			}
 		},
+		users: async () => {
+			try {
+				const users = await UserModel.find()
+				return users
+			} catch (error) {
+				console.log(error)
+			}
+		},
 	},
 	Mutation: {
 		createPet: async (parent, args) => {
@@ -83,10 +91,16 @@ const resolvers = {
 				console.log(error)
 			}
 		},
-		createUser: async (parent, args) => {
+		createOrFindUser: async (parent, args) => {
 			const userData = args.input
-			const newUser = new UserModel(userData)
 			try {
+				// check if user alraedy exists
+				const user = await UserModel.findOne({ sub: userData.sub })
+				console.log(user)
+				if (user) {
+					return user
+				}
+				const newUser = new UserModel(userData)
 				await newUser.save()
 				return newUser
 			} catch (error) {

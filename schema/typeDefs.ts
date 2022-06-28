@@ -8,19 +8,22 @@ const typeDefs = gql`
 		foundPets: [Pet]
 		lostPets: [Pet]
 		user(id: ID!): User
+		users: [User]
 	}
 
 	type Mutation {
 		createPet(input: CreatePetInput!): Pet
 		updatePet(input: UpdatePetInput!): Pet
-		createUser(input: CreateUserInput!): User
+		createOrFindUser(input: CreateUserInput!): User
 	}
 
 	type User {
 		id: ID!
 		email: String
+		email_verified: Boolean
 		family_name: String
 		given_name: String
+		locale: String
 		name: String
 		nickname: String
 		picture: String
@@ -32,8 +35,10 @@ const typeDefs = gql`
 
 	input CreateUserInput {
 		email: String
+		email_verified: Boolean
 		family_name: String
 		given_name: String
+		locale: String
 		name: String
 		nickname: String
 		picture: String
