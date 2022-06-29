@@ -1,7 +1,7 @@
 import PetPageRedirectBox from '../components/PetPageRedirectBox'
 
-// import {Link} from 'next/link'
-const Link = require('next/link')
+import Link from 'next/link'
+
 const { useUser } = require('@auth0/nextjs-auth0')
 
 const {
@@ -48,15 +48,43 @@ export default function Home() {
 	}
 
 	return (
-		<div className=' mx-6 border-black border grid justify-items-center'>
-			<h1 className='justify-center'>
+		<div className=' mx-6  grid justify-items-center mt-32'>
+			<h1 className='justify-center text-3xl mb-12'>
 				Welcome to the <span className='text-red-500'>Find My Pet</span> App
 			</h1>
-			<div className='grid p-2 grid-cols-3 gap-6'>
-				<PetPageRedirectBox {...boxData.foundPets} />
-				<PetPageRedirectBox {...boxData.lostPets} />
-				<PetPageRedirectBox {...boxData.lostAndFound} />
+			<div className='grid p-4 grid-cols-3 gap-6'>
+				<Link href={boxData.foundPets.redirect}>
+					<a>
+						<PetPageRedirectBox {...boxData.foundPets} />
+					</a>
+				</Link>
+				<Link href={boxData.lostPets.redirect}>
+					<a>
+						<PetPageRedirectBox {...boxData.lostPets} />
+					</a>
+				</Link>
+				<Link href={boxData.lostAndFound.redirect}>
+					<a>
+						<PetPageRedirectBox {...boxData.lostAndFound} />
+					</a>
+				</Link>
 			</div>
+
+			{/* render out user boxes if user is logged in */}
+			{user ? (
+				<div className='grid p-4 grid-cols-2 gap-6'>
+					<Link href={boxData.foundPets.redirect}>
+						<a>
+							<PetPageRedirectBox {...userBoxData.foundPets} />
+						</a>
+					</Link>
+					<Link href={boxData.foundPets.redirect}>
+						<a>
+							<PetPageRedirectBox {...userBoxData.lostPets} />
+						</a>
+					</Link>
+				</div>
+			) : null}
 		</div>
 	)
 }
