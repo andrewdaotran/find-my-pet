@@ -45,8 +45,10 @@ const resolvers = {
 			}
 		},
 		user: async (parent, args) => {
+			// const userSub = args.sub
 			const userId = args.id
 			try {
+				// const user = await UserModel.find({ sub: userSub })
 				const user = await UserModel.findById(userId)
 				return user
 			} catch (error) {

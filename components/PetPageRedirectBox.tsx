@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 interface Props {
 	title: String
 	description: String
@@ -7,14 +9,18 @@ interface Props {
 const PetPageRedirectBox = ({ title, description, redirect }: Props) => {
 	const url = `http://localhost:3000/${redirect}`
 	return (
-		<div className='max-w-xs'>
-			<div className='border border-black p-2 shadow-md rounded-md h-32'>
-				<div className='grid justify-items-center gap-2'>
-					<h1 className='text-xl font-bold'>{title}</h1>
-					<h1>{description}</h1>
+		<Link href={`${redirect}`}>
+			<a>
+				<div className='max-w-xs'>
+					<div className='border border-black p-2 shadow-md rounded-md h-32'>
+						<div className='grid justify-items-center gap-2'>
+							<h1 className='text-xl font-bold'>{title}</h1>
+							<h1>{description}</h1>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
+			</a>
+		</Link>
 	)
 }
 

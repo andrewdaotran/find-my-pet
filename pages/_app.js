@@ -1,13 +1,12 @@
 import '../styles/globals.css'
 import { UserProvider } from '@auth0/nextjs-auth0'
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client'
+import { useApollo } from '../apollo/apollo-client'
+// import client from '../apollo/apollo-client'
 import Navbar from '../components/Navbar'
 
 function MyApp({ Component, pageProps }) {
-	const client = new ApolloClient({
-		cache: new InMemoryCache(),
-		uri: 'http://localhost:3000/api/graphql',
-	})
+	const client = useApollo(pageProps)
 	return (
 		<ApolloProvider client={client}>
 			<UserProvider>

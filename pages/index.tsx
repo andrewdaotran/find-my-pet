@@ -48,41 +48,21 @@ export default function Home() {
 	}
 
 	return (
-		<div className=' mx-6  grid justify-items-center mt-32'>
+		<div className=' mx-6  grid justify-items-center mt-12 md:mt-32'>
 			<h1 className='justify-center text-3xl mb-12'>
 				Welcome to the <span className='text-red-500'>Find My Pet</span> App
 			</h1>
-			<div className='grid p-4 grid-cols-3 gap-6'>
-				<Link href={boxData.foundPets.redirect}>
-					<a>
-						<PetPageRedirectBox {...boxData.foundPets} />
-					</a>
-				</Link>
-				<Link href={boxData.lostPets.redirect}>
-					<a>
-						<PetPageRedirectBox {...boxData.lostPets} />
-					</a>
-				</Link>
-				<Link href={boxData.lostAndFound.redirect}>
-					<a>
-						<PetPageRedirectBox {...boxData.lostAndFound} />
-					</a>
-				</Link>
+			<div className='grid p-4 sm:grid-cols-2 gap-6 md:grid-cols-3'>
+				<PetPageRedirectBox {...boxData.foundPets} />
+				<PetPageRedirectBox {...boxData.lostPets} />
+				<PetPageRedirectBox {...boxData.lostAndFound} />
 			</div>
 
 			{/* render out user boxes if user is logged in */}
 			{user ? (
-				<div className='grid p-4 grid-cols-2 gap-6'>
-					<Link href={boxData.foundPets.redirect}>
-						<a>
-							<PetPageRedirectBox {...userBoxData.foundPets} />
-						</a>
-					</Link>
-					<Link href={boxData.foundPets.redirect}>
-						<a>
-							<PetPageRedirectBox {...userBoxData.lostPets} />
-						</a>
-					</Link>
+				<div className='grid p-4 sm:grid-cols-2 gap-6'>
+					<PetPageRedirectBox {...userBoxData.foundPets} />
+					<PetPageRedirectBox {...userBoxData.lostPets} />
 				</div>
 			) : null}
 		</div>
