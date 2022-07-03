@@ -34,10 +34,52 @@ const resolvers = {
 				console.log(error)
 			}
 		},
+		foundPetsByItem: async (parent, args) => {
+			const category = args.item
+			const searchTerm = args.searchTerm
+			try {
+				// if (category === 'all') {
+				// 	const pets = await PetModel.find({
+				// 		lostOrFound: 'found',
+				// 	})
+				// 	console.log('whats up')
+				// 	return pets
+				// }
+				// currently not querying for 'all' because it is being taken from the cache
+				const pets = await PetModel.find({
+					lostOrFound: 'found',
+					[category]: searchTerm,
+				})
+				return pets
+			} catch (error) {
+				console.log(error)
+			}
+		},
 		lostPets: async () => {
 			try {
 				const pets = await PetModel.find({
 					lostOrFound: 'lost',
+				})
+				return pets
+			} catch (error) {
+				console.log(error)
+			}
+		},
+		lostPetsByItem: async (parent, args) => {
+			const category = args.item
+			const searchTerm = args.searchTerm
+			try {
+				// if (category === 'all') {
+				// 	const pets = await PetModel.find({
+				// 		lostOrFound: 'found',
+				// 	})
+				// 	console.log('whats up')
+				// 	return pets
+				// }
+				// currently not querying for 'all' because it is being taken from the cache
+				const pets = await PetModel.find({
+					lostOrFound: 'lost',
+					[category]: searchTerm,
 				})
 				return pets
 			} catch (error) {

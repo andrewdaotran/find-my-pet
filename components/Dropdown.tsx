@@ -10,7 +10,11 @@ const Dropdown = ({ data, setFunction, value }: Props) => {
 	return (
 		<select onChange={(e) => setFunction(e.target.value)} value={value}>
 			{data.map((category) => {
-				return <option value={category}>{category}</option>
+				return (
+					<option key={category} value={category}>
+						{category}
+					</option>
+				)
 			})}
 		</select>
 	)

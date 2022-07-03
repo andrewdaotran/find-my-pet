@@ -6,7 +6,9 @@ const typeDefs = gql`
 		pets: [Pet]
 		pet(id: ID!): Pet
 		foundPets: [Pet]
+		foundPetsByItem(item: String!, searchTerm: String!): [Pet]
 		lostPets: [Pet]
+		lostPetsByItem(item: String!, searchTerm: String!): [Pet]
 		user(id: ID!): User
 		users: [User]
 	}
