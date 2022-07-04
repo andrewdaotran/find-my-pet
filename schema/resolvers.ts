@@ -87,11 +87,13 @@ const resolvers = {
 			}
 		},
 		user: async (parent, args) => {
-			// const userSub = args.sub
-			const userId = args.id
+			const userSub = args.sub
+			// const userId = args.id
+
 			try {
-				// const user = await UserModel.find({ sub: userSub })
-				const user = await UserModel.findById(userId)
+				const user = await UserModel.find({ sub: userSub })
+				// const user = await UserModel.findById(userId)
+				console.log(user)
 				return user
 			} catch (error) {
 				console.log(error)

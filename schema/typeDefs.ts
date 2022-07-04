@@ -9,7 +9,7 @@ const typeDefs = gql`
 		foundPetsByItem(item: String!, searchTerm: String!): [Pet]
 		lostPets: [Pet]
 		lostPetsByItem(item: String!, searchTerm: String!): [Pet]
-		user(id: ID!): User
+		user(sub: String!): User
 		users: [User]
 	}
 

@@ -1,7 +1,8 @@
 import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { addApolloState, initializeApollo } from '../../../apollo/apollo-client'
 import { UserData } from '../../../typings'
-import { userQuery } from '../../../apollo/userQueries'
 
 interface Props {
 	user: UserData
@@ -10,6 +11,13 @@ interface Props {
 
 const User = ({ user, userId }: Props) => {
 	console.log(user)
+	const router = useRouter()
+	console.log(router.query.userId)
+
+	// useEffect(() => {
+
+	// }, [])
+
 	return (
 		<div>
 			<h1>hello</h1>
