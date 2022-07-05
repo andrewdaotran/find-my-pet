@@ -9,15 +9,23 @@ export const UserContextProvider = ({ children }) => {
 		nickname: '',
 		picture: '',
 		sub: '',
+		id: '',
 	})
 
 	const storeUser = (email, name, nickname, picture, sub) => {
 		setUser({
+			...user,
 			email,
 			name,
 			nickname,
 			picture,
 			sub,
+		})
+	}
+	const setUserId = (id) => {
+		setUser({
+			...user,
+			id,
 		})
 	}
 	const clearUser = () => {
@@ -27,10 +35,11 @@ export const UserContextProvider = ({ children }) => {
 			nickname: '',
 			picture: '',
 			sub: '',
+			id: '',
 		})
 	}
 	return (
-		<UserContext.Provider value={{ user, storeUser, clearUser }}>
+		<UserContext.Provider value={{ user, storeUser, clearUser, setUserId }}>
 			{children}
 		</UserContext.Provider>
 	)

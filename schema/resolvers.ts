@@ -91,9 +91,8 @@ const resolvers = {
 			// const userId = args.id
 
 			try {
-				const user = await UserModel.find({ sub: userSub })
+				const user = await UserModel.findOne({ sub: userSub })
 				// const user = await UserModel.findById(userId)
-				console.log(user)
 				return user
 			} catch (error) {
 				console.log(error)

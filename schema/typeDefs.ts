@@ -51,25 +51,26 @@ const typeDefs = gql`
 	type Pet {
 		id: ID!
 		name: String
-		age: Int
-		gender: String
-		species: String
+		age: String
+		gender: Gender
+		species: Species!
 		breed: String
 		dateFound: String
 		dateLost: String
 		description: String!
 		image: String
 		isReturned: Boolean
-		lostOrFound: String!
+		lostOrFound: LostOrFound!
 		city: String
 		state: String
+		location: String
 		user: String
 	}
 
 	input CreatePetInput {
 		name: String
-		age: Int
-		gender: String
+		age: String
+		gender: Gender
 		species: String
 		breed: String
 		dateFound: String
@@ -77,17 +78,18 @@ const typeDefs = gql`
 		description: String!
 		image: String
 		isReturned: Boolean
-		lostOrFound: String!
+		lostOrFound: LostOrFound!
 		city: String
 		state: String
 		user: String
+		location: String
 	}
 
 	input UpdatePetInput {
 		id: String!
 		name: String
-		age: Int
-		gender: String
+		age: String
+		gender: Gender
 		species: String
 		breed: String
 		dateFound: String
@@ -95,10 +97,31 @@ const typeDefs = gql`
 		description: String
 		image: String
 		isReturned: Boolean
-		lostOrFound: String
+		lostOrFound: LostOrFound
 		city: String
 		state: String
-		user: String
+		location: String
+	}
+
+	enum LostOrFound {
+		LOST
+		FOUND
+	}
+
+	enum Species {
+		ALL
+		DOG
+		CAT
+		BIRD
+		RABBIT
+		REPTILE
+		OTHER
+	}
+
+	enum Gender {
+		NA
+		MALE
+		FEMALE
 	}
 `
 

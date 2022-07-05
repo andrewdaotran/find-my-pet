@@ -14,8 +14,8 @@ interface User {
 }
 
 const Navbar = ({ children }) => {
-	const { user: auth0User, isLoading, error } = useUser()
-	const { user, storeUser, clearUser } = useContext(UserContext)
+	const { user: auth0User } = useUser()
+	const { user, storeUser, clearUser, setUserId } = useContext(UserContext)
 
 	useEffect(() => {
 		if (auth0User) {
@@ -26,14 +26,20 @@ const Navbar = ({ children }) => {
 				auth0User.picture,
 				auth0User.sub
 			)
+		} else {
+			clearUser()
 		}
 	}, [auth0User])
 
-	const { data: userData, loading } = useQuery(USER_QUERY, {
+	const { data: userData } = useQuery(USER_QUERY, {
 		variables: { sub: user.sub },
 	})
 
-	console.log(userData)
+	useEffect(() => {
+		if (userData) {
+			setUserId(userData.user?.id)
+		}
+	}, [userData])
 
 	return (
 		<>
@@ -46,11 +52,11 @@ const Navbar = ({ children }) => {
 									<h1 className=''>logo</h1>
 								</a>
 							</Link>
-							{/* {loading ? null : (
-								<Link href={`/user/${userData.id}`}>
+							{userData && auth0User ? (
+								<Link href={`/user/${userData.user.id}`}>
 									<a>{user.name}</a>
 								</Link>
-							)} */}
+							) : null}
 						</div>
 						<div className='flex'>
 							{!auth0User ? (
