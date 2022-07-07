@@ -27,7 +27,7 @@ const resolvers = {
 		foundPets: async () => {
 			try {
 				const pets = await PetModel.find({
-					lostOrFound: 'found',
+					lostOrFound: 'Found',
 				})
 				return pets
 			} catch (error) {
@@ -38,16 +38,16 @@ const resolvers = {
 			const category = args.item
 			const searchTerm = args.searchTerm
 			try {
-				// if (category === 'all') {
+				// if (category === 'All') {
 				// 	const pets = await PetModel.find({
-				// 		lostOrFound: 'found',
+				// 		lostOrFound: 'Found',
 				// 	})
-				// 	console.log('whats up')
+
 				// 	return pets
 				// }
 				// currently not querying for 'all' because it is being taken from the cache
 				const pets = await PetModel.find({
-					lostOrFound: 'found',
+					lostOrFound: 'Found',
 					[category]: searchTerm,
 				})
 				return pets
@@ -58,7 +58,7 @@ const resolvers = {
 		lostPets: async () => {
 			try {
 				const pets = await PetModel.find({
-					lostOrFound: 'lost',
+					lostOrFound: 'Lost',
 				})
 				return pets
 			} catch (error) {
@@ -69,16 +69,14 @@ const resolvers = {
 			const category = args.item
 			const searchTerm = args.searchTerm
 			try {
-				// if (category === 'all') {
+				// if (category === 'All') {
 				// 	const pets = await PetModel.find({
 				// 		lostOrFound: 'found',
 				// 	})
-				// 	console.log('whats up')
 				// 	return pets
 				// }
-				// currently not querying for 'all' because it is being taken from the cache
 				const pets = await PetModel.find({
-					lostOrFound: 'lost',
+					lostOrFound: 'Lost',
 					[category]: searchTerm,
 				})
 				return pets
@@ -169,7 +167,7 @@ const resolvers = {
 			const user = parent.id
 			try {
 				const pets = await PetModel.find({
-					lostOrFound: 'found',
+					lostOrFound: 'Found',
 					user,
 				})
 				return pets
@@ -181,7 +179,7 @@ const resolvers = {
 			const user = parent.id
 			try {
 				const pets = await PetModel.find({
-					lostOrFound: 'lost',
+					lostOrFound: 'Lost',
 					user,
 				})
 				return pets

@@ -76,7 +76,7 @@ export const LostPetsByItemQuery = gql`
 			gender
 			species
 			breed
-			dateFound
+			dateLost
 			description
 			image
 			isReturned

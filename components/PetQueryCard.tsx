@@ -15,7 +15,7 @@ const PetQueryCard = ({ pet }: Props) => {
 						<div className='grid justify-items-center gap-2'>
 							<h3 className='text-xl font-bold'>{pet.name}</h3>
 							<h3>
-								{pet.lostOrFound === 'found'
+								{pet.lostOrFound === 'Found'
 									? `Date Found: ${pet.dateFound}`
 									: `Date Lost: ${pet.dateLost}`}
 							</h3>
