@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import React, { useContext, useEffect, useState } from 'react'
 import { format } from 'date-fns'
+import FileBase from 'react-file-base64'
 
 import { CREATE_PET } from '../apollo/petQueries'
 import UserContext from '../context/userContext'
@@ -12,6 +13,7 @@ import {
 	convertCase,
 } from '../utils'
 import Dropdown from './Dropdown'
+import Image from 'next/image'
 
 interface InputError {
 	isEmpty: boolean
@@ -42,15 +44,17 @@ const PetForm = () => {
 	const [state, setState] = useState<string>('')
 	const [city, setCity] = useState<string>('')
 	const [image, setImage] = useState<string>('')
+	const [imageError, setImageError] = useState<InputError>({
+		isEmpty: true,
+		throwErrorMessage: false,
+	})
 
 	const { user } = useContext(UserContext)
-
-	// const reader = new FileReader()
-	// console.log(reader)
 
 	const [createPet, { data: petData, loading: petLoading, error: petError }] =
 		useMutation(CREATE_PET)
 
+	// changes state of input fields being empty to guard submitting without these fields
 	useEffect(() => {
 		if (lostOrFound !== 'Set Lost or Found') {
 			setLostOrFoundError({ ...lostOrFoundError, isEmpty: false })
@@ -62,13 +66,17 @@ const PetForm = () => {
 		} else {
 			setDescriptionError({ ...descriptionError, isEmpty: true })
 		}
-
 		if (species !== 'Set Species') {
 			setSpeciesError({ ...speciesError, isEmpty: false })
 		} else {
 			setSpeciesError({ ...speciesError, isEmpty: true })
 		}
-	}, [lostOrFound, description, species])
+		if (image !== '') {
+			setImageError({ ...imageError, isEmpty: false })
+		} else {
+			setImageError({ ...imageError, isEmpty: true })
+		}
+	}, [lostOrFound, description, species, image])
 
 	const handleSubmitPet = (e) => {
 		e.preventDefault()
@@ -82,11 +90,15 @@ const PetForm = () => {
 		if (speciesError.isEmpty) {
 			setSpeciesError({ ...speciesError, throwErrorMessage: true })
 		}
+		if (imageError.isEmpty) {
+			setImageError({ ...imageError, throwErrorMessage: true })
+		}
 
 		if (
 			speciesError.isEmpty ||
 			descriptionError.isEmpty ||
-			lostOrFoundError.isEmpty
+			lostOrFoundError.isEmpty ||
+			imageError.isEmpty
 		) {
 			return
 		}
@@ -113,9 +125,10 @@ const PetForm = () => {
 				},
 			},
 		})
-		setLostOrFoundError({ ...lostOrFoundError, isEmpty: true })
-		setDescriptionError({ ...descriptionError, isEmpty: true })
-		setSpeciesError({ ...speciesError, isEmpty: true })
+		setLostOrFoundError({ isEmpty: true, throwErrorMessage: false })
+		setDescriptionError({ isEmpty: true, throwErrorMessage: false })
+		setSpeciesError({ isEmpty: true, throwErrorMessage: false })
+		setImageError({ isEmpty: true, throwErrorMessage: false })
 		setSpecies('Set Species')
 		setBreed('')
 		setName('')
@@ -128,6 +141,11 @@ const PetForm = () => {
 		setCity('')
 		setImage('')
 	}
+
+	const handleImageChange = ({ base64 }) => setImage(base64)
+
+	const handleRemoveImage = (e) => setImage('')
+
 	return (
 		<div>
 			<form onSubmit={handleSubmitPet}>
@@ -242,15 +260,22 @@ const PetForm = () => {
 					<h4>
 						Image<span className='text-red-500'>*</span>:
 					</h4>
-					<input
-						type='file'
-						className='border border-black rounded-md'
-						value={image}
-						onChange={(e) => setImage(e.target.value)}
-						accept='image/*'
-					/>
-					<div className=''></div>
+					<FileBase type='file' multiple={false} onDone={handleImageChange} />
 				</div>
+
+				{image && (
+					<div className=''>
+						<div className='flex gap-4'>
+							<h4>Image Preview:</h4>
+							<div className='border border-black w-36 h-36 relative'>
+								<Image src={image} layout='fill' className='object-cover' />
+							</div>
+						</div>
+						<button onClick={handleRemoveImage} className=''>
+							Remove Image
+						</button>
+					</div>
+				)}
 
 				<button type='submit'>Submit</button>
 			</form>
