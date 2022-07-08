@@ -12,3 +12,47 @@ export const USER_QUERY = gql`
 		}
 	}
 `
+
+export const USER_FOUND_PETS_QUERY = gql`
+	query User($sub: String!) {
+		user(sub: $sub) {
+			id
+			foundPets {
+				age
+				breed
+				species
+				description
+				dateFound
+				image
+				isReturned
+				city
+				state
+				gender
+				name
+				id
+			}
+		}
+	}
+`
+
+export const USER_LOST_PETS_QUERY = gql`
+	query User($sub: String!) {
+		user(sub: $sub) {
+			id
+			lostPets {
+				age
+				breed
+				species
+				description
+				dateFound
+				image
+				isReturned
+				city
+				state
+				gender
+				name
+				id
+			}
+		}
+	}
+`

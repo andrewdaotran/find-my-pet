@@ -109,6 +109,7 @@ const resolvers = {
 		createPet: async (parent, args) => {
 			const petData = args.input
 			const newPet = new PetModel(petData)
+
 			try {
 				await newPet.save()
 				return newPet
@@ -139,29 +140,29 @@ const resolvers = {
 			try {
 				// check if user alraedy exists
 				const user = await UserModel.findOne({ sub: userData.sub })
-				console.log(user)
 				if (user) {
 					return user
 				}
 				const newUser = new UserModel(userData)
 				await newUser.save()
+
 				return newUser
 			} catch (error) {
 				console.log(error)
 			}
 		},
 	},
-	Pet: {
-		user: async (parent, args) => {
-			const userId = args.id
-			try {
-				const user = await UserModel.findById(userId)
-				return user
-			} catch (error) {
-				console.log(error)
-			}
-		},
-	},
+	// Pet: {
+	// 	user: async (parent, args) => {
+	// 		const userId = args.id
+	// 		try {
+	// 			const user = await UserModel.findById(userId)
+	// 			return user
+	// 		} catch (error) {
+	// 			console.log(error)
+	// 		}
+	// 	},
+	// },
 	User: {
 		foundPets: async (parent, args) => {
 			const user = parent.id

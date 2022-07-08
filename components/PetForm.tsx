@@ -15,7 +15,6 @@ import {
 import Dropdown from './Dropdown'
 import Image from 'next/image'
 import InputEmptyError from './InputEmptyError'
-import PopupModal from './PopupModal'
 
 interface InputError {
 	isEmpty: boolean
@@ -159,7 +158,8 @@ const PetForm = () => {
 			<form onSubmit={handleSubmitPet}>
 				<div className='flex gap-4'>
 					<h4>
-						Lost or Found<span className='text-red-500'>*</span>:
+						<span className='font-bold'>Lost or Found</span>
+						<span className='text-red-500'>*</span>:
 					</h4>
 					<Dropdown
 						data={lostOrFoundList}
@@ -170,9 +170,15 @@ const PetForm = () => {
 
 				<div className='flex gap-4'>
 					<h4>
-						{lostOrFound === 'Lost' || lostOrFound === 'Set Lost or Found'
-							? 'Date Lost'
-							: 'Date Found'}
+						{lostOrFound === 'Lost' || lostOrFound === 'Set Lost or Found' ? (
+							<>
+								<span className='font-bold'>Date Lost</span>:
+							</>
+						) : (
+							<>
+								<span className='font-bold'>Date Found</span>:
+							</>
+						)}
 					</h4>
 
 					<input
@@ -187,7 +193,8 @@ const PetForm = () => {
 
 				<div className='flex gap-4'>
 					<h4>
-						Species<span className='text-red-500'>*</span>:
+						<span className='font-bold'>Species</span>
+						<span className='text-red-500'>*</span>:
 					</h4>
 					<Dropdown
 						data={speciesList}
@@ -200,7 +207,9 @@ const PetForm = () => {
 				</div>
 
 				<div className='flex gap-4'>
-					<h4>Breed:</h4>
+					<h4>
+						<span className='font-bold'>Breed</span>:
+					</h4>
 					<input
 						type='text'
 						className='border border-black rounded-md'
@@ -210,7 +219,9 @@ const PetForm = () => {
 				</div>
 
 				<div className='flex gap-4'>
-					<h4>Name:</h4>
+					<h4>
+						<span className='font-bold'>Name</span>:
+					</h4>
 					<input
 						type='text'
 						className='border border-black rounded-md'
@@ -220,12 +231,16 @@ const PetForm = () => {
 				</div>
 
 				<div className='flex gap-4 '>
-					<h4>Gender:</h4>
+					<h4>
+						<span className='font-bold'>Gender</span>:
+					</h4>
 					<Dropdown data={genderList} setFunction={setGender} value={gender} />
 				</div>
 
 				<div className='flex gap-4'>
-					<h4>Age:</h4>
+					<h4>
+						<span className='font-bold'>Age</span>:
+					</h4>
 					<input
 						type='text'
 						className='border border-black rounded-md'
@@ -236,7 +251,8 @@ const PetForm = () => {
 
 				<div className='flex gap-4'>
 					<h4>
-						Description<span className='text-red-500'>*</span> :
+						<span className='font-bold'>Description</span>
+						<span className='text-red-500'>*</span> :
 					</h4>
 					<textarea
 						className='border border-black rounded-md resize-none h-32 w-80'
@@ -251,18 +267,30 @@ const PetForm = () => {
 				{/* location */}
 				<div className='flex gap-4 '>
 					<h4>
-						{lostOrFound === 'Lost' || lostOrFound === 'Set Lost or Found'
-							? 'State Lost'
-							: 'State Found'}
+						{lostOrFound === 'Lost' || lostOrFound === 'Set Lost or Found' ? (
+							<>
+								<span className='font-bold'>State Lost</span>:
+							</>
+						) : (
+							<>
+								<span className='font-bold'>State Found</span>:
+							</>
+						)}
 					</h4>
 					<Dropdown data={statesList} setFunction={setState} value={state} />
 				</div>
 
 				<div className='flex gap-4'>
 					<h4>
-						{lostOrFound === 'Lost' || lostOrFound === 'Set Lost or Found'
-							? 'City Lost'
-							: 'City Found'}
+						{lostOrFound === 'Lost' || lostOrFound === 'Set Lost or Found' ? (
+							<>
+								<span className='font-bold'>City Lost</span>:
+							</>
+						) : (
+							<>
+								<span className='font-bold'>City Found</span>:
+							</>
+						)}
 					</h4>
 					<input
 						type='text'
@@ -275,7 +303,8 @@ const PetForm = () => {
 				{/* image */}
 				<div className='flex gap-4'>
 					<h4>
-						Image<span className='text-red-500'>*</span>:
+						<span className='font-bold'>Image</span>
+						<span className='text-red-500'>*</span>:
 					</h4>
 					<input
 						type='file'
