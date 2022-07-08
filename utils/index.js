@@ -1,8 +1,68 @@
+import Compressor from 'compressorjs'
+
 export const convertCase = (str) => {
 	var lower = String(str).toLowerCase()
 	return lower.replace(/(^| )(\w)/g, function (x) {
 		return x.toUpperCase()
 	})
+}
+
+export const compressImage = (image, setImage, setIsImageTooLarge) => {
+	new Compressor(image, {
+		quality: 0.4, // 0.6 can also be used, but its not recommended to go below.
+		success: (compressedResult) => {
+			if (compressedResult.size > 705000) {
+				setIsImageTooLarge(true)
+				setImage('')
+				return
+			}
+			setIsImageTooLarge(false)
+			imageToBase64(compressedResult, setImage)
+		},
+	})
+}
+
+export const imageToBase64 = (image, setImage) => {
+	let reader = new FileReader()
+	reader.readAsDataURL(image)
+	reader.onload = () => {
+		setImage(reader.result)
+	}
+	reader.onerror = function (error) {
+		console.log('Error: ', error)
+	}
+}
+
+export const boxData = {
+	foundPets: {
+		title: 'Found Pets',
+		description: 'Click here to see all posts on pets that have been found',
+		redirect: '/pets/found-pets',
+	},
+	lostPets: {
+		title: 'Lost Pets',
+		description: 'Click here to see all posts on pets that have been lost',
+		redirect: '/pets/lost-pets',
+	},
+	lostAndFound: {
+		title: 'Lost and Found',
+		description:
+			'Click here to see all pets that have been turned over to a lost and found',
+		redirect: '/pets/lost-and-found',
+	},
+}
+
+export const userBoxData = {
+	foundPets: {
+		title: 'Your Found Pets',
+		description: 'All your found pets posts',
+		redirect: '/user/found-pets',
+	},
+	lostPets: {
+		title: 'Your Lost Pets',
+		description: 'All your lost pets posts',
+		redirect: '/user/lost-pets',
+	},
 }
 
 export const userSearchCategory = ['all', 'name', 'gender', 'species']

@@ -1,33 +1,33 @@
 export interface UserData {
 	id: !ID
-	email: String
-	email_verified?: Boolean
-	family_name?: String
-	given_name?: String
-	locale?: String
-	name: String
-	nickname?: String
-	picture?: String
-	sub: String
-	updated_at?: String
+	email: string
+	email_verified?: boolean
+	family_name?: string
+	given_name?: string
+	locale?: string
+	name: string
+	nickname?: string
+	picture?: string
+	sub: string
+	updated_at?: string
 	foundPets?: PetData[]
 	lostPets?: PetData[]
 }
 
 export interface PetData {
-	id: String
-	name?: String
-	age?: Number
-	gender?: String
-	species?: String
-	breed?: String
-	dateFound?: String
-	dateLost?: String
-	description?: String
-	image?: String
-	isReturned?: Boolean
-	lostOrFound?: String
-	city?: String
-	state?: String
-	user?: String
+	id: string
+	name?: string
+	age?: number
+	gender?: string
+	species?: string
+	breed?: string
+	dateFound?: string
+	dateLost?: string
+	description?: string
+	image?: string
+	isReturned?: boolean
+	lostOrFound?: string
+	city?: string
+	state?: string
+	user?: string
 }

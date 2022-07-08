@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const CREATE_PET = gql`
-	mutation ($input: CreatePetInput!) {
+	mutation CreatePet($input: CreatePetInput!) {
 		createPet(input: $input) {
 			id
 		}

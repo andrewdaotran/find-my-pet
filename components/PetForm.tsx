@@ -1,7 +1,6 @@
 import { useMutation } from '@apollo/client'
 import React, { useContext, useEffect, useState } from 'react'
 import { format } from 'date-fns'
-import FileBase from 'react-file-base64'
 
 import { CREATE_PET } from '../apollo/petQueries'
 import UserContext from '../context/userContext'
@@ -11,9 +10,12 @@ import {
 	genderList,
 	statesList,
 	convertCase,
+	compressImage,
 } from '../utils'
 import Dropdown from './Dropdown'
 import Image from 'next/image'
+import InputEmptyError from './InputEmptyError'
+import PopupModal from './PopupModal'
 
 interface InputError {
 	isEmpty: boolean
@@ -48,6 +50,7 @@ const PetForm = () => {
 		isEmpty: true,
 		throwErrorMessage: false,
 	})
+	const [isImageTooLarge, setIsImageTooLarge] = useState<boolean>(false)
 
 	const { user } = useContext(UserContext)
 
@@ -107,10 +110,11 @@ const PetForm = () => {
 		lostOrFound === 'Lost'
 			? (whichDate = 'dateLost')
 			: (whichDate = 'dateFound')
+
 		createPet({
 			variables: {
 				input: {
-					name: convertCase(name),
+					name: convertCase(name) || 'Uknown Name',
 					age,
 					gender,
 					species,
@@ -142,7 +146,11 @@ const PetForm = () => {
 		setImage('')
 	}
 
-	const handleImageChange = ({ base64 }) => setImage(base64)
+	const handleImageChange = (e) => {
+		const image = e.target.files[0]
+
+		compressImage(image, setImage, setIsImageTooLarge)
+	}
 
 	const handleRemoveImage = (e) => setImage('')
 
@@ -172,6 +180,9 @@ const PetForm = () => {
 						value={date}
 						onChange={(e) => setDate(e.target.value)}
 					/>
+					{lostOrFoundError.throwErrorMessage && (
+						<InputEmptyError message='Please specify lost or found' />
+					)}
 				</div>
 
 				<div className='flex gap-4'>
@@ -183,6 +194,9 @@ const PetForm = () => {
 						setFunction={setSpecies}
 						value={species}
 					/>
+					{speciesError.throwErrorMessage && (
+						<InputEmptyError message='Please enter a species' />
+					)}
 				</div>
 
 				<div className='flex gap-4'>
@@ -229,6 +243,9 @@ const PetForm = () => {
 						value={description}
 						onChange={(e) => setDescription(e.target.value)}
 					/>
+					{descriptionError.throwErrorMessage && (
+						<InputEmptyError message='Please enter a pet description' />
+					)}
 				</div>
 
 				{/* location */}
@@ -260,7 +277,18 @@ const PetForm = () => {
 					<h4>
 						Image<span className='text-red-500'>*</span>:
 					</h4>
-					<FileBase type='file' multiple={false} onDone={handleImageChange} />
+					<input
+						type='file'
+						accept='image/png, image/jpeg'
+						onChange={handleImageChange}
+					/>
+					<h4>
+						Only <span className='text-blue-500'>jpeg</span> and
+						<span className='text-blue-500'> png</span> files are accepted
+					</h4>
+					{imageError.throwErrorMessage && (
+						<InputEmptyError message='Please select an image' />
+					)}
 				</div>
 
 				{image && (
@@ -275,6 +303,10 @@ const PetForm = () => {
 							Remove Image
 						</button>
 					</div>
+				)}
+
+				{isImageTooLarge && (
+					<InputEmptyError message='Unfortunately your image is too large' />
 				)}
 
 				<button type='submit'>Submit</button>

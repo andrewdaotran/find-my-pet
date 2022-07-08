@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { PetData } from '../typings'
@@ -11,8 +12,15 @@ const PetQueryCard = ({ pet }: Props) => {
 		<Link href={`/pets/found-pets/${pet.id}`}>
 			<a>
 				<div className=' w-96 '>
-					<div className='border border-black p-2 shadow-md rounded-md'>
-						<div className='grid justify-items-center gap-2'>
+					<div className='border border-black shadow-md rounded-md'>
+						<div className='w-96 h-64 relative mb-4 '>
+							<Image
+								src={pet.image}
+								layout='fill'
+								className='rounded-t-md object-fill'
+							/>
+						</div>
+						<div className='grid justify-items-center gap-2 mb-4 '>
 							<h3 className='text-xl font-bold'>{pet.name}</h3>
 							<h3>
 								{pet.lostOrFound === 'Found'

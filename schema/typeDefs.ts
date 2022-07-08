@@ -63,7 +63,6 @@ const typeDefs = gql`
 		lostOrFound: String!
 		city: String
 		state: String
-
 		user: String
 	}
 

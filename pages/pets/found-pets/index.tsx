@@ -34,10 +34,6 @@ const FoundPets = ({}: Props) => {
 		setSearch('')
 	}
 
-	console.log(foundPetsByItem)
-	if (called) {
-	}
-
 	// return <div>hello</div>
 	return (
 		<>

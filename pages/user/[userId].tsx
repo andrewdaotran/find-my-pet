@@ -2,10 +2,12 @@ import { useQuery } from '@apollo/client'
 import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { addApolloState, initializeApollo } from '../../../apollo/apollo-client'
-import { USER_QUERY } from '../../../apollo/userQueries'
-import PetForm from '../../../components/PetForm'
-import { UserData } from '../../../typings'
+import { addApolloState, initializeApollo } from '../../apollo/apollo-client'
+import { USER_QUERY } from '../../apollo/userQueries'
+import PetForm from '../../components/PetForm'
+import PetPageRedirectBox from '../../components/PetPageRedirectBox'
+import { UserData } from '../../typings'
+import { userBoxData } from '../../utils'
 
 interface Props {
 	user: UserData
@@ -33,6 +35,10 @@ const User = ({ user, userIdParams }: Props) => {
 	return (
 		<div>
 			<PetForm />
+			<div className='grid p-4 sm:grid-cols-2 gap-6'>
+				<PetPageRedirectBox {...userBoxData.foundPets} />
+				<PetPageRedirectBox {...userBoxData.lostPets} />
+			</div>
 		</div>
 	)
 }
