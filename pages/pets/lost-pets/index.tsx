@@ -5,7 +5,7 @@ import PetQueryCard from '../../../components/PetQueryCard'
 import { LostPetsByItemQuery, LostPetsQuery } from '../../../apollo/petQueries'
 import { useLazyQuery, useQuery } from '@apollo/client'
 import Dropdown from '../../../components/Dropdown'
-import { userSearchCategory } from '../../../utils'
+import { convertCase, userSearchCategory } from '../../../utils'
 
 interface Props {}
 
@@ -23,7 +23,7 @@ const LostPets = ({}: Props) => {
 		fetchPetsByItem({
 			variables: {
 				item: category,
-				searchTerm: search,
+				searchTerm: convertCase(search),
 			},
 		})
 		setSearch('')
@@ -53,7 +53,13 @@ const LostPets = ({}: Props) => {
 				<div className='grid p-4  gap-6 mx-auto justify-items-center'>
 					{lostPetsByItem.lostPetsByItem[0] ? (
 						lostPetsByItem.lostPetsByItem.map((pet: PetData) => {
-							return <PetQueryCard key={String(pet.id)} pet={pet} />
+							return (
+								<PetQueryCard
+									key={String(pet.id)}
+									pet={pet}
+									navigateTo={`/pet/lost-pets/${pet.id}`}
+								/>
+							)
 						})
 					) : (
 						// If no pets that fit search term and category
@@ -67,7 +73,13 @@ const LostPets = ({}: Props) => {
 			lostPets[0] ? (
 				<div className='grid p-4  gap-6 mx-auto justify-items-center'>
 					{lostPets.map((pet: PetData) => {
-						return <PetQueryCard key={String(pet.id)} pet={pet} />
+						return (
+							<PetQueryCard
+								key={String(pet.id)}
+								pet={pet}
+								navigateTo={`/pet/lost-pets/${pet.id}`}
+							/>
+						)
 					})}
 				</div>
 			) : (

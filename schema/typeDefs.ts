@@ -7,8 +7,18 @@ const typeDefs = gql`
 		pet(id: ID!): Pet
 		foundPets: [Pet]
 		foundPetsByItem(item: String!, searchTerm: String!): [Pet]
+		foundPetsByUserAndItem(
+			id: String!
+			item: String!
+			searchTerm: String!
+		): [Pet]
 		lostPets: [Pet]
 		lostPetsByItem(item: String!, searchTerm: String!): [Pet]
+		lostPetsByUserAndItem(
+			id: String!
+			item: String!
+			searchTerm: String!
+		): [Pet]
 		user(sub: String!): User
 		users: [User]
 	}

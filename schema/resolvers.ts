@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
-// import PetModel from '../models/PetModel'
-// import UserModel from '../models/UserModel
+import PetModel from '../models/PetModel'
+import UserModel from '../models/UserModel'
 
-const PetModel = require('../models/PetModel.js')
-const UserModel = require('../models/UserModel.js')
+// const PetModel = require('../models/PetModel.js')
+// const UserModel = require('../models/UserModel.js')
 
 const resolvers = {
 	Query: {
@@ -38,14 +38,6 @@ const resolvers = {
 			const category = args.item
 			const searchTerm = args.searchTerm
 			try {
-				// if (category === 'All') {
-				// 	const pets = await PetModel.find({
-				// 		lostOrFound: 'Found',
-				// 	})
-
-				// 	return pets
-				// }
-				// currently not querying for 'all' because it is being taken from the cache
 				const pets = await PetModel.find({
 					lostOrFound: 'Found',
 					[category]: searchTerm,
@@ -55,7 +47,22 @@ const resolvers = {
 				console.log(error)
 			}
 		},
-
+		foundPetsByUserAndItem: async (parent, args) => {
+			const user = args.id
+			const category = args.item
+			const searchTerm = args.searchTerm
+			console.log(user, category, searchTerm)
+			try {
+				const pets = await PetModel.find({
+					user,
+					lostOrFound: 'Found',
+					[category]: searchTerm,
+				})
+				return pets
+			} catch (error) {
+				console.log(error)
+			}
+		},
 		lostPets: async () => {
 			try {
 				const pets = await PetModel.find({
@@ -85,7 +92,21 @@ const resolvers = {
 				console.log(error)
 			}
 		},
-
+		lostPetsByUserAndItem: async (parent, args) => {
+			const user = args.id
+			const category = args.item
+			const searchTerm = args.searchTerm
+			try {
+				const pets = await PetModel.find({
+					user,
+					lostOrFound: 'Lost',
+					[category]: searchTerm,
+				})
+				return pets
+			} catch (error) {
+				console.log(error)
+			}
+		},
 		user: async (parent, args) => {
 			const userSub = args.sub
 			// const userId = args.id

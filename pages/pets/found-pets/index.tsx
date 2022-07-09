@@ -8,7 +8,7 @@ import {
 	FoundPetsQuery,
 } from '../../../apollo/petQueries'
 import { useLazyQuery, useQuery } from '@apollo/client'
-import { userSearchCategory } from '../../../utils'
+import { convertCase, userSearchCategory } from '../../../utils'
 import Dropdown from '../../../components/Dropdown'
 
 interface Props {}
@@ -28,7 +28,7 @@ const FoundPets = ({}: Props) => {
 		fetchPetsByItem({
 			variables: {
 				item: category,
-				searchTerm: search,
+				searchTerm: convertCase(search),
 			},
 		})
 		setSearch('')
@@ -59,7 +59,13 @@ const FoundPets = ({}: Props) => {
 				<div className='grid p-4  gap-6 mx-auto justify-items-center'>
 					{foundPetsByItem.foundPetsByItem[0] ? (
 						foundPetsByItem.foundPetsByItem.map((pet: PetData) => {
-							return <PetQueryCard key={String(pet.id)} pet={pet} />
+							return (
+								<PetQueryCard
+									key={String(pet.id)}
+									pet={pet}
+									navigateTo={`/pet/found-pets/${pet.id}`}
+								/>
+							)
 						})
 					) : (
 						// If no pets that fit search term and category
@@ -73,7 +79,13 @@ const FoundPets = ({}: Props) => {
 			foundPets[0] ? (
 				<div className='grid p-4  gap-6 mx-auto justify-items-center'>
 					{foundPets.map((pet: PetData) => {
-						return <PetQueryCard key={String(pet.id)} pet={pet} />
+						return (
+							<PetQueryCard
+								key={String(pet.id)}
+								pet={pet}
+								navigateTo={`/pet/found-pets/${pet.id}`}
+							/>
+						)
 					})}
 				</div>
 			) : (
