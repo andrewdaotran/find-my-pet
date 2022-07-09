@@ -55,6 +55,7 @@ const resolvers = {
 				console.log(error)
 			}
 		},
+
 		lostPets: async () => {
 			try {
 				const pets = await PetModel.find({
@@ -84,6 +85,7 @@ const resolvers = {
 				console.log(error)
 			}
 		},
+
 		user: async (parent, args) => {
 			const userSub = args.sub
 			// const userId = args.id

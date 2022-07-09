@@ -1,17 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Link from 'next/link'
 import { useUser } from '@auth0/nextjs-auth0'
 import { USER_QUERY } from '../apollo/userQueries'
 import { useQuery } from '@apollo/client'
 import UserContext from '../context/userContext'
-
-interface User {
-	email: string
-	name: string
-	nickname: string
-	picture: string
-	sub: string
-}
 
 const Navbar = ({ children }) => {
 	const { user: auth0User } = useUser()
@@ -52,8 +44,9 @@ const Navbar = ({ children }) => {
 									<h1 className=''>logo</h1>
 								</a>
 							</Link>
-							{userData && auth0User ? (
-								<Link href={`/user/${userData.user.id}`}>
+							{/* {userData && auth0User && !loading ? ( */}
+							{user.id ? (
+								<Link href={`/user/${user.id}`}>
 									<a>{user.name}</a>
 								</Link>
 							) : null}

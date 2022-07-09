@@ -8,6 +8,28 @@ export const CREATE_PET = gql`
 	}
 `
 
+export const PET_QUERY = gql`
+	query ($id: ID!) {
+		pet(id: $id) {
+			id
+			name
+			age
+			gender
+			species
+			breed
+			dateFound
+			dateLost
+			description
+			image
+			isReturned
+			city
+			state
+			lostOrFound
+			user
+		}
+	}
+`
+
 export const FoundPetsQuery = gql`
 	query FoundPets {
 		foundPets {
