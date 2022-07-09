@@ -1,5 +1,4 @@
 import { gql } from '@apollo/client'
-import { useUser } from '@auth0/nextjs-auth0'
 import { GetStaticProps } from 'next'
 import React, { useContext, useEffect, useState } from 'react'
 import { initializeApollo } from '../../../apollo/apollo-client'
