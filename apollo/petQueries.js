@@ -10,20 +10,22 @@ export const CREATE_PET = gql`
 
 export const UPDATE_PET = gql`
 	mutation UpdatePet($input: UpdatePetInput!) {
-		id
-		name
-		age
-		gender
-		species
-		breed
-		dateLostOrFound
-		description
-		image
-		isReturned
-		city
-		state
-		lostOrFound
-		user
+		updatePet(input: $input) {
+			id
+			name
+			age
+			gender
+			species
+			breed
+			dateLostOrFound
+			description
+			image
+			isReturned
+			city
+			state
+			lostOrFound
+			user
+		}
 	}
 `
 

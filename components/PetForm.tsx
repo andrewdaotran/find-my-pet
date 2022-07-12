@@ -27,7 +27,6 @@ interface Props {
 const PetForm = ({ isNewPet }: Props) => {
 	const { user } = useContext(UserContext)
 	const { pet, clearPet, editPet } = useContext(PetEditContext)
-	console.log(pet)
 
 	const [createPet, { data: petData, loading: petLoading, error: petError }] =
 		useMutation(CREATE_PET)
@@ -167,6 +166,7 @@ const PetForm = ({ isNewPet }: Props) => {
 			updatePet({
 				variables: {
 					input: {
+						id: pet.id,
 						name: convertCase(pet.name) || 'Uknown Name',
 						age: pet.age,
 						gender: pet.gender,
@@ -178,7 +178,7 @@ const PetForm = ({ isNewPet }: Props) => {
 						lostOrFound: pet.lostOrFound,
 						city: convertCase(pet.city),
 						state: pet.state,
-						user: user.id,
+						// user: user.id,
 					},
 				},
 			})

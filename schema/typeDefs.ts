@@ -96,15 +96,15 @@ const typeDefs = gql`
 		name: String
 		age: String
 		gender: String
-		species: String!
+		species: String
 		breed: String
-		dateLostOrFound: String!
-		description: String!
-		image: String!
+		dateLostOrFound: String
+		description: String
+		image: String
 		isReturned: Boolean
-		lostOrFound: String!
-		city: String!
-		state: String!
+		lostOrFound: String
+		city: String
+		state: String
 	}
 `
 

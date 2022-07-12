@@ -3,6 +3,8 @@ import { GetStaticProps } from 'next'
 import React, { useContext, useEffect, useState } from 'react'
 import { initializeApollo } from '../../../apollo/apollo-client'
 import { PET_QUERY } from '../../../apollo/petQueries'
+import PetForm from '../../../components/PetForm'
+import PetEditContext from '../../../context/petEditContext'
 import UserContext from '../../../context/userContext'
 import { PetData } from '../../../typings'
 
@@ -13,17 +15,23 @@ interface Props {
 const LostPet = ({ pet }: Props) => {
 	const [isUserPost, setIsUserPost] = useState<boolean>(false)
 	const { user } = useContext(UserContext)
+	const { pet: petContext, clearPet, storePet } = useContext(PetEditContext)
 
 	useEffect(() => {
 		if (user.id === pet.user) {
 			setIsUserPost(true)
 		}
 	}, [user])
+
+	const handleEdit = () => {
+		storePet(pet)
+	}
 	return (
 		<div>
 			<div>
+				{isUserPost && <PetForm isNewPet={false} />}
 				<h2>{pet.name}</h2>
-				{isUserPost && <h3>whats up</h3>}
+				{isUserPost && <button onClick={handleEdit}>Edit</button>}
 			</div>
 		</div>
 	)

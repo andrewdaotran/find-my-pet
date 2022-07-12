@@ -27,7 +27,8 @@ const FoundPet = ({ pet }: Props) => {
 	return (
 		<div>
 			<div>
-				{/* <PetForm /> */}
+				{isUserPost && <PetForm isNewPet={false} />}
+
 				<h2>{pet.name}</h2>
 				{isUserPost && <h3>whats up</h3>}
 			</div>
