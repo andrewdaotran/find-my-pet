@@ -34,7 +34,7 @@ const User = ({ user, userIdParams }: Props) => {
 
 	return (
 		<div>
-			<PetForm />
+			<PetForm isNewPet={true} />
 			<div className='grid p-4 sm:grid-cols-2 gap-6'>
 				<PetPageRedirectBox {...userBoxData.foundPets} />
 				<PetPageRedirectBox {...userBoxData.lostPets} />

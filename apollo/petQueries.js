@@ -8,6 +8,25 @@ export const CREATE_PET = gql`
 	}
 `
 
+export const UPDATE_PET = gql`
+	mutation UpdatePet($input: UpdatePetInput!) {
+		id
+		name
+		age
+		gender
+		species
+		breed
+		dateLostOrFound
+		description
+		image
+		isReturned
+		city
+		state
+		lostOrFound
+		user
+	}
+`
+
 export const PET_QUERY = gql`
 	query ($id: ID!) {
 		pet(id: $id) {
@@ -17,8 +36,7 @@ export const PET_QUERY = gql`
 			gender
 			species
 			breed
-			dateFound
-			dateLost
+			dateLostOrFound
 			description
 			image
 			isReturned
@@ -30,7 +48,7 @@ export const PET_QUERY = gql`
 	}
 `
 
-export const FoundPetsQuery = gql`
+export const FOUND_PETS_QUERY = gql`
 	query FoundPets {
 		foundPets {
 			id
@@ -39,7 +57,7 @@ export const FoundPetsQuery = gql`
 			gender
 			species
 			breed
-			dateFound
+			dateLostOrFound
 			description
 			image
 			isReturned
@@ -59,7 +77,7 @@ export const FoundPetsByItemQuery = gql`
 			gender
 			species
 			breed
-			dateFound
+			dateLostOrFound
 			description
 			image
 			isReturned
@@ -79,7 +97,7 @@ export const FOUND_PETS_BY_USER_AND_ITEM_QUERY = gql`
 			gender
 			species
 			breed
-			dateFound
+			dateLostOrFound
 			description
 			image
 			isReturned
@@ -99,7 +117,7 @@ export const LostPetsQuery = gql`
 			gender
 			species
 			breed
-			dateLost
+			dateLostOrFound
 			description
 			image
 			isReturned
@@ -118,7 +136,7 @@ export const LostPetsByItemQuery = gql`
 			gender
 			species
 			breed
-			dateLost
+			dateLostOrFound
 			description
 			image
 			isReturned
@@ -137,7 +155,7 @@ export const LOST_PETS_BY_USER_AND_ITEM_QUERY = gql`
 			gender
 			species
 			breed
-			dateFound
+			dateLostOrFound
 			description
 			image
 			isReturned

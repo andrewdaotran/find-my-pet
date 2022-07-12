@@ -7,26 +7,27 @@ export const convertCase = (str) => {
 	})
 }
 
-export const compressImage = (image, setImage, setIsImageTooLarge) => {
+export const compressImage = (image, editPet, title, setIsImageTooLarge) => {
 	new Compressor(image, {
 		quality: 0.4, // 0.6 can also be used, but its not recommended to go below.
 		success: (compressedResult) => {
 			if (compressedResult.size > 705000) {
 				setIsImageTooLarge(true)
-				setImage('')
+				editPet('', title)
 				return
 			}
 			setIsImageTooLarge(false)
-			imageToBase64(compressedResult, setImage)
+			imageToBase64(compressedResult, editPet)
 		},
 	})
 }
 
-export const imageToBase64 = (image, setImage) => {
+export const imageToBase64 = (image, editPet) => {
 	let reader = new FileReader()
 	reader.readAsDataURL(image)
 	reader.onload = () => {
-		setImage(reader.result)
+		// setImage( reader.result )
+		editPet(reader.result, 'image')
 	}
 	reader.onerror = function (error) {
 		console.log('Error: ', error)

@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client'
-import { useUser } from '@auth0/nextjs-auth0'
 import { GetStaticProps } from 'next'
 import React, { useContext, useEffect, useState } from 'react'
 import { initializeApollo } from '../../../apollo/apollo-client'
 import { PET_QUERY } from '../../../apollo/petQueries'
+import PetForm from '../../../components/PetForm'
 import UserContext from '../../../context/userContext'
 import { PetData } from '../../../typings'
 
@@ -15,14 +15,19 @@ const FoundPet = ({ pet }: Props) => {
 	const [isUserPost, setIsUserPost] = useState<boolean>(false)
 	const { user } = useContext(UserContext)
 
+	// const [petData, setPetData] = useState<PetData>({})
+
 	useEffect(() => {
 		if (user.id === pet.user) {
 			setIsUserPost(true)
+			// setPetData({})
 		}
 	}, [user])
+
 	return (
 		<div>
 			<div>
+				{/* <PetForm /> */}
 				<h2>{pet.name}</h2>
 				{isUserPost && <h3>whats up</h3>}
 			</div>
@@ -60,6 +65,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const apolloClient = initializeApollo()
+	console.log(params.petId)
 	const { data } = await apolloClient.query({
 		query: PET_QUERY,
 		variables: { id: params.petId },

@@ -65,14 +65,13 @@ const typeDefs = gql`
 		gender: String
 		species: String!
 		breed: String
-		dateFound: String
-		dateLost: String
+		dateLostOrFound: String!
 		description: String!
-		image: String
+		image: String!
 		isReturned: Boolean
 		lostOrFound: String!
-		city: String
-		state: String
+		city: String!
+		state: String!
 		user: String
 	}
 
@@ -80,16 +79,15 @@ const typeDefs = gql`
 		name: String
 		age: String
 		gender: String
-		species: String
+		species: String!
 		breed: String
-		dateFound: String
-		dateLost: String
+		dateLostOrFound: String!
 		description: String!
-		image: String
+		image: String!
 		isReturned: Boolean
 		lostOrFound: String!
-		city: String
-		state: String
+		city: String!
+		state: String!
 		user: String
 	}
 
@@ -98,16 +96,15 @@ const typeDefs = gql`
 		name: String
 		age: String
 		gender: String
-		species: String
+		species: String!
 		breed: String
-		dateFound: String
-		dateLost: String
-		description: String
-		image: String
+		dateLostOrFound: String!
+		description: String!
+		image: String!
 		isReturned: Boolean
-		lostOrFound: String
-		city: String
-		state: String
+		lostOrFound: String!
+		city: String!
+		state: String!
 	}
 `
 

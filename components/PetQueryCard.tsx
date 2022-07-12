@@ -43,11 +43,13 @@ const PetQueryCard = ({ pet, userPets, navigateTo }: Props) => {
 					<h3>
 						{pet.lostOrFound === 'Found' ? (
 							<>
-								<span className='font-bold'>Date Found</span>: {pet.dateFound}
+								<span className='font-bold'>Date Found</span>:{' '}
+								{pet.dateLostOrFound}
 							</>
 						) : (
 							<>
-								<span className='font-bold'>Date Lost</span>: {pet.dateLost}
+								<span className='font-bold'>Date Lost</span>:{' '}
+								{pet.dateLostOrFound}
 							</>
 						)}
 					</h3>

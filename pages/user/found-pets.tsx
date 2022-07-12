@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { addApolloState, initializeApollo } from '../../apollo/apollo-client'
 import { USER_FOUND_PETS_QUERY } from '../../apollo/userQueries'
@@ -20,7 +20,6 @@ const UserFoundPets = ({ user }: Props) => {
 	const { data: userQueryData } = useQuery(USER_FOUND_PETS_QUERY, {
 		variables: { sub: user.sub },
 	})
-
 	const [
 		fetchPetsByUserAndItem,
 		{ data: foundPetsByUserAndItem, error, refetch, called },
@@ -53,6 +52,7 @@ const UserFoundPets = ({ user }: Props) => {
 					data={userSearchCategory}
 					setFunction={setCategory}
 					value={category}
+					isForm={false}
 				/>
 				<button onClick={fetchPets}>Press me</button>
 			</div>
@@ -106,10 +106,10 @@ export const getServerSideProps = withPageAuthRequired({
 		const apolloClient = initializeApollo()
 		const { user: auth0User } = getSession(context.req, context.res)
 
-		await apolloClient.query({
-			query: USER_FOUND_PETS_QUERY,
-			variables: { sub: auth0User.sub },
-		})
+		// await apolloClient.query({
+		// 	query: USER_FOUND_PETS_QUERY,
+		// 	variables: { sub: auth0User.sub },
+		// })
 
 		return addApolloState(apolloClient, {
 			props: {},

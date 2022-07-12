@@ -5,7 +5,7 @@ import { PetData } from '../../../typings'
 import PetQueryCard from '../../../components/PetQueryCard'
 import {
 	FoundPetsByItemQuery,
-	FoundPetsQuery,
+	FOUND_PETS_QUERY,
 } from '../../../apollo/petQueries'
 import { useLazyQuery, useQuery } from '@apollo/client'
 import { convertCase, userSearchCategory } from '../../../utils'
@@ -19,7 +19,7 @@ const FoundPets = ({}: Props) => {
 
 	const {
 		data: { foundPets },
-	} = useQuery(FoundPetsQuery)
+	} = useQuery(FOUND_PETS_QUERY)
 
 	const [fetchPetsByItem, { data: foundPetsByItem, error, refetch, called }] =
 		useLazyQuery(FoundPetsByItemQuery)
@@ -51,6 +51,7 @@ const FoundPets = ({}: Props) => {
 					data={userSearchCategory}
 					setFunction={setCategory}
 					value={category}
+					isForm={false}
 				/>
 				<button onClick={fetchPets}>Press me</button>
 			</div>
@@ -63,7 +64,7 @@ const FoundPets = ({}: Props) => {
 								<PetQueryCard
 									key={String(pet.id)}
 									pet={pet}
-									navigateTo={`/pet/found-pets/${pet.id}`}
+									navigateTo={`/pets/found-pets/${pet.id}`}
 								/>
 							)
 						})
@@ -83,7 +84,7 @@ const FoundPets = ({}: Props) => {
 							<PetQueryCard
 								key={String(pet.id)}
 								pet={pet}
-								navigateTo={`/pet/found-pets/${pet.id}`}
+								navigateTo={`/pets/found-pets/${pet.id}`}
 							/>
 						)
 					})}
@@ -100,7 +101,7 @@ export default FoundPets
 export const getServerSideProps = async () => {
 	const apolloClient = initializeApollo()
 	await apolloClient.query({
-		query: FoundPetsQuery,
+		query: FOUND_PETS_QUERY,
 	})
 
 	return addApolloState(apolloClient, {

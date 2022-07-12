@@ -21,8 +21,7 @@ export interface PetData {
 	gender?: string
 	species?: string
 	breed?: string
-	dateFound?: string
-	dateLost?: string
+	dateLostOrFound: string
 	description?: string
 	image?: string
 	isReturned?: boolean

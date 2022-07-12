@@ -45,6 +45,7 @@ const LostPets = ({}: Props) => {
 					data={userSearchCategory}
 					setFunction={setCategory}
 					value={category}
+					isForm={false}
 				/>
 				<button onClick={fetchPets}>Press me</button>
 			</div>
@@ -57,7 +58,7 @@ const LostPets = ({}: Props) => {
 								<PetQueryCard
 									key={String(pet.id)}
 									pet={pet}
-									navigateTo={`/pet/lost-pets/${pet.id}`}
+									navigateTo={`/pets/lost-pets/${pet.id}`}
 								/>
 							)
 						})
@@ -77,7 +78,7 @@ const LostPets = ({}: Props) => {
 							<PetQueryCard
 								key={String(pet.id)}
 								pet={pet}
-								navigateTo={`/pet/lost-pets/${pet.id}`}
+								navigateTo={`/pets/lost-pets/${pet.id}`}
 							/>
 						)
 					})}

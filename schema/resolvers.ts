@@ -51,7 +51,6 @@ const resolvers = {
 			const user = args.id
 			const category = args.item
 			const searchTerm = args.searchTerm
-			console.log(user, category, searchTerm)
 			try {
 				const pets = await PetModel.find({
 					user,
@@ -135,6 +134,7 @@ const resolvers = {
 
 			try {
 				await newPet.save()
+				console.log(newPet)
 				return newPet
 			} catch (error) {
 				console.log(error)

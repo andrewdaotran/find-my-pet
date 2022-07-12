@@ -2,13 +2,25 @@ import React, { Dispatch, SetStateAction } from 'react'
 
 interface Props {
 	data: string[]
-	setFunction: Dispatch<SetStateAction<string>>
+	setFunction: (
+		data: string,
+		title: string
+	) => void | Dispatch<SetStateAction<string>>
 	value: string
+	title?: string
+	isForm: boolean
 }
 
-const Dropdown = ({ data, setFunction, value }: Props) => {
+const Dropdown = ({ data, setFunction, isForm, value, title }: Props) => {
 	return (
-		<select onChange={(e) => setFunction(e.target.value)} value={value}>
+		<select
+			onChange={
+				isForm
+					? (e) => setFunction(e.target.value, title)
+					: (e) => setFunction(e.target.value, null)
+			}
+			value={value}
+		>
 			{data.map((category) => {
 				return (
 					<option key={category} value={category}>
