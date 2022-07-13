@@ -1,11 +1,12 @@
 import { useQuery } from '@apollo/client'
 import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { addApolloState, initializeApollo } from '../../apollo/apollo-client'
 import { USER_QUERY } from '../../apollo/userQueries'
 import PetForm from '../../components/PetForm'
 import PetPageRedirectBox from '../../components/PetPageRedirectBox'
+import PetEditContext from '../../context/petEditContext'
 import { UserData } from '../../typings'
 import { userBoxData } from '../../utils'
 
@@ -19,9 +20,13 @@ const User = ({ user, userIdParams }: Props) => {
 		data: { user: gqlUser },
 	} = useQuery(USER_QUERY, { variables: { sub: user.sub } })
 
+	const { clearPet } = useContext(PetEditContext)
+
 	const router = useRouter()
 
 	useEffect(() => {
+		clearPet()
+
 		if (!user) {
 			router.push(`/`)
 			return

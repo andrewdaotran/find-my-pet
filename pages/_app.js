@@ -6,6 +6,7 @@ import { useApollo } from '../apollo/apollo-client'
 import Navbar from '../components/Navbar'
 import { UserContextProvider } from '../context/userContext'
 import { PetEditContextProvider } from '../context/petEditContext'
+import { FormSubmissionContextProvider } from '../context/formSubmissionContext'
 
 function MyApp({ Component, pageProps }) {
 	const client = useApollo(pageProps)
@@ -14,10 +15,12 @@ function MyApp({ Component, pageProps }) {
 			<UserProvider>
 				<PetEditContextProvider>
 					<UserContextProvider>
-						<Navbar>
-							{/* This instead? */}
-							<Component {...pageProps} />
-						</Navbar>
+						<FormSubmissionContextProvider>
+							<Navbar>
+								{/* This instead? */}
+								<Component {...pageProps} />
+							</Navbar>
+						</FormSubmissionContextProvider>
 					</UserContextProvider>
 				</PetEditContextProvider>
 			</UserProvider>

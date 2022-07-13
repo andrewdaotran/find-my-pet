@@ -106,10 +106,10 @@ export const getServerSideProps = withPageAuthRequired({
 		const apolloClient = initializeApollo()
 		const { user: auth0User } = getSession(context.req, context.res)
 
-		// await apolloClient.query({
-		// 	query: USER_FOUND_PETS_QUERY,
-		// 	variables: { sub: auth0User.sub },
-		// })
+		await apolloClient.query({
+			query: USER_FOUND_PETS_QUERY,
+			variables: { sub: auth0User.sub },
+		})
 
 		return addApolloState(apolloClient, {
 			props: {},

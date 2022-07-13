@@ -12,13 +12,12 @@ export const PetEditContextProvider = ({ children }) => {
 		species: 'Set Species',
 		breed: '',
 		dateLostOrFound: format(new Date(), 'yyyy-MM-dd'),
-		// dateLost: format(new Date(), 'yyyy-MM-dd'),
 		description: '',
 		image: '',
-		isReturned: '',
+		isReturned: false,
 		lostOrFound: 'Set Lost or Found',
 		city: '',
-		state: '',
+		state: 'Alabama',
 	})
 
 	const storePet = (petData) => {

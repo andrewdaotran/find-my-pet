@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const PetSchema = mongoose.Schema({
 	name: String,
-	age: Number,
+	age: String,
 	gender: String,
 	species: String,
 	breed: String,

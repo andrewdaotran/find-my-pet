@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { CREATE_PET, UPDATE_PET } from '../apollo/petQueries'
 import UserContext from '../context/userContext'
 import PetEditContext from '../context/petEditContext'
+import FormSubmissionContext from '../context/formSubmissionContext'
 import {
 	speciesList,
 	lostOrFoundList,
@@ -22,11 +23,14 @@ interface InputError {
 
 interface Props {
 	isNewPet: boolean
+	setIsEditingPet?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const PetForm = ({ isNewPet }: Props) => {
+const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 	const { user } = useContext(UserContext)
 	const { pet, clearPet, editPet } = useContext(PetEditContext)
+	const { submitModalPopup } = useContext(FormSubmissionContext)
+	// console.log(pet)
 
 	const [createPet, { data: petData, loading: petLoading, error: petError }] =
 		useMutation(CREATE_PET)
@@ -99,6 +103,8 @@ const PetForm = ({ isNewPet }: Props) => {
 		} else {
 			setStateError({ ...imageError, isEmpty: true })
 		}
+
+		console.log(dateError, pet.dateLostOrFound)
 	}, [
 		pet.lostOrFound,
 		pet.description,
@@ -112,26 +118,43 @@ const PetForm = ({ isNewPet }: Props) => {
 		e.preventDefault()
 		if (dateError.isEmpty) {
 			setDateError({ ...lostOrFoundError, throwErrorMessage: true })
+		} else {
+			setDateError({ ...lostOrFoundError, throwErrorMessage: false })
 		}
 		if (lostOrFoundError.isEmpty) {
 			setLostOrFoundError({ ...lostOrFoundError, throwErrorMessage: true })
+		} else {
+			setLostOrFoundError({ ...lostOrFoundError, throwErrorMessage: false })
 		}
 		if (descriptionError.isEmpty) {
 			setDescriptionError({ ...descriptionError, throwErrorMessage: true })
+		} else {
+			setDescriptionError({
+				...descriptionError,
+				throwErrorMessage: false,
+			})
 		}
 		if (speciesError.isEmpty) {
 			setSpeciesError({ ...speciesError, throwErrorMessage: true })
+		} else {
+			setSpeciesError({ ...speciesError, throwErrorMessage: false })
 		}
 		if (imageError.isEmpty) {
 			setImageError({ ...imageError, throwErrorMessage: true })
+		} else {
+			setImageError({ ...imageError, throwErrorMessage: false })
 		}
 		if (cityError.isEmpty) {
 			setCityError({ ...imageError, throwErrorMessage: true })
+		} else {
+			setCityError({ ...imageError, throwErrorMessage: false })
 		}
 		if (stateError.isEmpty) {
 			setStateError({ ...imageError, throwErrorMessage: true })
+		} else {
+			setStateError({ ...imageError, throwErrorMessage: false })
 		}
-
+		console.log('heeeey')
 		if (
 			speciesError.isEmpty ||
 			descriptionError.isEmpty ||
@@ -140,6 +163,7 @@ const PetForm = ({ isNewPet }: Props) => {
 			cityError.isEmpty ||
 			stateError.isEmpty
 		) {
+			console.log('stopped')
 			return
 		}
 
@@ -148,10 +172,10 @@ const PetForm = ({ isNewPet }: Props) => {
 				variables: {
 					input: {
 						name: convertCase(pet.name) || 'Uknown Name',
-						age: pet.age,
-						gender: pet.gender,
+						age: pet.age || '',
+						gender: pet.gender || 'NA',
 						species: pet.species,
-						breed: convertCase(pet.breed),
+						breed: convertCase(pet.breed) || '',
 						dateLostOrFound: pet.dateLostOrFound,
 						description: pet.description,
 						image: pet.image,
@@ -159,9 +183,11 @@ const PetForm = ({ isNewPet }: Props) => {
 						city: convertCase(pet.city),
 						state: pet.state,
 						user: user.id,
+						isReturned: false,
 					},
 				},
 			})
+			console.log('pet created')
 		} else {
 			updatePet({
 				variables: {
@@ -182,6 +208,7 @@ const PetForm = ({ isNewPet }: Props) => {
 					},
 				},
 			})
+			setIsEditingPet(false)
 			console.log('pet edited!')
 		}
 		setLostOrFoundError({ isEmpty: true, throwErrorMessage: false })
@@ -190,6 +217,13 @@ const PetForm = ({ isNewPet }: Props) => {
 		setImageError({ isEmpty: true, throwErrorMessage: false })
 		setCityError({ isEmpty: true, throwErrorMessage: false })
 		setStateError({ isEmpty: true, throwErrorMessage: false })
+		clearPet()
+		console.log('the end')
+		submitModalPopup()
+	}
+
+	const handleCancelEditPet = () => {
+		setIsEditingPet(false)
 		clearPet()
 	}
 
@@ -216,6 +250,9 @@ const PetForm = ({ isNewPet }: Props) => {
 						title='lostOrFound'
 						isForm={true}
 					/>
+					{lostOrFoundError.throwErrorMessage && (
+						<InputEmptyError message='Please specify lost or found' />
+					)}
 				</div>
 
 				<div className='flex gap-4'>
@@ -239,8 +276,14 @@ const PetForm = ({ isNewPet }: Props) => {
 						value={pet.dateLostOrFound}
 						onChange={(e) => editPet(e.target.value, 'dateLostOrFound')}
 					/>
-					{lostOrFoundError.throwErrorMessage && (
-						<InputEmptyError message='Please specify lost or found' />
+					{dateError.throwErrorMessage && (
+						<InputEmptyError
+							message={
+								pet.lostOrFound === 'Lost'
+									? 'Please specify date lost'
+									: 'Please specify date found'
+							}
+						/>
 					)}
 				</div>
 
@@ -348,6 +391,15 @@ const PetForm = ({ isNewPet }: Props) => {
 						title='state'
 						isForm={true}
 					/>
+					{stateError.throwErrorMessage && (
+						<InputEmptyError
+							message={
+								pet.lostOrFound === 'Lost'
+									? 'Please select the state the pet was lost'
+									: 'Please select the state the pet was found'
+							}
+						/>
+					)}
 				</div>
 
 				<div className='flex gap-4'>
@@ -361,6 +413,7 @@ const PetForm = ({ isNewPet }: Props) => {
 						) : (
 							<>
 								<span className='font-bold'>City Found</span>:
+								<span className='text-red-500'>*</span>
 							</>
 						)}
 					</h4>
@@ -370,6 +423,15 @@ const PetForm = ({ isNewPet }: Props) => {
 						value={pet.city}
 						onChange={(e) => editPet(e.target.value, 'city')}
 					/>
+					{cityError.throwErrorMessage && (
+						<InputEmptyError
+							message={
+								pet.lostOrFound === 'Lost'
+									? 'Please specify the city the pet was lost'
+									: 'Please specify the city the pet was found'
+							}
+						/>
+					)}
 				</div>
 
 				{/* image */}
@@ -409,8 +471,10 @@ const PetForm = ({ isNewPet }: Props) => {
 				{isImageTooLarge && (
 					<InputEmptyError message='Unfortunately your image is too large' />
 				)}
-
-				<button type='submit'>Submit</button>
+				<div className=' flex gap-4'>
+					<button type='submit'>Submit</button>
+					<button onClick={handleCancelEditPet}>Cancel Edit</button>
+				</div>
 			</form>
 		</div>
 	)

@@ -9,7 +9,7 @@ export const convertCase = (str) => {
 
 export const compressImage = (image, editPet, title, setIsImageTooLarge) => {
 	new Compressor(image, {
-		quality: 0.4, // 0.6 can also be used, but its not recommended to go below.
+		quality: 0.3, // 0.6 can also be used, but its not recommended to go below.
 		success: (compressedResult) => {
 			if (compressedResult.size > 705000) {
 				setIsImageTooLarge(true)
