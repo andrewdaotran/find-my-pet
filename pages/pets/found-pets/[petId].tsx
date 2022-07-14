@@ -9,6 +9,9 @@ import UserContext from '../../../context/userContext'
 import FormSubmissionContext from '../../../context/formSubmissionContext'
 import { PetData } from '../../../typings'
 import FormSubmissionModal from '../../../components/FormSubmissionModal'
+import dayjs from 'dayjs'
+import CommentSection from '../../../components/CommentSection'
+import CommentForm from '../../../components/CommentForm'
 
 interface Props {
 	pet: PetData
@@ -47,6 +50,16 @@ const FoundPet = ({ pet }: Props) => {
 				{isUserPost && <h3>whats up</h3>}
 				{isUserPost && <button onClick={handleEdit}>Edit</button>}
 			</div>
+
+			<div>
+				<CommentForm petId={pet.id} />
+				{isFormSubmitted && (
+					<FormSubmissionModal isNewPet={false} isComment={true} />
+				)}
+			</div>
+			<div>
+				<CommentSection comments={pet.comments} />
+			</div>
 		</div>
 	)
 }
@@ -81,7 +94,6 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const apolloClient = initializeApollo()
-	console.log(params.petId)
 	const { data } = await apolloClient.query({
 		query: PET_QUERY,
 		variables: { id: params.petId },

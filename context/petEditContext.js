@@ -53,29 +53,3 @@ export const PetEditContextProvider = ({ children }) => {
 }
 
 export default PetEditContext
-
-// const [speciesError, setSpeciesError] = useState({
-// 	isEmpty: true,
-// 	throwErrorMessage: false,
-// })
-// const [descriptionError, setDescriptionError] = useState({
-// 	isEmpty: true,
-// 	throwErrorMessage: false,
-// })
-// const [lostOrFoundError, setLostOrFoundError] = useState({
-// 	isEmpty: true,
-// 	throwErrorMessage: false,
-// })
-// const [imageError, setImageError] = useState({
-// 	isEmpty: true,
-// 	throwErrorMessage: false,
-// })
-// const [cityError, setCityError] = useState({
-// 	isEmpty: true,
-// 	throwErrorMessage: false,
-// })
-
-// const [stateError, setStateError] = useState({
-// 	isEmpty: true,
-// 	throwErrorMessage: false,
-// })

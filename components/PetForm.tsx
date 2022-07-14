@@ -103,8 +103,6 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 		} else {
 			setStateError({ ...imageError, isEmpty: true })
 		}
-
-		console.log(dateError, pet.dateLostOrFound)
 	}, [
 		pet.lostOrFound,
 		pet.description,
@@ -154,7 +152,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 		} else {
 			setStateError({ ...imageError, throwErrorMessage: false })
 		}
-		console.log('heeeey')
+
 		if (
 			speciesError.isEmpty ||
 			descriptionError.isEmpty ||
@@ -163,7 +161,6 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 			cityError.isEmpty ||
 			stateError.isEmpty
 		) {
-			console.log('stopped')
 			return
 		}
 
@@ -187,7 +184,6 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 					},
 				},
 			})
-			console.log('pet created')
 		} else {
 			updatePet({
 				variables: {
@@ -209,7 +205,6 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 				},
 			})
 			setIsEditingPet(false)
-			console.log('pet edited!')
 		}
 		setLostOrFoundError({ isEmpty: true, throwErrorMessage: false })
 		setDescriptionError({ isEmpty: true, throwErrorMessage: false })
@@ -218,7 +213,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 		setCityError({ isEmpty: true, throwErrorMessage: false })
 		setStateError({ isEmpty: true, throwErrorMessage: false })
 		clearPet()
-		console.log('the end')
+
 		submitModalPopup()
 	}
 

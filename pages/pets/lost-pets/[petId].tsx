@@ -9,6 +9,9 @@ import UserContext from '../../../context/userContext'
 import { PetData } from '../../../typings'
 import FormSubmissionContext from '../../../context/formSubmissionContext'
 import FormSubmissionModal from '../../../components/FormSubmissionModal'
+import dayjs from 'dayjs'
+import CommentSection from '../../../components/CommentSection'
+import CommentForm from '../../../components/CommentForm'
 
 interface Props {
 	pet: PetData
@@ -23,6 +26,7 @@ const LostPet = ({ pet }: Props) => {
 
 	useEffect(() => {
 		clearPet()
+		console.log(pet)
 	}, [])
 
 	useEffect(() => {
@@ -45,6 +49,15 @@ const LostPet = ({ pet }: Props) => {
 				{isFormSubmitted && <FormSubmissionModal isNewPet={false} />}
 				<h2>{pet.name}</h2>
 				{isUserPost && <button onClick={handleEdit}>Edit</button>}
+			</div>
+			<div>
+				<CommentForm petId={pet.id} />
+				{isFormSubmitted && (
+					<FormSubmissionModal isNewPet={false} isComment={true} />
+				)}
+			</div>
+			<div>
+				<CommentSection comments={pet.comments} />
 			</div>
 		</div>
 	)

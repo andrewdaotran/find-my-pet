@@ -1,12 +1,34 @@
 const mongoose = require('mongoose')
 import PetModel from '../models/PetModel'
 import UserModel from '../models/UserModel'
+import CommentModel from '../models/CommentModel'
+import { GraphQLScalarType, Kind } from 'graphql'
+import dayjs from 'dayjs'
 
-// const PetModel = require('../models/PetModel.js')
-// const UserModel = require('../models/UserModel.js')
+const dateScalar = new GraphQLScalarType({
+	name: 'Date',
+	description: 'Date custom scalar type',
+	serialize(value: Date) {
+		return dayjs(value)
+	},
+	parseValue(value: Date) {
+		return dayjs(value)
+	},
+	// parseLiteral(ast) {
+	// 	if (ast.kind === Kind.INT) {
+	// 		return new Date(parseInt(ast.value, 10))
+	// 	}
+	// 	return null
+	// },
+})
 
 const resolvers = {
+	Date: dateScalar,
 	Query: {
+		dateNow: (parent, { date }) => {
+			console.log('date', date)
+			return date
+		},
 		pets: async () => {
 			try {
 				const pets = await PetModel.find()
@@ -76,12 +98,6 @@ const resolvers = {
 			const category = args.item
 			const searchTerm = args.searchTerm
 			try {
-				// if (category === 'All') {
-				// 	const pets = await PetModel.find({
-				// 		lostOrFound: 'found',
-				// 	})
-				// 	return pets
-				// }
 				const pets = await PetModel.find({
 					lostOrFound: 'Lost',
 					[category]: searchTerm,
@@ -130,8 +146,8 @@ const resolvers = {
 	Mutation: {
 		createPet: async (parent, args) => {
 			const petData = args.input
-			const newPet = new PetModel(petData)
-
+			const newPet = new PetModel({ ...petData, timestamp: dayjs(new Date()) })
+			console.log(newPet)
 			try {
 				await newPet.save()
 				console.log(newPet)
@@ -166,7 +182,7 @@ const resolvers = {
 				if (user) {
 					return user
 				}
-				const newUser = new UserModel(userData)
+				const newUser = new UserModel({ userData })
 				await newUser.save()
 
 				return newUser
@@ -174,18 +190,42 @@ const resolvers = {
 				console.log(error)
 			}
 		},
+		createComment: async (parent, args) => {
+			const commentData = args.input
+			try {
+				const comment = new CommentModel({
+					...commentData,
+					timestamp: dayjs(new Date()),
+				})
+				await comment.save()
+				return comment
+			} catch (error) {
+				console.log(error)
+			}
+		},
 	},
-	// Pet: {
-	// 	user: async (parent, args) => {
-	// 		const userId = args.id
-	// 		try {
-	// 			const user = await UserModel.findById(userId)
-	// 			return user
-	// 		} catch (error) {
-	// 			console.log(error)
-	// 		}
-	// 	},
-	// },
+	Pet: {
+		// 	user: async (parent, args) => {
+		// 		const userId = args.id
+		// 		try {
+		// 			const user = await UserModel.findById(userId)
+		// 			return user
+		// 		} catch (error) {
+		// 			console.log(error)
+		// 		}
+		// 	},
+		comments: async (parent, args) => {
+			const petId = String(parent.id)
+			try {
+				const comments = await CommentModel.find({
+					pet: petId,
+				})
+				return comments
+			} catch (error) {
+				console.log(error)
+			}
+		},
+	},
 	User: {
 		foundPets: async (parent, args) => {
 			const user = parent.id

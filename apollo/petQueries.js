@@ -25,6 +25,7 @@ export const UPDATE_PET = gql`
 			state
 			lostOrFound
 			user
+			timestamp
 		}
 	}
 `
@@ -46,6 +47,14 @@ export const PET_QUERY = gql`
 			state
 			lostOrFound
 			user
+			timestamp
+			comments {
+				user
+				pet
+				timestamp
+				value
+				id
+			}
 		}
 	}
 `
@@ -66,6 +75,14 @@ export const FOUND_PETS_QUERY = gql`
 			city
 			state
 			lostOrFound
+			timestamp
+			comments {
+				user
+				pet
+				timestamp
+				value
+				id
+			}
 		}
 	}
 `
@@ -86,6 +103,14 @@ export const FoundPetsByItemQuery = gql`
 			city
 			state
 			lostOrFound
+			timestamp
+			comments {
+				user
+				pet
+				timestamp
+				value
+				id
+			}
 		}
 	}
 `
@@ -106,6 +131,14 @@ export const FOUND_PETS_BY_USER_AND_ITEM_QUERY = gql`
 			city
 			state
 			lostOrFound
+			timestamp
+			comments {
+				user
+				pet
+				timestamp
+				value
+				id
+			}
 		}
 	}
 `
@@ -125,7 +158,15 @@ export const LostPetsQuery = gql`
 			isReturned
 			city
 			state
+			timestamp
 			lostOrFound
+			comments {
+				user
+				pet
+				timestamp
+				value
+				id
+			}
 		}
 	}
 `
@@ -145,6 +186,14 @@ export const LostPetsByItemQuery = gql`
 			city
 			state
 			lostOrFound
+			timestamp
+			comments {
+				user
+				pet
+				timestamp
+				value
+				id
+			}
 		}
 	}
 `
@@ -164,6 +213,14 @@ export const LOST_PETS_BY_USER_AND_ITEM_QUERY = gql`
 			city
 			state
 			lostOrFound
+			timestamp
+			comments {
+				user
+				pet
+				timestamp
+				value
+				id
+			}
 		}
 	}
 `

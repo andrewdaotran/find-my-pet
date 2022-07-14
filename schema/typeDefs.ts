@@ -2,7 +2,10 @@
 const { gql } = require('apollo-server-micro')
 
 const typeDefs = gql`
+	scalar Date
+
 	type Query {
+		dateNow(date: Date!): Date
 		pets: [Pet]
 		pet(id: ID!): Pet
 		foundPets: [Pet]
@@ -27,6 +30,7 @@ const typeDefs = gql`
 		createPet(input: CreatePetInput!): Pet
 		updatePet(input: UpdatePetInput!): Pet
 		createOrFindUser(input: CreateUserInput!): User
+		createComment(input: CreateCommentInput!): Comment
 	}
 
 	type User {
@@ -73,6 +77,8 @@ const typeDefs = gql`
 		city: String!
 		state: String!
 		user: String
+		comments: [Comment]
+		timestamp: Date
 	}
 
 	input CreatePetInput {
@@ -89,6 +95,7 @@ const typeDefs = gql`
 		city: String!
 		state: String!
 		user: String
+		timestamp: Date
 	}
 
 	input UpdatePetInput {
@@ -105,6 +112,20 @@ const typeDefs = gql`
 		lostOrFound: String
 		city: String
 		state: String
+	}
+
+	type Comment {
+		id: ID!
+		value: String!
+		user: String!
+		pet: String!
+		timestamp: Date
+	}
+
+	input CreateCommentInput {
+		value: String!
+		user: String!
+		pet: String!
 	}
 `
 

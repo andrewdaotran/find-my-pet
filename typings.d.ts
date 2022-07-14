@@ -29,4 +29,14 @@ export interface PetData {
 	city?: string
 	state?: string
 	user?: string
+	comments: CommentData[]
+	timestamp: Date
+}
+
+export interface CommentData {
+	id: string
+	value: string
+	user: string
+	pet: string
+	timestamp: Date
 }

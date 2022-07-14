@@ -18,6 +18,14 @@ const PetSchema = mongoose.Schema({
 	//    type: Schema.Types.ObjectId,
 	//    ref: 'users'
 	//  }
+	comments: [
+		{
+			value: String,
+			user: String,
+			pet: String,
+		},
+	],
+	timestamp: { type: Date, default: Date.now },
 })
 
 const PetModel = mongoose.models['Pets']
