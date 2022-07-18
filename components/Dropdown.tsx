@@ -20,6 +20,7 @@ const Dropdown = ({ data, setFunction, isForm, value, title }: Props) => {
 					: (e) => setFunction(e.target.value, null)
 			}
 			value={value}
+			className='border border-black rounded-md px-2 py-1 '
 		>
 			{data.map((category) => {
 				return (

@@ -26,10 +26,10 @@ const PetQueryCard = ({ pet, userPets, navigateTo }: Props) => {
 						</a>
 					</Link>
 
-					<XIcon
+					{/* <XIcon
 						className='absolute text-red-500 right-2 top-2 h-10 w-10 cursor-pointer'
 						onClick={() => console.log('ayyee')}
-					/>
+					/> */}
 				</div>
 
 				<div className='grid justify-items-center gap-2 mb-4 '>
@@ -76,7 +76,7 @@ const PetQueryCard = ({ pet, userPets, navigateTo }: Props) => {
 					<h3>
 						<span className='font-bold'>Description</span>: {pet.description}
 					</h3>
-					{userPets && (
+					{/* {userPets && (
 						<div className='flex gap-4'>
 							<button
 								className='border border-black px-4 py-1 rounded-md bg-yellow-500 text-white '
@@ -89,7 +89,7 @@ const PetQueryCard = ({ pet, userPets, navigateTo }: Props) => {
 								Mark as Found
 							</button>
 						</div>
-					)}
+					)} */}
 				</div>
 			</div>
 		</div>

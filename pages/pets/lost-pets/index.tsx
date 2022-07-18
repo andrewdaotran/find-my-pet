@@ -6,6 +6,7 @@ import { LostPetsByItemQuery, LostPetsQuery } from '../../../apollo/petQueries'
 import { useLazyQuery, useQuery } from '@apollo/client'
 import Dropdown from '../../../components/Dropdown'
 import { convertCase, userSearchCategory } from '../../../utils'
+import PetSearchInput from '../../../components/PetSearchInput'
 
 interface Props {}
 
@@ -34,21 +35,14 @@ const LostPets = ({}: Props) => {
 			<div className='flex justify-center my-4'>
 				<h2 className='text-5xl'>Lost Pets</h2>
 			</div>
-			<div>
-				<input
-					type='text'
-					placeholder='search'
-					value={search}
-					onChange={(e) => setSearch(e.target.value)}
-				/>
-				<Dropdown
-					data={userSearchCategory}
-					setFunction={setCategory}
-					value={category}
-					isForm={false}
-				/>
-				<button onClick={fetchPets}>Press me</button>
-			</div>
+
+			<PetSearchInput
+				search={search}
+				setSearch={setSearch}
+				category={category}
+				setCategory={setCategory}
+				fetchPets={fetchPets}
+			/>
 
 			{lostPetsByItem ? (
 				<div className='grid p-4  gap-6 mx-auto justify-items-center'>

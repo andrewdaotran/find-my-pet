@@ -24,7 +24,7 @@ export default function Home() {
 			<div className='grid p-4 sm:grid-cols-2 gap-6 md:grid-cols-3'>
 				<PetPageRedirectBox {...boxData.foundPets} />
 				<PetPageRedirectBox {...boxData.lostPets} />
-				<PetPageRedirectBox {...boxData.lostAndFound} />
+				<PetPageRedirectBox {...boxData.petAdoption} />
 			</div>
 
 			{/* render out user boxes if user is logged in */}

@@ -9,6 +9,7 @@ import PetQueryCard from '../../components/PetQueryCard'
 import Dropdown from '../../components/Dropdown'
 import { convertCase, userSearchCategory } from '../../utils'
 import { FOUND_PETS_BY_USER_AND_ITEM_QUERY } from '../../apollo/petQueries'
+import PetSearchInput from '../../components/PetSearchInput'
 
 interface Props {
 	user: UserData
@@ -41,21 +42,13 @@ const UserFoundPets = ({ user }: Props) => {
 			<h2 className='sm:text-7xl text-4xl text-center mt-6 mb-2 lg:mb-6'>
 				Your Found Pets
 			</h2>
-			<div>
-				<input
-					type='text'
-					placeholder='search'
-					value={search}
-					onChange={(e) => setSearch(e.target.value)}
-				/>
-				<Dropdown
-					data={userSearchCategory}
-					setFunction={setCategory}
-					value={category}
-					isForm={false}
-				/>
-				<button onClick={fetchPets}>Press me</button>
-			</div>
+			<PetSearchInput
+				search={search}
+				setSearch={setSearch}
+				category={category}
+				setCategory={setCategory}
+				fetchPets={fetchPets}
+			/>
 
 			{foundPetsByUserAndItem ? (
 				<div className='grid p-4  gap-6 mx-auto justify-items-center'>

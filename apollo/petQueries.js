@@ -172,7 +172,7 @@ export const LostPetsQuery = gql`
 `
 export const LostPetsByItemQuery = gql`
 	query ($item: String!, $searchTerm: String!) {
-		lostPetsByUserAndItem(item: $item, searchTerm: $searchTerm) {
+		lostPetsByItem(item: $item, searchTerm: $searchTerm) {
 			id
 			name
 			age
@@ -199,7 +199,7 @@ export const LostPetsByItemQuery = gql`
 `
 export const LOST_PETS_BY_USER_AND_ITEM_QUERY = gql`
 	query ($item: String!, $searchTerm: String!, $id: String!) {
-		foundPetsByItem(item: $item, searchTerm: $searchTerm, id: $id) {
+		lostPetsByUserAndItem(item: $item, searchTerm: $searchTerm, id: $id) {
 			id
 			name
 			age

@@ -45,11 +45,10 @@ export const boxData = {
 		description: 'Click here to see all posts on pets that have been lost',
 		redirect: '/pets/lost-pets',
 	},
-	lostAndFound: {
-		title: 'Lost and Found',
-		description:
-			'Click here to see all pets that have been turned over to a lost and found',
-		redirect: '/pets/lost-and-found',
+	petAdoption: {
+		title: 'Pet Adoption Listing',
+		description: 'Click here to find a pet to adopt',
+		redirect: '/pets/pet-adoption',
 	},
 }
 

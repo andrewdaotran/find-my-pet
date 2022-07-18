@@ -10,6 +10,7 @@ import {
 import { useLazyQuery, useQuery } from '@apollo/client'
 import { convertCase, userSearchCategory } from '../../../utils'
 import Dropdown from '../../../components/Dropdown'
+import PetSearchInput from '../../../components/PetSearchInput'
 
 interface Props {}
 
@@ -40,21 +41,13 @@ const FoundPets = ({}: Props) => {
 			<div className='flex justify-center my-4'>
 				<h2 className='text-5xl'>Found Pets</h2>
 			</div>
-			<div>
-				<input
-					type='text'
-					placeholder='search'
-					value={search}
-					onChange={(e) => setSearch(e.target.value)}
-				/>
-				<Dropdown
-					data={userSearchCategory}
-					setFunction={setCategory}
-					value={category}
-					isForm={false}
-				/>
-				<button onClick={fetchPets}>Press me</button>
-			</div>
+			<PetSearchInput
+				search={search}
+				setSearch={setSearch}
+				category={category}
+				setCategory={setCategory}
+				fetchPets={fetchPets}
+			/>
 
 			{foundPetsByItem ? (
 				<div className='grid p-4  gap-6 mx-auto justify-items-center'>
