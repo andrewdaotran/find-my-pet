@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { XIcon } from '@heroicons/react/solid'
+
 import React, { useContext } from 'react'
 
 import { PetData } from '../typings'

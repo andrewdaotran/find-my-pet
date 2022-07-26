@@ -35,7 +35,7 @@ const Navbar = ({ children }) => {
 
 	return (
 		<>
-			<nav className=' bg-slate-600 '>
+			<nav className=' bg-pastelCream border-b border-pastelPurple '>
 				<div className='mx-6'>
 					<div className='flex justify-between max-w-6xl mx-auto py-4 '>
 						<div className='flex gap-8'>

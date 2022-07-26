@@ -18,13 +18,13 @@ const PetSearchInput = ({
 	fetchPets,
 }: Props) => {
 	return (
-		<div className=' px-4 py-2 gap-4 flex justify-center'>
+		<div className=' px-4 py-2 gap-4 flex justify-center max-w-md mx-auto my-8'>
 			<input
 				type='text'
-				placeholder='Search'
+				placeholder='Type in a search term'
 				value={search}
 				onChange={(e) => setSearch(e.target.value)}
-				className='border-b border-black outline-none px-2'
+				className='border-b border-black outline-none px-2 bg-inherit'
 			/>
 			<Dropdown
 				data={userSearchCategory}
@@ -34,9 +34,9 @@ const PetSearchInput = ({
 			/>
 			<button
 				onClick={fetchPets}
-				className='bg-gray-500 px-2 py-1 rounded-md hover:bg-gray-400 transition ease-in-out'
+				className=' px-2 py-1 rounded-md hover:bg-pastelDarkerCream transition ease-in-out bg-pastelCream border border-pastelPurple'
 			>
-				Press me
+				Search
 			</button>
 		</div>
 	)

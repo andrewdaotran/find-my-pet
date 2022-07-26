@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }) {
 						<FormSubmissionContextProvider>
 							<Navbar>
 								{/* This instead? */}
+
 								<Component {...pageProps} />
 							</Navbar>
 						</FormSubmissionContextProvider>

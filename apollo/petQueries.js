@@ -4,6 +4,7 @@ export const CREATE_PET = gql`
 	mutation CreatePet($input: CreatePetInput!) {
 		createPet(input: $input) {
 			id
+			lostOrFound
 		}
 	}
 `

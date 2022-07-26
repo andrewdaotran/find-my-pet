@@ -18,7 +18,7 @@ interface Props {
 }
 
 const User = ({ user, userIdParams }: Props) => {
-	const { isFormSubmitted } = useContext(FormSubmissionContext)
+	// const { isFormSubmitted } = useContext(FormSubmissionContext)
 	const {
 		data: { user: gqlUser },
 	} = useQuery(USER_QUERY, { variables: { sub: user.sub } })
@@ -42,12 +42,24 @@ const User = ({ user, userIdParams }: Props) => {
 
 	return (
 		<div>
-			<PetForm isNewPet={true} />
-			{isFormSubmitted && <FormSubmissionModal isNewPet={true} />}
-			<div className='grid p-4 sm:grid-cols-2 gap-6'>
-				<PetPageRedirectBox {...userBoxData.foundPets} />
-				<PetPageRedirectBox {...userBoxData.lostPets} />
+			<div className='grid md:p-4 sm:grid-cols-2 gap-6 max-w-2xl mx-auto  justify-center mt-8 sm:w-[40rem] '>
+				<div className='w-[22rem] sm:w-full'>
+					<PetPageRedirectBox
+						{...userBoxData.foundPets}
+						backgroundColor='bg-pastelLightGreen'
+					/>
+				</div>
+				<div className='w-[22rem] sm:w-full'>
+					<PetPageRedirectBox
+						{...userBoxData.lostPets}
+						backgroundColor='bg-pastelRed'
+					/>
+				</div>
 			</div>
+
+			<PetForm isNewPet={true} />
+			{/* {isFormSubmitted && <FormSubmissionModal isNewPet={true} />} */}
+			{/* {isFormSubmitted || <FormSubmissionModal isNewPet={true} />} */}
 		</div>
 	)
 }

@@ -63,6 +63,10 @@ export const userBoxData = {
 		description: 'All your lost pets posts',
 		redirect: '/user/lost-pets',
 	},
+	homePage: {
+		title: 'Your Home Page',
+		description: 'Create your own lost or found pet post',
+	},
 }
 
 export const userSearchCategory = ['all', 'name', 'gender', 'species']
