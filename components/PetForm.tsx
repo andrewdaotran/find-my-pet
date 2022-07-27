@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form'
 import { CREATE_PET, UPDATE_PET } from '../apollo/petQueries'
 import UserContext from '../context/userContext'
@@ -27,8 +27,8 @@ interface Props {
 const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 	const { user } = useContext(UserContext)
 	const { pet, clearPet, editPet } = useContext(PetEditContext)
+	const imageRef = useRef<HTMLInputElement>(null)
 
-	console.log(pet)
 	const {
 		register,
 		handleSubmit,
@@ -107,6 +107,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 
 	const handleImageChange = (e) => {
 		const image = e.target.files[0]
+
 		if (image) {
 			compressImage(image, editPet, 'image', setIsImageTooLarge)
 		} else {
@@ -114,7 +115,10 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 		}
 	}
 
-	const handleRemoveImage = (e) => editPet('', 'image')
+	const handleRemoveImage = (e) => {
+		imageRef.current.value = ''
+		editPet('', 'image')
+	}
 
 	const handleCloseModal = () => {
 		petReset()
@@ -123,11 +127,11 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 	return petLoading || !petCalled ? (
 		<div className='border border-pastelPurple grid md:mx-auto mt-8 bg-pastelCream md:px-8 px-4 py-4 rounded-md  w-full md:max-w-3xl sm:mx-2 mb-8'>
 			<h3 className='text-center text-lg font-bold mb-8'>
-				Make a Lost or Found Pet Post
+				Create a Lost or Found Pet Post
 			</h3>
 			<form
 				onSubmit={handleSubmit(handleCreateOrEditPet)}
-				className='md:grid md:grid-cols-2 flex-col md:gap-8'
+				className='md:grid md:grid-cols-2 flex-col md:gap-x-8'
 			>
 				{/* <input {...register('_id')} type='hidden' name='_id' value={post._id} />  */}
 				{/* Left Div */}
@@ -274,7 +278,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 						<textarea
 							{...register('description', { required: true })}
 							disabled={petLoading && true}
-							className='border border-black rounded-md resize-none h- 32 md:h-48 w-full  px-2 py-1 outline-none '
+							className='border border-black rounded-md resize-none h-32 md:h-56 w-full  px-2 py-1 outline-none '
 							value={pet.description}
 							onChange={(e) => editPet(e.target.value, 'description')}
 						/>
@@ -358,6 +362,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 							type='file'
 							accept='image/png, image/jpeg'
 							onChange={handleImageChange}
+							ref={imageRef}
 						/>
 						<h4>
 							Only <span className='text-blue-500'>jpeg</span> and
@@ -379,7 +384,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 
 				{/* Image Preview */}
 				{pet.image && (
-					<div className=' col-span-2  mx-auto'>
+					<div className=' col-span-2  mx-auto grid justify-items-center mt-2 md:mt-4'>
 						<div className='grid gap-1 '>
 							<h4 className='font-bold'>Image Preview:</h4>
 							<div className='border border-pastelPurple w-[21rem] h-56 relative'>
@@ -404,7 +409,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 				)}
 
 				{petLoading || (
-					<div className=' flex gap-10  col-span-2  justify-center '>
+					<div className=' flex gap-10  col-span-2  justify-center mt-8'>
 						<button
 							type='submit'
 							className='border border-pastelPurple py-1 px-2 rounded-md bg-pastelLightGreen hover:bg-pastelDarkerLightGreen transition ease-in-out'
