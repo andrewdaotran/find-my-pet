@@ -19,11 +19,6 @@ import InputEmptyError from './InputEmptyError'
 import FormSubmissionModal from './FormSubmissionModal'
 import { InputForm } from '../typings'
 
-interface InputError {
-	isEmpty: boolean
-	throwErrorMessage: boolean
-}
-
 interface Props {
 	isNewPet: boolean
 	setIsEditingPet?: React.Dispatch<React.SetStateAction<boolean>>
@@ -52,135 +47,9 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 	] = useMutation(CREATE_PET)
 	const [updatePet, { data: updatedPetData }] = useMutation(UPDATE_PET)
 
-	// const [dateError, setDateError] = useState<InputError>({
-	// 	isEmpty: true,
-	// 	throwErrorMessage: false,
-	// })
-	// const [speciesError, setSpeciesError] = useState<InputError>({
-	// 	isEmpty: true,
-	// 	throwErrorMessage: false,
-	// })
-	// const [descriptionError, setDescriptionError] = useState<InputError>({
-	// 	isEmpty: true,
-	// 	throwErrorMessage: false,
-	// })
-	// const [lostOrFoundError, setLostOrFoundError] = useState<InputError>({
-	// 	isEmpty: true,
-	// 	throwErrorMessage: false,
-	// })
-	// const [imageError, setImageError] = useState<InputError>({
-	// 	isEmpty: true,
-	// 	throwErrorMessage: false,
-	// })
-	// const [cityError, setCityError] = useState<InputError>({
-	// 	isEmpty: true,
-	// 	throwErrorMessage: false,
-	// })
-	// const [stateError, setStateError] = useState<InputError>({
-	// 	isEmpty: true,
-	// 	throwErrorMessage: false,
-	// })
 	const [isImageTooLarge, setIsImageTooLarge] = useState<boolean>(false)
 
-	// changes state of input fields being empty to guard submitting without these fields
-	// useEffect(() => {
-	// 	if (pet.dateLostOrFound !== '') {
-	// 		setDateError({ ...dateError, isEmpty: false })
-	// 	} else {
-	// 		setDateError({ ...dateError, isEmpty: true })
-	// 	}
-	// 	if (pet.lostOrFound !== 'Set Lost or Found') {
-	// 		setLostOrFoundError({ ...lostOrFoundError, isEmpty: false })
-	// 	} else {
-	// 		setLostOrFoundError({ ...lostOrFoundError, isEmpty: true })
-	// 	}
-	// 	if (pet.description !== '') {
-	// 		setDescriptionError({ ...descriptionError, isEmpty: false })
-	// 	} else {
-	// 		setDescriptionError({ ...descriptionError, isEmpty: true })
-	// 	}
-	// 	if (pet.species !== 'Set Species') {
-	// 		setSpeciesError({ ...speciesError, isEmpty: false })
-	// 	} else {
-	// 		setSpeciesError({ ...speciesError, isEmpty: true })
-	// 	}
-	// 	if (pet.image !== '') {
-	// 		setImageError({ ...imageError, isEmpty: false })
-	// 	} else {
-	// 		setImageError({ ...imageError, isEmpty: true })
-	// 	}
-	// 	if (pet.city !== '') {
-	// 		setCityError({ ...imageError, isEmpty: false })
-	// 	} else {
-	// 		setCityError({ ...imageError, isEmpty: true })
-	// 	}
-	// 	if (pet.state !== '') {
-	// 		setStateError({ ...imageError, isEmpty: false })
-	// 	} else {
-	// 		setStateError({ ...imageError, isEmpty: true })
-	// 	}
-	// }, [
-	// 	pet.lostOrFound,
-	// 	pet.description,
-	// 	pet.species,
-	// 	pet.image,
-	// 	pet.state,
-	// 	pet.city,
-	// ])
-
 	const handleCreateOrEditPet: SubmitHandler<InputForm> = (data) => {
-		// e.preventDefault()
-		// console.log(data)
-		// if (dateError.isEmpty) {
-		// 	setDateError({ ...lostOrFoundError, throwErrorMessage: true })
-		// } else {
-		// 	setDateError({ ...lostOrFoundError, throwErrorMessage: false })
-		// }
-		// if (lostOrFoundError.isEmpty) {
-		// 	setLostOrFoundError({ ...lostOrFoundError, throwErrorMessage: true })
-		// } else {
-		// 	setLostOrFoundError({ ...lostOrFoundError, throwErrorMessage: false })
-		// }
-		// if (descriptionError.isEmpty) {
-		// 	setDescriptionError({ ...descriptionError, throwErrorMessage: true })
-		// } else {
-		// 	setDescriptionError({
-		// 		...descriptionError,
-		// 		throwErrorMessage: false,
-		// 	})
-		// }
-		// if (speciesError.isEmpty) {
-		// 	setSpeciesError({ ...speciesError, throwErrorMessage: true })
-		// } else {
-		// 	setSpeciesError({ ...speciesError, throwErrorMessage: false })
-		// }
-		// if (imageError.isEmpty) {
-		// 	setImageError({ ...imageError, throwErrorMessage: true })
-		// } else {
-		// 	setImageError({ ...imageError, throwErrorMessage: false })
-		// }
-		// if (cityError.isEmpty) {
-		// 	setCityError({ ...imageError, throwErrorMessage: true })
-		// } else {
-		// 	setCityError({ ...imageError, throwErrorMessage: false })
-		// }
-		// if (stateError.isEmpty) {
-		// 	setStateError({ ...imageError, throwErrorMessage: true })
-		// } else {
-		// 	setStateError({ ...imageError, throwErrorMessage: false })
-		// }
-
-		// if (
-		// 	speciesError.isEmpty ||
-		// 	descriptionError.isEmpty ||
-		// 	lostOrFoundError.isEmpty ||
-		// 	imageError.isEmpty ||
-		// 	cityError.isEmpty ||
-		// 	stateError.isEmpty
-		// ) {
-		// 	return
-		// }
-
 		if (isNewPet) {
 			createPet({
 				variables: {
@@ -224,12 +93,6 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 			setIsEditingPet(false)
 		}
 
-		// setLostOrFoundError({ isEmpty: true, throwErrorMessage: false })
-		// setDescriptionError({ isEmpty: true, throwErrorMessage: false })
-		// setSpeciesError({ isEmpty: true, throwErrorMessage: false })
-		// setImageError({ isEmpty: true, throwErrorMessage: false })
-		// setCityError({ isEmpty: true, throwErrorMessage: false })
-		// setStateError({ isEmpty: true, throwErrorMessage: false })
 		clearPet()
 
 		submitModalPopup()
