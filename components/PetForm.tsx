@@ -140,12 +140,9 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 								value={pet.lostOrFound}
 								title='lostOrFound'
 								isForm={true}
-								// register={register}
-								// inputTitle='lostOrFound'
-								// isRequired={true}
 							/>
 						</div>
-						{/* {lostOrFoundError.throwErrorMessage && ( */}
+
 						{errors.lostOrFound && (
 							<InputEmptyError message='Please specify lost or found' />
 						)}
@@ -175,7 +172,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 							onChange={(e) => editPet(e.target.value, 'dateLostOrFound')}
 							className='cursor-pointer  border border-black rounded-md px-2 py-1  w-full '
 						/>
-						{/* {dateError.throwErrorMessage && ( */}
+
 						{errors.dateLostOrFound && (
 							<InputEmptyError
 								message={
@@ -200,15 +197,8 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 								value={pet.species}
 								title='species'
 								isForm={true}
-								// register={register}
-								// inputTitle='species'
-								// isRequired={true}
 							/>
 						</div>
-						{/* {speciesError.throwErrorMessage && ( */}
-						{/* {errors.species && (
-							<InputEmptyError message='Please enter a species' />
-						)} */}
 					</div>
 					{/* Breed */}
 					<div className=' grid  gap-1'>
@@ -250,9 +240,6 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 								value={pet.gender}
 								title='gender'
 								isForm={true}
-								// register={register}
-								// inputTitle='gender'
-								// isRequired={false}
 							/>
 						</div>
 					</div>
@@ -286,7 +273,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 							value={pet.description}
 							onChange={(e) => editPet(e.target.value, 'description')}
 						/>
-						{/* {descriptionError.throwErrorMessage && ( */}
+
 						{errors.description && (
 							<InputEmptyError message='Please enter a pet description' />
 						)}
@@ -315,21 +302,8 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 								value={pet.state}
 								title='state'
 								isForm={true}
-								// register={register}
-								// inputTitle='state'
-								// isRequired={true}
 							/>
 						</div>
-						{/* {stateError.throwErrorMessage && ( */}
-						{/* {errors.state && (
-							<InputEmptyError
-								message={
-									pet.lostOrFound === 'Lost'
-										? 'Please select the state the pet was lost'
-										: 'Please select the state the pet was found'
-								}
-							/>
-						)} */}
 					</div>
 					{/* City */}
 					<div className='grid  gap-1'>
@@ -355,7 +329,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 							value={pet.city}
 							onChange={(e) => editPet(e.target.value, 'city')}
 						/>
-						{/* {cityError.throwErrorMessage && ( */}
+
 						{errors.city && (
 							<InputEmptyError
 								message={
@@ -384,7 +358,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 							Only <span className='text-blue-500'>jpeg</span> and
 							<span className='text-blue-500'> png</span> files are accepted
 						</h4>
-						{/* {imageError.throwErrorMessage && ( */}
+
 						{errors.image && (
 							<InputEmptyError message='Please select an image' />
 						)}
