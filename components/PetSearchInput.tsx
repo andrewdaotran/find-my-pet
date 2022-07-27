@@ -1,4 +1,5 @@
 import React from 'react'
+import { useWindowSize } from '../custom-hooks/useWindowSize'
 import { userSearchCategory } from '../utils'
 import Dropdown from './Dropdown'
 
@@ -17,14 +18,17 @@ const PetSearchInput = ({
 	setCategory,
 	fetchPets,
 }: Props) => {
+	const size = useWindowSize()
 	return (
 		<div className=' px-4 py-2 gap-4 flex justify-center max-w-md mx-auto my-8'>
 			<input
 				type='text'
-				placeholder='Type in a search term'
+				placeholder={
+					size.width >= 640 ? 'Type in a search term' : 'Search Term'
+				}
 				value={search}
 				onChange={(e) => setSearch(e.target.value)}
-				className='border-b border-black outline-none px-2 bg-inherit'
+				className='border-b border-black outline-none px-2 bg-inherit w-36 sm:w-52'
 			/>
 			<Dropdown
 				data={userSearchCategory}

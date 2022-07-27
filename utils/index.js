@@ -71,9 +71,13 @@ export const userBoxData = {
 
 export const userSearchCategory = ['all', 'name', 'gender', 'species']
 
-export const lostOrFoundList = ['Set Lost or Found', 'Lost', 'Found']
+export const lostOrFoundList = [
+	// 'Set Lost or Found',
+	'Lost',
+	'Found',
+]
 export const speciesList = [
-	'Set Species',
+	// 'Set Species',
 	'Dog',
 	'Cat',
 	'Bird',

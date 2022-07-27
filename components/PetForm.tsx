@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client'
 import React, { useContext, useEffect, useState } from 'react'
+import { useForm, SubmitHandler, FieldValues } from 'react-hook-form'
 import { CREATE_PET, UPDATE_PET } from '../apollo/petQueries'
 import UserContext from '../context/userContext'
 import PetEditContext from '../context/petEditContext'
@@ -16,6 +17,7 @@ import Dropdown from './Dropdown'
 import Image from 'next/image'
 import InputEmptyError from './InputEmptyError'
 import FormSubmissionModal from './FormSubmissionModal'
+import { InputForm } from '../typings'
 
 interface InputError {
 	isEmpty: boolean
@@ -30,8 +32,13 @@ interface Props {
 const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 	const { user } = useContext(UserContext)
 	const { pet, clearPet, editPet } = useContext(PetEditContext)
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<FieldValues>()
+	// } = useForm<InputForm>()
 	const { submitModalPopup } = useContext(FormSubmissionContext)
-	// console.log(pet)
 
 	const [
 		createPet,
@@ -45,133 +52,134 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 	] = useMutation(CREATE_PET)
 	const [updatePet, { data: updatedPetData }] = useMutation(UPDATE_PET)
 
-	const [dateError, setDateError] = useState<InputError>({
-		isEmpty: true,
-		throwErrorMessage: false,
-	})
-	const [speciesError, setSpeciesError] = useState<InputError>({
-		isEmpty: true,
-		throwErrorMessage: false,
-	})
-	const [descriptionError, setDescriptionError] = useState<InputError>({
-		isEmpty: true,
-		throwErrorMessage: false,
-	})
-	const [lostOrFoundError, setLostOrFoundError] = useState<InputError>({
-		isEmpty: true,
-		throwErrorMessage: false,
-	})
-	const [imageError, setImageError] = useState<InputError>({
-		isEmpty: true,
-		throwErrorMessage: false,
-	})
-	const [cityError, setCityError] = useState<InputError>({
-		isEmpty: true,
-		throwErrorMessage: false,
-	})
-	const [stateError, setStateError] = useState<InputError>({
-		isEmpty: true,
-		throwErrorMessage: false,
-	})
+	// const [dateError, setDateError] = useState<InputError>({
+	// 	isEmpty: true,
+	// 	throwErrorMessage: false,
+	// })
+	// const [speciesError, setSpeciesError] = useState<InputError>({
+	// 	isEmpty: true,
+	// 	throwErrorMessage: false,
+	// })
+	// const [descriptionError, setDescriptionError] = useState<InputError>({
+	// 	isEmpty: true,
+	// 	throwErrorMessage: false,
+	// })
+	// const [lostOrFoundError, setLostOrFoundError] = useState<InputError>({
+	// 	isEmpty: true,
+	// 	throwErrorMessage: false,
+	// })
+	// const [imageError, setImageError] = useState<InputError>({
+	// 	isEmpty: true,
+	// 	throwErrorMessage: false,
+	// })
+	// const [cityError, setCityError] = useState<InputError>({
+	// 	isEmpty: true,
+	// 	throwErrorMessage: false,
+	// })
+	// const [stateError, setStateError] = useState<InputError>({
+	// 	isEmpty: true,
+	// 	throwErrorMessage: false,
+	// })
 	const [isImageTooLarge, setIsImageTooLarge] = useState<boolean>(false)
 
 	// changes state of input fields being empty to guard submitting without these fields
-	useEffect(() => {
-		if (pet.dateLostOrFound !== '') {
-			setDateError({ ...dateError, isEmpty: false })
-		} else {
-			setDateError({ ...dateError, isEmpty: true })
-		}
-		if (pet.lostOrFound !== 'Set Lost or Found') {
-			setLostOrFoundError({ ...lostOrFoundError, isEmpty: false })
-		} else {
-			setLostOrFoundError({ ...lostOrFoundError, isEmpty: true })
-		}
-		if (pet.description !== '') {
-			setDescriptionError({ ...descriptionError, isEmpty: false })
-		} else {
-			setDescriptionError({ ...descriptionError, isEmpty: true })
-		}
-		if (pet.species !== 'Set Species') {
-			setSpeciesError({ ...speciesError, isEmpty: false })
-		} else {
-			setSpeciesError({ ...speciesError, isEmpty: true })
-		}
-		if (pet.image !== '') {
-			setImageError({ ...imageError, isEmpty: false })
-		} else {
-			setImageError({ ...imageError, isEmpty: true })
-		}
-		if (pet.city !== '') {
-			setCityError({ ...imageError, isEmpty: false })
-		} else {
-			setCityError({ ...imageError, isEmpty: true })
-		}
-		if (pet.state !== '') {
-			setStateError({ ...imageError, isEmpty: false })
-		} else {
-			setStateError({ ...imageError, isEmpty: true })
-		}
-	}, [
-		pet.lostOrFound,
-		pet.description,
-		pet.species,
-		pet.image,
-		pet.state,
-		pet.city,
-	])
+	// useEffect(() => {
+	// 	if (pet.dateLostOrFound !== '') {
+	// 		setDateError({ ...dateError, isEmpty: false })
+	// 	} else {
+	// 		setDateError({ ...dateError, isEmpty: true })
+	// 	}
+	// 	if (pet.lostOrFound !== 'Set Lost or Found') {
+	// 		setLostOrFoundError({ ...lostOrFoundError, isEmpty: false })
+	// 	} else {
+	// 		setLostOrFoundError({ ...lostOrFoundError, isEmpty: true })
+	// 	}
+	// 	if (pet.description !== '') {
+	// 		setDescriptionError({ ...descriptionError, isEmpty: false })
+	// 	} else {
+	// 		setDescriptionError({ ...descriptionError, isEmpty: true })
+	// 	}
+	// 	if (pet.species !== 'Set Species') {
+	// 		setSpeciesError({ ...speciesError, isEmpty: false })
+	// 	} else {
+	// 		setSpeciesError({ ...speciesError, isEmpty: true })
+	// 	}
+	// 	if (pet.image !== '') {
+	// 		setImageError({ ...imageError, isEmpty: false })
+	// 	} else {
+	// 		setImageError({ ...imageError, isEmpty: true })
+	// 	}
+	// 	if (pet.city !== '') {
+	// 		setCityError({ ...imageError, isEmpty: false })
+	// 	} else {
+	// 		setCityError({ ...imageError, isEmpty: true })
+	// 	}
+	// 	if (pet.state !== '') {
+	// 		setStateError({ ...imageError, isEmpty: false })
+	// 	} else {
+	// 		setStateError({ ...imageError, isEmpty: true })
+	// 	}
+	// }, [
+	// 	pet.lostOrFound,
+	// 	pet.description,
+	// 	pet.species,
+	// 	pet.image,
+	// 	pet.state,
+	// 	pet.city,
+	// ])
 
-	const handleCreateOrEditPet = (e) => {
-		e.preventDefault()
-		if (dateError.isEmpty) {
-			setDateError({ ...lostOrFoundError, throwErrorMessage: true })
-		} else {
-			setDateError({ ...lostOrFoundError, throwErrorMessage: false })
-		}
-		if (lostOrFoundError.isEmpty) {
-			setLostOrFoundError({ ...lostOrFoundError, throwErrorMessage: true })
-		} else {
-			setLostOrFoundError({ ...lostOrFoundError, throwErrorMessage: false })
-		}
-		if (descriptionError.isEmpty) {
-			setDescriptionError({ ...descriptionError, throwErrorMessage: true })
-		} else {
-			setDescriptionError({
-				...descriptionError,
-				throwErrorMessage: false,
-			})
-		}
-		if (speciesError.isEmpty) {
-			setSpeciesError({ ...speciesError, throwErrorMessage: true })
-		} else {
-			setSpeciesError({ ...speciesError, throwErrorMessage: false })
-		}
-		if (imageError.isEmpty) {
-			setImageError({ ...imageError, throwErrorMessage: true })
-		} else {
-			setImageError({ ...imageError, throwErrorMessage: false })
-		}
-		if (cityError.isEmpty) {
-			setCityError({ ...imageError, throwErrorMessage: true })
-		} else {
-			setCityError({ ...imageError, throwErrorMessage: false })
-		}
-		if (stateError.isEmpty) {
-			setStateError({ ...imageError, throwErrorMessage: true })
-		} else {
-			setStateError({ ...imageError, throwErrorMessage: false })
-		}
+	const handleCreateOrEditPet: SubmitHandler<InputForm> = (data) => {
+		// e.preventDefault()
+		// console.log(data)
+		// if (dateError.isEmpty) {
+		// 	setDateError({ ...lostOrFoundError, throwErrorMessage: true })
+		// } else {
+		// 	setDateError({ ...lostOrFoundError, throwErrorMessage: false })
+		// }
+		// if (lostOrFoundError.isEmpty) {
+		// 	setLostOrFoundError({ ...lostOrFoundError, throwErrorMessage: true })
+		// } else {
+		// 	setLostOrFoundError({ ...lostOrFoundError, throwErrorMessage: false })
+		// }
+		// if (descriptionError.isEmpty) {
+		// 	setDescriptionError({ ...descriptionError, throwErrorMessage: true })
+		// } else {
+		// 	setDescriptionError({
+		// 		...descriptionError,
+		// 		throwErrorMessage: false,
+		// 	})
+		// }
+		// if (speciesError.isEmpty) {
+		// 	setSpeciesError({ ...speciesError, throwErrorMessage: true })
+		// } else {
+		// 	setSpeciesError({ ...speciesError, throwErrorMessage: false })
+		// }
+		// if (imageError.isEmpty) {
+		// 	setImageError({ ...imageError, throwErrorMessage: true })
+		// } else {
+		// 	setImageError({ ...imageError, throwErrorMessage: false })
+		// }
+		// if (cityError.isEmpty) {
+		// 	setCityError({ ...imageError, throwErrorMessage: true })
+		// } else {
+		// 	setCityError({ ...imageError, throwErrorMessage: false })
+		// }
+		// if (stateError.isEmpty) {
+		// 	setStateError({ ...imageError, throwErrorMessage: true })
+		// } else {
+		// 	setStateError({ ...imageError, throwErrorMessage: false })
+		// }
 
-		if (
-			speciesError.isEmpty ||
-			descriptionError.isEmpty ||
-			lostOrFoundError.isEmpty ||
-			imageError.isEmpty ||
-			cityError.isEmpty ||
-			stateError.isEmpty
-		) {
-			return
-		}
+		// if (
+		// 	speciesError.isEmpty ||
+		// 	descriptionError.isEmpty ||
+		// 	lostOrFoundError.isEmpty ||
+		// 	imageError.isEmpty ||
+		// 	cityError.isEmpty ||
+		// 	stateError.isEmpty
+		// ) {
+		// 	return
+		// }
 
 		if (isNewPet) {
 			createPet({
@@ -216,15 +224,15 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 			setIsEditingPet(false)
 		}
 
-		setLostOrFoundError({ isEmpty: true, throwErrorMessage: false })
-		setDescriptionError({ isEmpty: true, throwErrorMessage: false })
-		setSpeciesError({ isEmpty: true, throwErrorMessage: false })
-		setImageError({ isEmpty: true, throwErrorMessage: false })
-		setCityError({ isEmpty: true, throwErrorMessage: false })
-		setStateError({ isEmpty: true, throwErrorMessage: false })
+		// setLostOrFoundError({ isEmpty: true, throwErrorMessage: false })
+		// setDescriptionError({ isEmpty: true, throwErrorMessage: false })
+		// setSpeciesError({ isEmpty: true, throwErrorMessage: false })
+		// setImageError({ isEmpty: true, throwErrorMessage: false })
+		// setCityError({ isEmpty: true, throwErrorMessage: false })
+		// setStateError({ isEmpty: true, throwErrorMessage: false })
 		clearPet()
 
-		// submitModalPopup()
+		submitModalPopup()
 	}
 
 	const handleCancelEditPet = () => {
@@ -244,15 +252,16 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 		petReset()
 	}
 
-	return petLoading && !petCalled ? (
+	return petLoading || !petCalled ? (
 		<div className='border border-pastelPurple grid md:mx-auto mt-8 bg-pastelCream md:px-8 px-4 py-4 rounded-md  w-full md:max-w-3xl sm:mx-2 mb-8'>
 			<h3 className='text-center text-lg font-bold mb-8'>
 				Make a Lost or Found Pet Post
 			</h3>
 			<form
-				onSubmit={handleCreateOrEditPet}
+				onSubmit={handleSubmit(handleCreateOrEditPet)}
 				className='md:grid md:grid-cols-2 flex-col md:gap-8'
 			>
+				{/* <input {...register('_id')} type='hidden' name='_id' value={post._id} />  */}
 				{/* Left Div */}
 				<div className='grid gap-2 mb-2 md:mb-0'>
 					{/* Lost or Found */}
@@ -268,9 +277,13 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 								value={pet.lostOrFound}
 								title='lostOrFound'
 								isForm={true}
+								// register={register}
+								// inputTitle='lostOrFound'
+								// isRequired={true}
 							/>
 						</div>
-						{lostOrFoundError.throwErrorMessage && (
+						{/* {lostOrFoundError.throwErrorMessage && ( */}
+						{errors.lostOrFound && (
 							<InputEmptyError message='Please specify lost or found' />
 						)}
 					</div>
@@ -292,13 +305,15 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 							)}
 						</h4>
 						<input
+							{...register('dateLostOrFound', { required: true })}
 							disabled={petLoading && true}
 							type='date'
 							value={pet.dateLostOrFound}
 							onChange={(e) => editPet(e.target.value, 'dateLostOrFound')}
 							className='cursor-pointer  border border-black rounded-md px-2 py-1  w-full '
 						/>
-						{dateError.throwErrorMessage && (
+						{/* {dateError.throwErrorMessage && ( */}
+						{errors.dateLostOrFound && (
 							<InputEmptyError
 								message={
 									pet.lostOrFound === 'Lost'
@@ -322,11 +337,15 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 								value={pet.species}
 								title='species'
 								isForm={true}
+								// register={register}
+								// inputTitle='species'
+								// isRequired={true}
 							/>
 						</div>
-						{speciesError.throwErrorMessage && (
+						{/* {speciesError.throwErrorMessage && ( */}
+						{/* {errors.species && (
 							<InputEmptyError message='Please enter a species' />
-						)}
+						)} */}
 					</div>
 					{/* Breed */}
 					<div className=' grid  gap-1'>
@@ -334,6 +353,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 							<span className='font-bold'>Breed</span>:
 						</h4>
 						<input
+							{...register('breed')}
 							disabled={petLoading && true}
 							type='text'
 							className='border border-black rounded-md  px-2 py-1 outline-none  w-full'
@@ -347,6 +367,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 							<span className='font-bold'>Name</span>:
 						</h4>
 						<input
+							{...register('name')}
 							disabled={petLoading && true}
 							type='text'
 							className='border border-black rounded-md  px-2 py-1 outline-none  w-full'
@@ -366,6 +387,9 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 								value={pet.gender}
 								title='gender'
 								isForm={true}
+								// register={register}
+								// inputTitle='gender'
+								// isRequired={false}
 							/>
 						</div>
 					</div>
@@ -375,6 +399,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 							<span className='font-bold'>Age</span>:
 						</h4>
 						<input
+							{...register('age')}
 							disabled={petLoading && true}
 							type='text'
 							className='border border-black rounded-md  px-2 py-1 outline-none  w-full '
@@ -392,12 +417,14 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 							<span className='text-red-500'>*</span> :
 						</h4>
 						<textarea
+							{...register('description', { required: true })}
 							disabled={petLoading && true}
 							className='border border-black rounded-md resize-none h-32 w-full  px-2 py-1 outline-none '
 							value={pet.description}
 							onChange={(e) => editPet(e.target.value, 'description')}
 						/>
-						{descriptionError.throwErrorMessage && (
+						{/* {descriptionError.throwErrorMessage && ( */}
+						{errors.description && (
 							<InputEmptyError message='Please enter a pet description' />
 						)}
 					</div>
@@ -425,9 +452,13 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 								value={pet.state}
 								title='state'
 								isForm={true}
+								// register={register}
+								// inputTitle='state'
+								// isRequired={true}
 							/>
 						</div>
-						{stateError.throwErrorMessage && (
+						{/* {stateError.throwErrorMessage && ( */}
+						{/* {errors.state && (
 							<InputEmptyError
 								message={
 									pet.lostOrFound === 'Lost'
@@ -435,7 +466,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 										: 'Please select the state the pet was found'
 								}
 							/>
-						)}
+						)} */}
 					</div>
 					{/* City */}
 					<div className='grid  gap-1'>
@@ -454,13 +485,15 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 							)}
 						</h4>
 						<input
+							{...register('city', { required: true })}
 							disabled={petLoading && true}
 							type='text'
 							className='border border-black rounded-md  px-2 py-1 outline-none  w-full'
 							value={pet.city}
 							onChange={(e) => editPet(e.target.value, 'city')}
 						/>
-						{cityError.throwErrorMessage && (
+						{/* {cityError.throwErrorMessage && ( */}
+						{errors.city && (
 							<InputEmptyError
 								message={
 									pet.lostOrFound === 'Lost'
@@ -478,6 +511,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 							<span className='text-red-500'>*</span>:
 						</h4>
 						<input
+							{...register('image', { required: true })}
 							disabled={petLoading && true}
 							type='file'
 							accept='image/png, image/jpeg'
@@ -487,7 +521,8 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 							Only <span className='text-blue-500'>jpeg</span> and
 							<span className='text-blue-500'> png</span> files are accepted
 						</h4>
-						{imageError.throwErrorMessage && (
+						{/* {imageError.throwErrorMessage && ( */}
+						{errors.image && (
 							<InputEmptyError message='Please select an image' />
 						)}
 					</div>

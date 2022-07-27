@@ -40,3 +40,18 @@ export interface CommentData {
 	pet: string
 	timestamp: Date
 }
+
+export interface InputForm {
+	_id: string
+	name: string
+	age: string
+	gender: string
+	species: string
+	breed: string
+	dateLostOrFound: string
+	description: string
+	image: string
+	lostOrFound: string
+	city: string
+	state: string
+}

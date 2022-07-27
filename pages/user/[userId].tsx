@@ -42,7 +42,7 @@ const User = ({ user, userIdParams }: Props) => {
 
 	return (
 		<div>
-			<div className='grid md:p-4 sm:grid-cols-2 gap-6 max-w-2xl mx-auto  justify-center mt-8 sm:w-[40rem] '>
+			<div className='grid md:p-4 sm:grid-cols-2 gap-6 max-w-2xl mx-auto  justify-center mt-8 sm:w-[40rem]'>
 				<div className='w-[22rem] sm:w-full'>
 					<PetPageRedirectBox
 						{...userBoxData.foundPets}
@@ -58,8 +58,6 @@ const User = ({ user, userIdParams }: Props) => {
 			</div>
 
 			<PetForm isNewPet={true} />
-			{/* {isFormSubmitted && <FormSubmissionModal isNewPet={true} />} */}
-			{/* {isFormSubmitted || <FormSubmissionModal isNewPet={true} />} */}
 		</div>
 	)
 }

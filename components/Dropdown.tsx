@@ -1,4 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react'
+import { UseFormRegister, FieldValues } from 'react-hook-form'
+import { InputForm } from '../typings'
 
 interface Props {
 	data: string[]
@@ -9,11 +11,24 @@ interface Props {
 	value: string
 	title?: string
 	isForm: boolean
+	// register?: UseFormRegister<FieldValues>
+	// inputTitle?: string
+	// isRequired?: boolean
 }
 
-const Dropdown = ({ data, setFunction, isForm, value, title }: Props) => {
+const Dropdown = ({
+	data,
+	setFunction,
+	isForm,
+	value,
+	title,
+}: // inputTitle,
+// register,
+// isRequired,
+Props) => {
 	return (
 		<select
+			// {...register(inputTitle, { required: isRequired })}
 			onChange={
 				isForm
 					? (e) => setFunction(e.target.value, title)
