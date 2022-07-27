@@ -27,6 +27,8 @@ interface Props {
 const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 	const { user } = useContext(UserContext)
 	const { pet, clearPet, editPet } = useContext(PetEditContext)
+
+	console.log(pet)
 	const {
 		register,
 		handleSubmit,
@@ -105,8 +107,11 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 
 	const handleImageChange = (e) => {
 		const image = e.target.files[0]
-
-		compressImage(image, editPet, 'image', setIsImageTooLarge)
+		if (image) {
+			compressImage(image, editPet, 'image', setIsImageTooLarge)
+		} else {
+			editPet('', 'image')
+		}
 	}
 
 	const handleRemoveImage = (e) => editPet('', 'image')
@@ -269,7 +274,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 						<textarea
 							{...register('description', { required: true })}
 							disabled={petLoading && true}
-							className='border border-black rounded-md resize-none h-32 w-full  px-2 py-1 outline-none '
+							className='border border-black rounded-md resize-none h- 32 md:h-48 w-full  px-2 py-1 outline-none '
 							value={pet.description}
 							onChange={(e) => editPet(e.target.value, 'description')}
 						/>
@@ -363,28 +368,6 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 							<InputEmptyError message='Please select an image' />
 						)}
 					</div>
-					{/* Image Preview */}
-					{pet.image && (
-						<div className=' '>
-							<div className='grid gap-1'>
-								<h4 className='font-bold'>Image Preview:</h4>
-								<div className='border border-pastelPurple w-[21rem] h-56 relative'>
-									<Image
-										src={pet.image}
-										layout='fill'
-										className='object-cover'
-									/>
-								</div>
-							</div>
-							<button
-								disabled={petLoading && true}
-								onClick={handleRemoveImage}
-								className='border border-pastelLighterPurple mt-4 px-2 py-1 bg-pastelSand rounded-md'
-							>
-								Remove Image
-							</button>
-						</div>
-					)}
 
 					{/* Image too large popup */}
 					{isImageTooLarge && (
@@ -393,6 +376,26 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 						</div>
 					)}
 				</div>
+
+				{/* Image Preview */}
+				{pet.image && (
+					<div className=' col-span-2  mx-auto'>
+						<div className='grid gap-1 '>
+							<h4 className='font-bold'>Image Preview:</h4>
+							<div className='border border-pastelPurple w-[21rem] h-56 relative'>
+								<Image src={pet.image} layout='fill' className='object-cover' />
+							</div>
+						</div>
+						<button
+							disabled={petLoading && true}
+							onClick={handleRemoveImage}
+							className='border border-pastelLighterPurple mt-4 px-2 py-1 bg-pastelSand rounded-md '
+						>
+							Remove Image
+						</button>
+					</div>
+				)}
+
 				{/* Loading Message */}
 				{petLoading && (
 					<div className='mt-4 text-center  col-span-2 '>
