@@ -28,6 +28,20 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 	const { user } = useContext(UserContext)
 	const { pet, clearPet, editPet } = useContext(PetEditContext)
 	const imageRef = useRef<HTMLInputElement>(null)
+	const [isUpdatingImage, setIsUpdatingImage] = useState<boolean>(false)
+	const [isImageUploaded, setIsImageUploaded] = useState<string>('')
+	const [isImageTooLarge, setIsImageTooLarge] = useState<boolean>(false)
+
+	// useEffect(() => {
+	// 	if (pet.image) {
+	// 		setIsImageUploaded(pet.image)
+	// 	} else {
+	// 		setIsImageUploaded('')
+	// 	}
+	// }, [pet.image])
+
+	// console.log(isImageUploaded)
+	console.log(pet)
 
 	const {
 		register,
@@ -36,6 +50,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 	} = useForm<FieldValues>()
 	// } = useForm<InputForm>()
 	const { submitModalPopup } = useContext(FormSubmissionContext)
+	const { ref, ...fields } = register('image')
 
 	const [
 		createPet,
@@ -47,9 +62,9 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 			reset: petReset,
 		},
 	] = useMutation(CREATE_PET)
-	const [updatePet, { data: updatedPetData }] = useMutation(UPDATE_PET)
 
-	const [isImageTooLarge, setIsImageTooLarge] = useState<boolean>(false)
+	console.log(errors)
+	const [updatePet, { data: updatedPetData }] = useMutation(UPDATE_PET)
 
 	const handleCreateOrEditPet: SubmitHandler<InputForm> = (data) => {
 		if (isNewPet) {
@@ -96,33 +111,41 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 		}
 
 		clearPet()
-
+		setIsUpdatingImage(false)
 		submitModalPopup()
 	}
 
 	const handleCancelEditPet = () => {
 		setIsEditingPet(false)
 		clearPet()
+		setIsUpdatingImage(false)
 	}
 
 	const handleImageChange = (e) => {
 		const image = e.target.files[0]
-
 		if (image) {
 			compressImage(image, editPet, 'image', setIsImageTooLarge)
+			setIsImageUploaded(image.name)
 		} else {
 			editPet('', 'image')
 		}
 	}
 
 	const handleRemoveImage = (e) => {
-		imageRef.current.value = ''
+		if ((!isNewPet && isUpdatingImage) || isNewPet) {
+			imageRef.current.value = ''
+		}
+		if (!isNewPet) {
+			setIsUpdatingImage(true)
+		}
 		editPet('', 'image')
 	}
 
 	const handleCloseModal = () => {
 		petReset()
 	}
+
+	console.log(isImageUploaded)
 
 	return petLoading || !petCalled ? (
 		<div className='border border-pastelPurple grid md:mx-auto mt-8 bg-pastelCream md:px-8 px-4 py-4 rounded-md  w-full md:max-w-3xl sm:mx-2 mb-8'>
@@ -351,34 +374,47 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 					</div>
 
 					{/* Image */}
-					<div className='grid  gap-1'>
-						<h4 className=''>
-							<span className='font-bold'>Image</span>
-							<span className='text-red-500'>*</span>:
-						</h4>
-						<input
-							{...register('image', { required: true })}
-							disabled={petLoading && true}
-							type='file'
-							accept='image/png, image/jpeg'
-							onChange={handleImageChange}
-							ref={imageRef}
-						/>
-						<h4>
-							Only <span className='text-blue-500'>jpeg</span> and
-							<span className='text-blue-500'> png</span> files are accepted
-						</h4>
+					{(isNewPet || isUpdatingImage) && (
+						<>
+							<div className='grid  gap-1'>
+								<h4 className=''>
+									<span className='font-bold'>Image</span>
+									<span className='text-red-500'>*</span>:
+								</h4>
+								<input
+									disabled={petLoading && true}
+									{...register('image', {
+										required: true,
+									})}
+									ref={(instance) => {
+										ref(instance)
+										imageRef.current = instance
+									}}
+									{...fields}
+									type='file'
+									accept='image/png, image/jpeg'
+									onChange={handleImageChange}
+								/>
+								<h4>
+									Only <span className='text-blue-500'>jpeg</span> and
+									<span className='text-blue-500'> png</span> files are accepted
+								</h4>
 
-						{errors.image && (
-							<InputEmptyError message='Please select an image' />
-						)}
-					</div>
+								{errors.image && isNewPet && (
+									<InputEmptyError message='Please select an image' />
+								)}
 
-					{/* Image too large popup */}
-					{isImageTooLarge && (
-						<div className=''>
-							<InputEmptyError message='Unfortunately your image is too large' />
-						</div>
+								{errors.image && !pet.image && !isNewPet && (
+									<InputEmptyError message='Please select an image' />
+								)}
+							</div>
+							{/* Image too large popup */}
+							{isImageTooLarge && (
+								<div className=''>
+									<InputEmptyError message='Unfortunately your image is too large' />
+								</div>
+							)}{' '}
+						</>
 					)}
 				</div>
 
@@ -416,12 +452,14 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 						>
 							Submit
 						</button>
-						<button
-							onClick={handleCancelEditPet}
-							className='py-1 px-2 rounded-md border border-pastelPurple bg-pastelRed hover:bg-pastelDarkerRed transition ease-in-out'
-						>
-							Cancel Edit
-						</button>
+						{!isNewPet && (
+							<button
+								onClick={handleCancelEditPet}
+								className='py-1 px-2 rounded-md border border-pastelPurple bg-pastelRed hover:bg-pastelDarkerRed transition ease-in-out'
+							>
+								Cancel Edit
+							</button>
+						)}
 					</div>
 				)}
 			</form>
