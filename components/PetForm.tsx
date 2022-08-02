@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form'
 import { CREATE_PET, UPDATE_PET } from '../apollo/petQueries'
 import UserContext from '../context/userContext'
@@ -22,26 +22,15 @@ import { InputForm } from '../typings'
 interface Props {
 	isNewPet: boolean
 	setIsEditingPet?: React.Dispatch<React.SetStateAction<boolean>>
+	isLargeWindow?: boolean
 }
 
-const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
+const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 	const { user } = useContext(UserContext)
 	const { pet, clearPet, editPet } = useContext(PetEditContext)
 	const imageRef = useRef<HTMLInputElement>(null)
 	const [isUpdatingImage, setIsUpdatingImage] = useState<boolean>(false)
-	const [isImageUploaded, setIsImageUploaded] = useState<string>('')
 	const [isImageTooLarge, setIsImageTooLarge] = useState<boolean>(false)
-
-	// useEffect(() => {
-	// 	if (pet.image) {
-	// 		setIsImageUploaded(pet.image)
-	// 	} else {
-	// 		setIsImageUploaded('')
-	// 	}
-	// }, [pet.image])
-
-	// console.log(isImageUploaded)
-	console.log(pet)
 
 	const {
 		register,
@@ -63,7 +52,6 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 		},
 	] = useMutation(CREATE_PET)
 
-	console.log(errors)
 	const [updatePet, { data: updatedPetData }] = useMutation(UPDATE_PET)
 
 	const handleCreateOrEditPet: SubmitHandler<InputForm> = (data) => {
@@ -125,7 +113,6 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 		const image = e.target.files[0]
 		if (image) {
 			compressImage(image, editPet, 'image', setIsImageTooLarge)
-			setIsImageUploaded(image.name)
 		} else {
 			editPet('', 'image')
 		}
@@ -145,18 +132,15 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 		petReset()
 	}
 
-	console.log(isImageUploaded)
-
 	return petLoading || !petCalled ? (
-		<div className='border border-pastelPurple grid md:mx-auto mt-8 bg-pastelCream md:px-8 px-4 py-4 rounded-md  w-full md:max-w-3xl sm:mx-2 mb-8'>
+		<div className='border border-pastelPurple grid md:mx-auto  bg-pastelCream md:px-8 px-4 py-4 rounded-md  w-full md:max-w-3xl '>
 			<h3 className='text-center text-lg font-bold mb-8'>
-				Create a Lost or Found Pet Post
+				{isNewPet ? 'Create a Lost or Found Pet Post' : `Editing ${pet.name}`}
 			</h3>
 			<form
 				onSubmit={handleSubmit(handleCreateOrEditPet)}
 				className='md:grid md:grid-cols-2 flex-col md:gap-x-8'
 			>
-				{/* <input {...register('_id')} type='hidden' name='_id' value={post._id} />  */}
 				{/* Left Div */}
 				<div className='grid gap-2 mb-2 md:mb-0'>
 					{/* Lost or Found */}
@@ -301,7 +285,9 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 						<textarea
 							{...register('description', { required: true })}
 							disabled={petLoading && true}
-							className='border border-black rounded-md resize-none h-32 md:h-56 w-full  px-2 py-1 outline-none '
+							className={`border border-black rounded-md resize-none h-56 w-full  px-2 py-1 outline-none ${
+								!isNewPet && !isUpdatingImage ? 'md:h-[20.5rem]' : 'md:h-56 '
+							}`}
 							value={pet.description}
 							onChange={(e) => editPet(e.target.value, 'description')}
 						/>
@@ -452,7 +438,7 @@ const PetForm = ({ isNewPet, setIsEditingPet }: Props) => {
 						>
 							Submit
 						</button>
-						{!isNewPet && (
+						{!isNewPet && !isLargeWindow && (
 							<button
 								onClick={handleCancelEditPet}
 								className='py-1 px-2 rounded-md border border-pastelPurple bg-pastelRed hover:bg-pastelDarkerRed transition ease-in-out'

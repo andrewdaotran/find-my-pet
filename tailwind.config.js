@@ -22,6 +22,7 @@ module.exports = {
 				pastelBlue: '#DFE7FD',
 				pastelPurple: '#CDDAFD',
 				pastelLighterPurple: '#E1E8FA',
+				gamboge: '#E09D37',
 			},
 		},
 	},

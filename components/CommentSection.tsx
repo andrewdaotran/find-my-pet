@@ -9,7 +9,6 @@ interface Props {
 const CommentSection = ({ comments }: Props) => {
 	return (
 		<div>
-			<h1>Comments</h1>
 			{comments.map((comment) => {
 				return (
 					<Comment

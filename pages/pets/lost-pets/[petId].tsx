@@ -26,7 +26,6 @@ const LostPet = ({ pet }: Props) => {
 
 	useEffect(() => {
 		clearPet()
-		console.log(pet)
 	}, [])
 
 	useEffect(() => {
@@ -47,6 +46,7 @@ const LostPet = ({ pet }: Props) => {
 					<PetForm isNewPet={false} setIsEditingPet={setIsEditingPet} />
 				) : null}
 				{isFormSubmitted && <FormSubmissionModal isNewPet={false} />}
+
 				<h2>{pet.name}</h2>
 				{isUserPost && <button onClick={handleEdit}>Edit</button>}
 			</div>
