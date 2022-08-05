@@ -1,22 +1,44 @@
 import React, { useContext } from 'react'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
+import { useMutation } from '@apollo/client'
 
 import UserContext from '../context/userContext'
+import { DELETE_COMMENT } from '../apollo/commentQueries'
 
 interface Props {
 	value: String
 	timestamp: Date
 	userName: String
 	userId: String
+	commentId: String
 }
 
-const Comment = ({ value, timestamp, userName, userId }: Props) => {
+const Comment = ({ value, timestamp, userName, userId, commentId }: Props) => {
+	// console.log(commentId)
 	const { user } = useContext(UserContext)
 	TimeAgo.setDefaultLocale(en.locale)
 	TimeAgo.addLocale(en)
 	const timeAgo = new TimeAgo('en-US')
 	const dateAgo = timeAgo.format(new Date(timestamp), 'round-minute')
+
+	const [
+		deleteComment,
+		{
+			loading: deleteCommentLoading,
+			error: deleteCommentError,
+			called: deleteCommentCalled,
+			reset: deleteCommentReset,
+		},
+	] = useMutation(DELETE_COMMENT)
+
+	const handleDeleteComment = () => {
+		deleteComment({
+			variables: {
+				id: commentId,
+			},
+		})
+	}
 	return (
 		<div className='bg-backgroundGrey p-4 border border-pastelPurple grid gap-2'>
 			<h3 className=' font-bold'>{userName}</h3>
@@ -24,7 +46,10 @@ const Comment = ({ value, timestamp, userName, userId }: Props) => {
 			<div className='flex gap-4'>
 				<h3 className=''>{dateAgo}</h3>
 				{user.id === userId && (
-					<button className='border border-black rounded-md px-1 bg-red-300 transition-all ease-in hover:bg-red-400'>
+					<button
+						className='border border-black rounded-md px-1 bg-red-300 transition-all ease-in hover:bg-red-400'
+						onClick={handleDeleteComment}
+					>
 						Delete
 					</button>
 				)}

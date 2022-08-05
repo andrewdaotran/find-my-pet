@@ -31,6 +31,7 @@ const typeDefs = gql`
 		updatePet(input: UpdatePetInput!): Pet
 		createOrFindUser(input: CreateUserInput!): User
 		createComment(input: CreateCommentInput!): Comment
+		deleteComment(id: ID!): Comment
 	}
 
 	type User {

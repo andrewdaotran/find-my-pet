@@ -39,6 +39,7 @@ const CommentSection = ({ comments }: Props) => {
 						key={comment.id}
 						userName={comment.userName}
 						userId={comment.userId}
+						commentId={comment.id}
 					/>
 				)
 			})}

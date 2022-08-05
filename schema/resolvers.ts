@@ -192,21 +192,32 @@ const resolvers = {
 		},
 		createComment: async (parent, args) => {
 			const commentData = args.input
-			console.log(commentData)
 			try {
 				const comment = new CommentModel({
 					...commentData,
 					timestamp: dayjs(new Date()),
 					// timestamp: new Date(),
 				})
-				console.log(comment)
+
 				await comment.save()
 				return comment
 			} catch (error) {
 				console.log(error)
 			}
 		},
+		deleteComment: async (parent, args) => {
+			const commentId = args.id
+			console.log(commentId)
+			try {
+				const comment = await CommentModel.findByIdAndDelete(commentId)
+
+				return comment
+			} catch (error) {
+				console.log(error)
+			}
+		},
 	},
+
 	Pet: {
 		comments: async (parent, args) => {
 			const petId = String(parent.id)
