@@ -117,15 +117,19 @@ const typeDefs = gql`
 	type Comment {
 		id: ID!
 		value: String!
-		user: String!
+		userId: String!
 		pet: String!
 		timestamp: Date
+		sub: String!
+		userName: String!
 	}
 
 	input CreateCommentInput {
 		value: String!
-		user: String!
+		userId: String!
 		pet: String!
+		userName: String!
+		sub: String!
 	}
 `
 

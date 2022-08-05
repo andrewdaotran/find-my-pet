@@ -5,9 +5,10 @@ export const CREATE_COMMENT = gql`
 		createComment(input: $input) {
 			value
 			pet
-			user
+			userId
 			timestamp
 			id
+			userName
 		}
 	}
 `

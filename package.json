@@ -19,6 +19,7 @@
 		"deepmerge": "^4.2.2",
 		"dotenv": "^16.0.1",
 		"graphql": "^16.5.0",
+		"javascript-time-ago": "^2.5.7",
 		"lodash": "^4.17.21",
 		"micro": "^9.3.4",
 		"mongoose": "^6.4.0",

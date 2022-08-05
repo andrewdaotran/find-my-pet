@@ -41,11 +41,18 @@ const CommentInput = ({ petId }: Props) => {
 				input: {
 					value: commentValue,
 					pet: petId,
-					user: user.id,
+					userId: user.id,
+					sub: user.sub,
+					userName: user.name,
 				},
 			},
 		})
 		setCommentValue('')
+		console.log(commentValue)
+		console.log(petId)
+		console.log(user.id)
+		console.log(user.sub)
+		console.log(user.name)
 	}
 	return (
 		<div>
@@ -67,7 +74,7 @@ const CommentInput = ({ petId }: Props) => {
 					placeholder='Write your comment here...'
 					value={commentValue}
 					onChange={(e) => setCommentValue(e.target.value)}
-					className='border border-black rounded-md w-[18rem] sm:w-[26rem] md:w-[36rem] pl-2 pt-2 h-[8rem]  resize-none '
+					className='border border-black rounded-md w-[18rem] sm:w-[26rem] md:w-[36rem] pl-2 pt-2 h-[8rem]  resize-none outline-gamboge'
 				/>
 
 				{errors.comment && (

@@ -192,11 +192,14 @@ const resolvers = {
 		},
 		createComment: async (parent, args) => {
 			const commentData = args.input
+			console.log(commentData)
 			try {
 				const comment = new CommentModel({
 					...commentData,
 					timestamp: dayjs(new Date()),
+					// timestamp: new Date(),
 				})
+				console.log(comment)
 				await comment.save()
 				return comment
 			} catch (error) {
@@ -205,15 +208,6 @@ const resolvers = {
 		},
 	},
 	Pet: {
-		// 	user: async (parent, args) => {
-		// 		const userId = args.id
-		// 		try {
-		// 			const user = await UserModel.findById(userId)
-		// 			return user
-		// 		} catch (error) {
-		// 			console.log(error)
-		// 		}
-		// 	},
 		comments: async (parent, args) => {
 			const petId = String(parent.id)
 			try {
@@ -252,6 +246,18 @@ const resolvers = {
 			}
 		},
 	},
+	// Comment: {
+	// 	user: async (parent, args) => {
+	// 		const userId = parent.user
+	// 		try {
+	// 			const user = await UserModel.findById(userId)
+	// 			console.log('lalalalalal', user)
+	// 			return user
+	// 		} catch (error) {
+	// 			console.log(error)
+	// 		}
+	// 	},
+	// },
 }
 
 export default resolvers

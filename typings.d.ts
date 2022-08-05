@@ -36,9 +36,11 @@ export interface PetData {
 export interface CommentData {
 	id: string
 	value: string
-	user: string
+	userId: string
 	pet: string
 	timestamp: Date
+	userName: string
+	sub: string
 }
 
 export interface InputForm {

@@ -21,8 +21,10 @@ const PetSchema = mongoose.Schema({
 	comments: [
 		{
 			value: String,
-			user: String,
+			userId: String,
 			pet: String,
+			userName: String,
+			sub: String,
 		},
 	],
 	timestamp: { type: Date, default: Date.now },

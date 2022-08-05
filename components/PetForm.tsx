@@ -186,7 +186,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							type='date'
 							value={pet.dateLostOrFound}
 							onChange={(e) => editPet(e.target.value, 'dateLostOrFound')}
-							className='cursor-pointer  border border-black rounded-md px-2 py-1  w-full '
+							className='cursor-pointer  border border-black rounded-md px-2 py-1  w-full outline-none focus:border-gamboge '
 						/>
 
 						{errors.dateLostOrFound && (
@@ -225,7 +225,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							{...register('breed')}
 							disabled={petLoading && true}
 							type='text'
-							className='border border-black rounded-md  px-2 py-1 outline-none  w-full'
+							className='border border-black rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
 							value={pet.breed}
 							onChange={(e) => editPet(e.target.value, 'breed')}
 						/>
@@ -239,7 +239,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							{...register('name')}
 							disabled={petLoading && true}
 							type='text'
-							className='border border-black rounded-md  px-2 py-1 outline-none  w-full'
+							className='border border-black rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
 							value={pet.name}
 							onChange={(e) => editPet(e.target.value, 'name')}
 						/>
@@ -268,7 +268,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							{...register('age')}
 							disabled={petLoading && true}
 							type='text'
-							className='border border-black rounded-md  px-2 py-1 outline-none  w-full '
+							className='border border-black rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
 							value={pet.age}
 							onChange={(e) => editPet(e.target.value, 'age')}
 						/>
@@ -285,7 +285,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 						<textarea
 							{...register('description', { required: true })}
 							disabled={petLoading && true}
-							className={`border border-black rounded-md resize-none h-56 w-full  px-2 py-1 outline-none ${
+							className={`focus:border-gamboge border border-black rounded-md resize-none h-56 w-full  px-2 py-1 outline-none ${
 								!isNewPet && !isUpdatingImage ? 'md:h-[20.5rem]' : 'md:h-56 '
 							}`}
 							value={pet.description}
@@ -343,7 +343,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							{...register('city', { required: true })}
 							disabled={petLoading && true}
 							type='text'
-							className='border border-black rounded-md  px-2 py-1 outline-none  w-full'
+							className='border border-black rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
 							value={pet.city}
 							onChange={(e) => editPet(e.target.value, 'city')}
 						/>

@@ -50,11 +50,12 @@ export const PET_QUERY = gql`
 			user
 			timestamp
 			comments {
-				user
+				userId
 				pet
 				timestamp
 				value
 				id
+				userName
 			}
 		}
 	}
@@ -78,11 +79,12 @@ export const FOUND_PETS_QUERY = gql`
 			lostOrFound
 			timestamp
 			comments {
-				user
+				userId
 				pet
 				timestamp
 				value
 				id
+				userName
 			}
 		}
 	}
@@ -106,11 +108,12 @@ export const FoundPetsByItemQuery = gql`
 			lostOrFound
 			timestamp
 			comments {
-				user
+				userId
 				pet
 				timestamp
 				value
 				id
+				userName
 			}
 		}
 	}
@@ -134,11 +137,12 @@ export const FOUND_PETS_BY_USER_AND_ITEM_QUERY = gql`
 			lostOrFound
 			timestamp
 			comments {
-				user
+				userId
 				pet
 				timestamp
 				value
 				id
+				userName
 			}
 		}
 	}
@@ -162,11 +166,12 @@ export const LostPetsQuery = gql`
 			timestamp
 			lostOrFound
 			comments {
-				user
+				userId
 				pet
 				timestamp
 				value
 				id
+				userName
 			}
 		}
 	}
@@ -189,11 +194,12 @@ export const LostPetsByItemQuery = gql`
 			lostOrFound
 			timestamp
 			comments {
-				user
+				userId
 				pet
 				timestamp
 				value
 				id
+				userName
 			}
 		}
 	}
@@ -216,11 +222,12 @@ export const LOST_PETS_BY_USER_AND_ITEM_QUERY = gql`
 			lostOrFound
 			timestamp
 			comments {
-				user
+				userId
 				pet
 				timestamp
 				value
 				id
+				userName
 			}
 		}
 	}

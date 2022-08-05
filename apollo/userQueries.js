@@ -23,6 +23,7 @@ export const USER_FOUND_PETS_QUERY = gql`
 				species
 				description
 				dateLostOrFound
+				lostOrFound
 				image
 				isReturned
 				city
@@ -45,6 +46,7 @@ export const USER_LOST_PETS_QUERY = gql`
 				species
 				description
 				dateLostOrFound
+				lostOrFound
 				image
 				isReturned
 				city

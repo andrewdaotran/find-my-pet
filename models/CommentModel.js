@@ -2,9 +2,11 @@ import mongoose from 'mongoose'
 
 const CommentSchema = mongoose.Schema({
 	value: String,
-	user: String,
+	userId: String,
 	pet: String,
 	timestamp: Date,
+	userName: String,
+	sub: String,
 })
 
 const CommentModel = mongoose.models['Comment']

@@ -107,7 +107,9 @@ const FoundPet = ({ pet }: Props) => {
 								'MMM DD, YYYY'
 							)}`}
 						</h3>
-						<h3 className='whitespace-pre-line'>{pet.description}</h3>
+						<h3 className='whitespace-pre-line bg-[#F0F0F0] w-full p-4'>
+							{pet.description}
+						</h3>
 					</div>
 
 					{/* Form Submit Modal */}
@@ -123,7 +125,7 @@ const FoundPet = ({ pet }: Props) => {
 					</div>
 					{/* Comment Section */}
 					<div className='w-[21rem] 6	sm:w-[30rem] 	md:w-[42rem]  border border-pastelPurple mx-auto p-4 bg-white '>
-						<h3 className='text-center text-xl'>Comments</h3>
+						<h3 className='text-center text-xl mb-4'>Comments</h3>
 						<CommentSection comments={pet.comments} />
 					</div>
 				</div>
