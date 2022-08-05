@@ -1,8 +1,8 @@
-import { gql } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import { GetStaticProps } from 'next'
 import React, { useContext, useEffect, useState } from 'react'
 import { initializeApollo } from '../../../apollo/apollo-client'
-import { PET_QUERY } from '../../../apollo/petQueries'
+import { PET_QUERY, UPDATE_PET } from '../../../apollo/petQueries'
 import PetForm from '../../../components/PetForm'
 import PetEditContext from '../../../context/petEditContext'
 import UserContext from '../../../context/userContext'
@@ -28,6 +28,21 @@ const FoundPet = ({ pet }: Props) => {
 	const { isFormSubmitted } = useContext(FormSubmissionContext)
 	const size = useWindowSize()
 
+	const { refetch } = useQuery(PET_QUERY, {
+		variables: { id: pet.id },
+	})
+
+	const [
+		updatePet,
+		{
+			data: petData,
+			loading: petLoading,
+			error: petError,
+			called: petCalled,
+			reset: petReset,
+		},
+	] = useMutation(UPDATE_PET)
+
 	useEffect(() => {
 		clearPet()
 		storePet(pet)
@@ -51,10 +66,20 @@ const FoundPet = ({ pet }: Props) => {
 		setIsEditingPet(true)
 	}
 
-	const handleMarkAsReturned = () => {}
+	const handleMarkAsReturned = () => {
+		updatePet({
+			variables: {
+				input: {
+					id: pet.id,
+					isReturned: !pet.isReturned,
+				},
+			},
+		})
+		refetch()
+	}
 
 	return (
-		<div>
+		<div className=''>
 			<div
 				className={`${size.width > 1800 ? 'flex gap-8 justify-center' : null} `}
 			>
@@ -64,9 +89,14 @@ const FoundPet = ({ pet }: Props) => {
 					<div
 						className=' w-[21rem] h-56 relative  mx-auto border border-pastelPurple 
 			sm:w-[30rem] sm:h-[20rem]
-			md:w-[42rem] md:h-[28rem] mt-8'
+			md:w-[42rem] md:h-[28rem] mt-8 '
 					>
 						<Image src={pet.image} layout='fill' className='object-cover' />
+						{pet.isReturned && (
+							<div className='absolute text-[4.5rem] sm:text-8xl md:text-[9.65rem] z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-[30deg] text-red-600'>
+								<h1>RETURNED</h1>
+							</div>
+						)}
 					</div>
 					{/* Info Box */}
 					<div className='border border-pastelPurple w-[21rem] sm:w-[30rem] md:w-[42rem] mx-auto bg-white p-4 grid justify-items-center gap-4 '>
@@ -91,12 +121,18 @@ const FoundPet = ({ pet }: Props) => {
 											Edit
 										</button>
 									)}
+									{/* {!pet.isReturned && ( */}
 									<button
 										onClick={handleMarkAsReturned}
-										className='border border-pastelPurple rounded-md px-2 py-1 bg-pastelLightGreen hover:bg-pastelDarkerLightGreen transition-all ease-in-out'
+										className={`border border-pastelPurple rounded-md px-2 py-1 ${
+											pet.isReturned
+												? 'bg-pastelLighterRed hover:bg-red-300'
+												: 'bg-pastelLightGreen hover:bg-pastelDarkerLightGreen'
+										} transition-all ease-in-out`}
 									>
-										Mark As Returned
+										{pet.isReturned ? 'Mark as Unreturned' : 'Mark As Returned'}
 									</button>
+									{/* )} */}
 								</>
 							)}
 						</div>

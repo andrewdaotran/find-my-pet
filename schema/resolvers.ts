@@ -147,7 +147,6 @@ const resolvers = {
 		createPet: async (parent, args) => {
 			const petData = args.input
 			const newPet = new PetModel({ ...petData, timestamp: dayjs(new Date()) })
-			console.log(newPet)
 			try {
 				await newPet.save()
 				console.log(newPet)

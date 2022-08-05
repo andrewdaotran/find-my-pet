@@ -441,7 +441,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 						{!isNewPet && !isLargeWindow && (
 							<button
 								onClick={handleCancelEditPet}
-								className='py-1 px-2 rounded-md border border-pastelPurple  hover:bg-red-400 transition ease-in-out'
+								className='py-1 px-2 rounded-md border border-pastelPurple  hover:bg-red-300 transition ease-in-out'
 								// bg-pastelRed
 							>
 								Cancel Edit
