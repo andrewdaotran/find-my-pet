@@ -48,11 +48,6 @@ const CommentInput = ({ petId }: Props) => {
 			},
 		})
 		setCommentValue('')
-		console.log(commentValue)
-		console.log(petId)
-		console.log(user.id)
-		console.log(user.sub)
-		console.log(user.name)
 	}
 	return (
 		<div>
@@ -74,7 +69,7 @@ const CommentInput = ({ petId }: Props) => {
 					placeholder='Write your comment here...'
 					value={commentValue}
 					onChange={(e) => setCommentValue(e.target.value)}
-					className='border border-black rounded-md w-[18rem] sm:w-[26rem] md:w-[36rem] pl-2 pt-2 h-[8rem]  resize-none outline-gamboge'
+					className='border border-pastelPurple rounded-md w-[18rem] sm:w-[26rem] md:w-[36rem] pl-2 pt-2 h-[8rem]  resize-none outline-gamboge'
 				/>
 
 				{errors.comment && (
@@ -91,7 +86,10 @@ const CommentInput = ({ petId }: Props) => {
 				)}
 
 				{commentLoading || (
-					<button type='submit' className='mt-2'>
+					<button
+						type='submit'
+						className='mt-2 bg-pastelLightGreen hover:bg-pastelDarkerLightGreen border border-pastelPurple  px-2 py-1  rounded-md transition-all ease-in-out'
+					>
 						Submit
 					</button>
 				)}

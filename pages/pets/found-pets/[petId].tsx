@@ -84,9 +84,17 @@ const FoundPet = ({ pet }: Props) => {
 							{isUserPost && (
 								<>
 									{size.width <= 1800 && !isEditingPet && (
-										<button onClick={handleEdit}>Edit</button>
+										<button
+											onClick={handleEdit}
+											className='border border-pastelPurple px-2 py-1 rounded-md bg-pastelLighterPurple hover:bg-pastelPurple transition-all ease-in-out'
+										>
+											Edit
+										</button>
 									)}
-									<button onClick={handleMarkAsReturned}>
+									<button
+										onClick={handleMarkAsReturned}
+										className='border border-pastelPurple rounded-md px-2 py-1 bg-pastelLightGreen hover:bg-pastelDarkerLightGreen transition-all ease-in-out'
+									>
 										Mark As Returned
 									</button>
 								</>
@@ -107,7 +115,7 @@ const FoundPet = ({ pet }: Props) => {
 								'MMM DD, YYYY'
 							)}`}
 						</h3>
-						<h3 className='whitespace-pre-line bg-[#F0F0F0] w-full p-4'>
+						<h3 className='whitespace-pre-line bg-backgroundGrey border border-pastelPurple w-full p-4'>
 							{pet.description}
 						</h3>
 					</div>

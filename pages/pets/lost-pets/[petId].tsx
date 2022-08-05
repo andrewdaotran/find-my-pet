@@ -48,6 +48,7 @@ const LostPet = ({ pet }: Props) => {
 				{isFormSubmitted && <FormSubmissionModal isNewPet={false} />}
 
 				<h2>{pet.name}</h2>
+				<h2>{pet.description}</h2>
 				{isUserPost && <button onClick={handleEdit}>Edit</button>}
 			</div>
 			<div>

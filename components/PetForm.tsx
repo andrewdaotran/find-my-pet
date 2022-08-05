@@ -416,7 +416,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 						<button
 							disabled={petLoading && true}
 							onClick={handleRemoveImage}
-							className='border border-pastelLighterPurple mt-4 px-2 py-1 bg-pastelSand rounded-md '
+							className='border border-pastelLighterPurple mt-4 px-2 py-1 bg-pastelSand hover:bg-gray-200 transition-all ease-in-out  rounded-md '
 						>
 							Remove Image
 						</button>
@@ -441,7 +441,8 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 						{!isNewPet && !isLargeWindow && (
 							<button
 								onClick={handleCancelEditPet}
-								className='py-1 px-2 rounded-md border border-pastelPurple bg-pastelRed hover:bg-pastelDarkerRed transition ease-in-out'
+								className='py-1 px-2 rounded-md border border-pastelPurple  hover:bg-red-400 transition ease-in-out'
+								// bg-pastelRed
 							>
 								Cancel Edit
 							</button>

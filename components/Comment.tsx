@@ -18,7 +18,7 @@ const Comment = ({ value, timestamp, userName, userId }: Props) => {
 	const timeAgo = new TimeAgo('en-US')
 	const dateAgo = timeAgo.format(new Date(timestamp), 'round-minute')
 	return (
-		<div className='bg-[#F0F0F0] p-4 border border-black grid gap-2'>
+		<div className='bg-backgroundGrey p-4 border border-pastelPurple grid gap-2'>
 			<h3 className=' font-bold'>{userName}</h3>
 			<h3 className='text-gray-500 '>{value}</h3>
 			<div className='flex gap-4'>
