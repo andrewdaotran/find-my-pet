@@ -1,18 +1,19 @@
-import { gql, useMutation, useQuery } from '@apollo/client'
-import { GetStaticProps } from 'next'
 import React, { useContext, useEffect, useState } from 'react'
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import { gql, useMutation } from '@apollo/client'
+import dayjs from 'dayjs'
+
 import { initializeApollo } from '../../../apollo/apollo-client'
-import { PET_QUERY, UPDATE_PET, DELETE_PET } from '../../../apollo/petQueries'
+import { PET_QUERY, DELETE_PET } from '../../../apollo/petQueries'
 import PetForm from '../../../components/PetForm'
 import PetEditContext from '../../../context/petEditContext'
 import UserContext from '../../../context/userContext'
 import FormSubmissionContext from '../../../context/formSubmissionContext'
 import { PetData } from '../../../typings'
 import FormSubmissionModal from '../../../components/FormSubmissionModal'
-import dayjs from 'dayjs'
 import CommentSection from '../../../components/CommentSection'
 import CommentForm from '../../../components/CommentForm'
-import Image from 'next/image'
 import { useWindowSize } from '../../../custom-hooks/useWindowSize'
 import DeletePetModal from '../../../components/DeletePetModal'
 
@@ -36,7 +37,7 @@ const FoundPet = ({ pet }: Props) => {
 		type: '',
 	})
 	const { user } = useContext(UserContext)
-	const { pet: petContext, clearPet, storePet } = useContext(PetEditContext)
+	const { clearPet, storePet } = useContext(PetEditContext)
 	const { isFormSubmitted } = useContext(FormSubmissionContext)
 	const size = useWindowSize()
 

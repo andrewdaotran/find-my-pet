@@ -25,7 +25,6 @@ const DeletePetModal = ({
 	removePetPopup,
 	userId,
 }: Props) => {
-	console.log(userId)
 	const [agree, setAgree] = useState<boolean>(false)
 	const router = useRouter()
 
