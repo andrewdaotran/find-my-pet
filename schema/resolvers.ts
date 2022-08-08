@@ -149,7 +149,6 @@ const resolvers = {
 			const newPet = new PetModel({ ...petData, timestamp: dayjs(new Date()) })
 			try {
 				await newPet.save()
-				console.log(newPet)
 				return newPet
 			} catch (error) {
 				console.log(error)
@@ -173,10 +172,19 @@ const resolvers = {
 				console.log(error)
 			}
 		},
+		deletePet: async (parent, args) => {
+			const id = args.id
+			try {
+				const pet = await PetModel.findByIdAndDelete(id)
+				return pet
+			} catch (error) {
+				console.log(error)
+			}
+		},
 		createOrFindUser: async (parent, args) => {
 			const userData = args.input
 			try {
-				// check if user alraedy exists
+				// check if user already exists
 				const user = await UserModel.findOne({ sub: userData.sub })
 				if (user) {
 					return user

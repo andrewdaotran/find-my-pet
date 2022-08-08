@@ -29,6 +29,7 @@ const typeDefs = gql`
 	type Mutation {
 		createPet(input: CreatePetInput!): Pet
 		updatePet(input: UpdatePetInput!): Pet
+		deletePet(id: ID!): Pet
 		createOrFindUser(input: CreateUserInput!): User
 		createComment(input: CreateCommentInput!): Comment
 		deleteComment(id: ID!): Comment

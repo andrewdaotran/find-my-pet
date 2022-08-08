@@ -31,6 +31,14 @@ export const UPDATE_PET = gql`
 	}
 `
 
+export const DELETE_PET = gql`
+	mutation DeletePet($id: ID!) {
+		deletePet(id: $id) {
+			id
+		}
+	}
+`
+
 export const PET_QUERY = gql`
 	query ($id: ID!) {
 		pet(id: $id) {

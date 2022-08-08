@@ -18,10 +18,8 @@ const FormSubmissionModal = ({
 	petData,
 	handleCloseModal,
 }: Props) => {
-	console.log(petData)
 	const router = useRouter()
 	const size = useWindowSize()
-	console.log(size)
 
 	const handleNavigate = () => {
 		router.push(`/pets/${petData.lostOrFound.toLowerCase()}-pets/${petData.id}`)

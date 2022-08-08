@@ -2,7 +2,7 @@ import { gql, useMutation, useQuery } from '@apollo/client'
 import { GetStaticProps } from 'next'
 import React, { useContext, useEffect, useState } from 'react'
 import { initializeApollo } from '../../../apollo/apollo-client'
-import { PET_QUERY, UPDATE_PET } from '../../../apollo/petQueries'
+import { PET_QUERY, UPDATE_PET, DELETE_PET } from '../../../apollo/petQueries'
 import PetForm from '../../../components/PetForm'
 import PetEditContext from '../../../context/petEditContext'
 import UserContext from '../../../context/userContext'
@@ -14,34 +14,33 @@ import CommentSection from '../../../components/CommentSection'
 import CommentForm from '../../../components/CommentForm'
 import Image from 'next/image'
 import { useWindowSize } from '../../../custom-hooks/useWindowSize'
+import DeletePetModal from '../../../components/DeletePetModal'
 
 interface Props {
 	pet: PetData
+}
+
+interface RemovePetPopup {
+	value: boolean
+	type: string
 }
 
 const FoundPet = ({ pet }: Props) => {
 	const [isUserPost, setIsUserPost] = useState<boolean>(false)
 	const [isEditingPet, setIsEditingPet] = useState<boolean>(false)
 	const [isLargeWindow, setIsLargeWindow] = useState<boolean>(false)
+	const [isMarkedButtonPressed, setIsMarkedButtonPressed] =
+		useState<boolean>(false)
+	const [removePetPopup, setRemovePetPopup] = useState<RemovePetPopup>({
+		value: false,
+		type: '',
+	})
 	const { user } = useContext(UserContext)
 	const { pet: petContext, clearPet, storePet } = useContext(PetEditContext)
 	const { isFormSubmitted } = useContext(FormSubmissionContext)
 	const size = useWindowSize()
 
-	const { refetch } = useQuery(PET_QUERY, {
-		variables: { id: pet.id },
-	})
-
-	const [
-		updatePet,
-		{
-			data: petData,
-			loading: petLoading,
-			error: petError,
-			called: petCalled,
-			reset: petReset,
-		},
-	] = useMutation(UPDATE_PET)
+	const [deletePet] = useMutation(DELETE_PET, { variables: { id: pet.id } })
 
 	useEffect(() => {
 		clearPet()
@@ -66,20 +65,25 @@ const FoundPet = ({ pet }: Props) => {
 		setIsEditingPet(true)
 	}
 
-	const handleMarkAsReturned = () => {
-		updatePet({
-			variables: {
-				input: {
-					id: pet.id,
-					isReturned: !pet.isReturned,
-				},
-			},
-		})
-		refetch()
+	const handleDeletePet = (type: string) => {
+		setRemovePetPopup({ type, value: true })
+		setIsMarkedButtonPressed(true)
 	}
 
 	return (
-		<div className=''>
+		<div className='relative'>
+			{removePetPopup.value && (
+				<DeletePetModal
+					isMarkedReturned={removePetPopup.type === 'returned' ? true : false}
+					petName={pet.name}
+					setRemovePetPopup={setRemovePetPopup}
+					deletePet={deletePet}
+					setIsMarkedButtonPressed={setIsMarkedButtonPressed}
+					removePetPopup={removePetPopup}
+					userId={user.id}
+				/>
+			)}
+
 			<div
 				className={`${size.width > 1800 ? 'flex gap-8 justify-center' : null} `}
 			>
@@ -92,11 +96,6 @@ const FoundPet = ({ pet }: Props) => {
 			md:w-[42rem] md:h-[28rem] mt-8 '
 					>
 						<Image src={pet.image} layout='fill' className='object-cover' />
-						{pet.isReturned && (
-							<div className='absolute text-[4.5rem] sm:text-8xl md:text-[9.65rem] z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-[30deg] text-red-600'>
-								<h1>RETURNED</h1>
-							</div>
-						)}
 					</div>
 					{/* Info Box */}
 					<div className='border border-pastelPurple w-[21rem] sm:w-[30rem] md:w-[42rem] mx-auto bg-white p-4 grid justify-items-center gap-4 '>
@@ -121,18 +120,14 @@ const FoundPet = ({ pet }: Props) => {
 											Edit
 										</button>
 									)}
-									{/* {!pet.isReturned && ( */}
-									<button
-										onClick={handleMarkAsReturned}
-										className={`border border-pastelPurple rounded-md px-2 py-1 ${
-											pet.isReturned
-												? 'bg-pastelLighterRed hover:bg-red-300'
-												: 'bg-pastelLightGreen hover:bg-pastelDarkerLightGreen'
-										} transition-all ease-in-out`}
-									>
-										{pet.isReturned ? 'Mark as Unreturned' : 'Mark As Returned'}
-									</button>
-									{/* )} */}
+									{!isMarkedButtonPressed && (
+										<button
+											onClick={() => handleDeletePet('returned')}
+											className={`border border-pastelPurple rounded-md px-2 py-1 bg-pastelLightGreen hover:bg-pastelDarkerLightGreen transition-all ease-in-out`}
+										>
+											Mark As Returned
+										</button>
+									)}
 								</>
 							)}
 						</div>
@@ -154,6 +149,14 @@ const FoundPet = ({ pet }: Props) => {
 						<h3 className='whitespace-pre-line bg-backgroundGrey border border-pastelPurple w-full p-4'>
 							{pet.description}
 						</h3>
+						{!isMarkedButtonPressed && (
+							<button
+								className='border border-pastelPurple transition ease-in-out bg-pastelRed hover:bg-red-300 py-1 px-2 rounded-md'
+								onClick={() => handleDeletePet('delete')}
+							>
+								Delete Post
+							</button>
+						)}
 					</div>
 
 					{/* Form Submit Modal */}
