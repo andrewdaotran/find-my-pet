@@ -45,7 +45,7 @@ const LostPets = ({}: Props) => {
 			/>
 
 			{lostPetsByItem ? (
-				<div className='grid p-4  gap-6 mx-auto justify-items-center'>
+				<div className='flex p-4 gap-6 mx-auto justify-center  lg:gap-24 flex-wrap'>
 					{lostPetsByItem.lostPetsByItem[0] ? (
 						lostPetsByItem.lostPetsByItem.map((pet: PetData) => {
 							return (
@@ -58,7 +58,7 @@ const LostPets = ({}: Props) => {
 						})
 					) : (
 						// If no pets that fit search term and category
-						<h2>
+						<h2 className='text-center'>
 							There are no lost pets currently with that search term and
 							category
 						</h2>
@@ -66,7 +66,7 @@ const LostPets = ({}: Props) => {
 				</div>
 			) : // If useLazyQuery has not been called, display all lost pets
 			lostPets[0] ? (
-				<div className='grid p-4  gap-6 mx-auto justify-items-center'>
+				<div className='flex p-4 gap-6 mx-auto justify-center  lg:gap-24 flex-wrap'>
 					{lostPets.map((pet: PetData) => {
 						return (
 							<PetQueryCard
@@ -78,7 +78,7 @@ const LostPets = ({}: Props) => {
 					})}
 				</div>
 			) : (
-				<h2>There are no lost pets currently</h2>
+				<h2 className='text-center'>There are no lost pets currently</h2>
 			)}
 		</>
 	)

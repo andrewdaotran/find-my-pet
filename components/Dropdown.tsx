@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useEffect } from 'react'
 
 interface Props {
-	data: string[]
+	data?: string[]
 	setFunction: (
 		data: string,
 		title: string
@@ -9,9 +9,25 @@ interface Props {
 	value: string
 	title?: string
 	isForm: boolean
+	isBreedList?: boolean
+	breedData?: { name: string }[]
 }
 
-const Dropdown = ({ data, setFunction, isForm, value, title }: Props) => {
+const Dropdown = ({
+	data,
+	setFunction,
+	isForm,
+	value,
+	title,
+	isBreedList,
+	breedData,
+}: Props) => {
+	// useEffect(() => {
+	// 	if (isBreedList) {
+	// 		data = breedData
+	// 	}
+	// }, [])
+	// console.log(data)
 	return (
 		<select
 			onChange={
@@ -22,13 +38,21 @@ const Dropdown = ({ data, setFunction, isForm, value, title }: Props) => {
 			value={value}
 			className='border border-black rounded-md px-2 py-2 cursor-pointer  w-full focus:border-gamboge outline-none'
 		>
-			{data.map((category) => {
-				return (
-					<option key={category} value={category}>
-						{category}
-					</option>
-				)
-			})}
+			{isBreedList
+				? breedData.map((category) => {
+						return (
+							<option key={category.name} value={category.name}>
+								{category.name}
+							</option>
+						)
+				  })
+				: data.map((category) => {
+						return (
+							<option key={category} value={category}>
+								{category}
+							</option>
+						)
+				  })}
 		</select>
 	)
 }

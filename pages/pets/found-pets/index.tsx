@@ -50,7 +50,7 @@ const FoundPets = ({}: Props) => {
 			/>
 
 			{foundPetsByItem ? (
-				<div className='grid p-4  gap-6 mx-auto justify-items-center'>
+				<div className='flex p-4 gap-6 mx-auto justify-center  lg:gap-24 flex-wrap'>
 					{foundPetsByItem.foundPetsByItem[0] ? (
 						foundPetsByItem.foundPetsByItem.map((pet: PetData) => {
 							return (
@@ -63,7 +63,7 @@ const FoundPets = ({}: Props) => {
 						})
 					) : (
 						// If no pets that fit search term and category
-						<h2>
+						<h2 className='text-center'>
 							There are no found pets currently with that search term and
 							category
 						</h2>
@@ -71,7 +71,7 @@ const FoundPets = ({}: Props) => {
 				</div>
 			) : // If useLazyQuery has not been called, display all found pets
 			foundPets[0] ? (
-				<div className='grid p-4  gap-6 mx-auto justify-items-center'>
+				<div className='flex p-4 gap-6 mx-auto justify-center  lg:gap-24 flex-wrap'>
 					{foundPets.map((pet: PetData) => {
 						return (
 							<PetQueryCard
@@ -83,7 +83,7 @@ const FoundPets = ({}: Props) => {
 					})}
 				</div>
 			) : (
-				<h2>There are no found pets currently</h2>
+				<h2 className='text-center'>There are no found pets currently</h2>
 			)}
 		</>
 	)

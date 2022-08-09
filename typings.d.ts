@@ -33,6 +33,45 @@ export interface PetData {
 	timestamp: Date
 }
 
+export interface PetAdoptionData {
+	age: string
+	attributes: {
+		spayed_neutered: boolean
+		house_trained: boolean
+		declawed: boolean
+		special_needs: boolean
+		shots_current: boolean
+	}
+	breeds: {
+		primary: string
+		secondary: string
+		mixed: boolean
+		unknown: boolean
+	}
+	contact: { email: string; phone: string }
+	description: string
+	gender: string
+	id: number
+	name: string
+	organization_animal_id: string
+	organization_id: string
+	photos: Array
+	published_at: string
+	size: string
+	species: string
+	status: string
+	status_changed_at: string
+	primary_photo_cropped: {
+		full: string
+		large: string
+		medium: string
+		small: string
+	}
+
+	type: string
+	url: string
+}
+
 export interface CommentData {
 	id: string
 	value: string

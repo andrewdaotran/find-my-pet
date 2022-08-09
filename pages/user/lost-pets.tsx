@@ -65,7 +65,7 @@ const UserLostPets = ({ user }: Props) => {
 			</div> */}
 
 			{lostPetsByUserAndItem ? (
-				<div className='grid p-4  gap-6 mx-auto justify-items-center'>
+				<div className='flex p-4 gap-6 mx-auto justify-center  lg:gap-24 flex-wrap'>
 					{lostPetsByUserAndItem.lostPetsByUserAndItem[0] ? (
 						lostPetsByUserAndItem.lostPetsByUserAndItem.map((pet: PetData) => {
 							return (
@@ -78,14 +78,14 @@ const UserLostPets = ({ user }: Props) => {
 						})
 					) : (
 						// If no pets that fit search term and category
-						<h2>
+						<h2 className='text-center'>
 							There are no lost pets currently with that search term and
 							category
 						</h2>
 					)}
 				</div>
 			) : userQueryData.user.lostPets[0] ? (
-				<div className='grid p-4 gap-6 mx-auto justify-items-center md:grid-cols-2 lg:flex lg:justify-center lg:gap-24'>
+				<div className='flex p-4 gap-6 mx-auto justify-center  lg:gap-24 flex-wrap'>
 					{userQueryData.user.lostPets.map((pet: PetData) => {
 						return (
 							<PetQueryCard
@@ -98,7 +98,7 @@ const UserLostPets = ({ user }: Props) => {
 					})}
 				</div>
 			) : (
-				<h2>You have no lost pets currently</h2>
+				<h2 className='text-center'>You have no lost pets currently</h2>
 			)}
 		</div>
 	)
