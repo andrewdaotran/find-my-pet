@@ -14,7 +14,7 @@ import { PetData } from '../../../typings'
 import FormSubmissionModal from '../../../components/FormSubmissionModal'
 import CommentSection from '../../../components/CommentSection'
 import CommentForm from '../../../components/CommentForm'
-import { useWindowSize } from '../../../custom-hooks/useWindowSize'
+import useWindowSize from '../../../custom-hooks/useWindowSize'
 import DeletePetModal from '../../../components/DeletePetModal'
 
 interface Props {

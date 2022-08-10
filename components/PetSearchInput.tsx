@@ -1,5 +1,5 @@
 import React from 'react'
-import { useWindowSize } from '../custom-hooks/useWindowSize'
+import useWindowSize from '../custom-hooks/useWindowSize'
 import { userSearchCategory } from '../utils'
 import Dropdown from './Dropdown'
 

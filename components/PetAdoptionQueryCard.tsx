@@ -35,26 +35,32 @@ const PetQueryCard = ({ pet, userPets, navigateTo }: Props) => {
 			<div className=' grid justify-items-center gap-2 mb-4'>
 				<Link href={`/pets/pet-adoption/${pet.id}`}>
 					<a>
-						<h3 className='text-2xl font-bold'>{pet.name}</h3>
+						<h3 className='text-2xl font-bold text-center max-w-[200px]'>
+							{pet.name}
+						</h3>
 					</a>
 				</Link>
-				<h3>
+				<h3 className=' text-center'>
 					<span className='font-bold'>Species</span>: {pet.species}
 				</h3>
-				<h3>
+				<h3 className=' text-center'>
 					<span className='font-bold'>Breed</span>:{' '}
 					{pet.breeds.primary || 'Unknown'}
 				</h3>
-				<h3>
+				<h3 className=' text-center'>
 					<span className='font-bold'>Gender</span>: {pet.gender}
 				</h3>
-				<h3>
+				<h3 className=' text-center'>
 					<span className='font-bold'>Age</span>: {pet.age}
 				</h3>
-				<h3>
+				<h3 className=' text-center'>
 					<span className='font-bold'>Size</span>: {pet.size}
 				</h3>
-				<h3>
+				<h3 className=' text-center'>
+					<span className='font-bold'>Location</span>:{' '}
+					{`${pet.contact.address.city}, ${pet.contact.address.state}`}
+				</h3>
+				<h3 className=' text-center'>
 					<span className='font-bold'>
 						{pet.gender === 'Male' ? 'Neutered' : 'Spayed'}
 					</span>

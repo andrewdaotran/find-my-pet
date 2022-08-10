@@ -22,12 +22,6 @@ const Dropdown = ({
 	isBreedList,
 	breedData,
 }: Props) => {
-	// useEffect(() => {
-	// 	if (isBreedList) {
-	// 		data = breedData
-	// 	}
-	// }, [])
-	// console.log(data)
 	return (
 		<select
 			onChange={

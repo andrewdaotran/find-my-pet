@@ -48,7 +48,18 @@ export interface PetAdoptionData {
 		mixed: boolean
 		unknown: boolean
 	}
-	contact: { email: string; phone: string }
+	contact: {
+		email: string
+		phone: string
+		address: {
+			address1: string
+			address2: string
+			city: string
+			state: string
+			postcode: string
+			country: string
+		}
+	}
 	description: string
 	gender: string
 	id: number
