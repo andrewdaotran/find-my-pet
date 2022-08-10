@@ -1,6 +1,6 @@
 import { PlusIcon } from '@heroicons/react/solid'
 import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import Dropdown from '../../../components/Dropdown'
 import PetAdoptionQueryCard from '../../../components/PetAdoptionQueryCard'
 import {
@@ -17,6 +17,7 @@ const PetAdoptionListing = () => {
 	const [isFiltersOpen, setIsFiltersOpen] = useState<boolean>(false)
 	const [resultsLoading, setResultsLoading] = useState<boolean>(true)
 	const [results, setResults] = useState(null)
+
 	const [speciesParameter, setSpeciesParameter] = useState<string>(
 		petFinderSpeciesList[0]
 	)
@@ -31,48 +32,57 @@ const PetAdoptionListing = () => {
 	)
 	const [locationParameter, setLocationParameter] = useState<string>('')
 	const [nameParameter, setNameParameter] = useState<string>('')
+	const [pageParameter, setPageParameter] = useState<number>(1)
+	const [backOrNext, setBackOrNext] = useState<boolean>(false)
+	const [limitParameter, setLimitParameter] = useState<number>(100)
 	const { accessToken } = useContext(PetFinderContext)
 
+	const fetchPets = async () => {
+		setResultsLoading(true)
+
+		const petResults = await axios.get(
+			`https://api.petfinder.com/v2/animals?type=${
+				speciesParameter === 'All' ? '' : speciesParameter
+			}&breed=${breedParameter === 'All' ? '' : breedParameter}&gender=${
+				genderParameter === 'All' ? '' : genderParameter
+			}&age=${ageParameter === 'All' ? '' : ageParameter}&size=${
+				sizeParameter === 'All' ? '' : sizeParameter
+			}${locationParameter && `&location=${locationParameter}`}${
+				nameParameter && `&name=${nameParameter}`
+			}&page=${backOrNext ? pageParameter : 1}&limit=${limitParameter}`,
+			{
+				headers: {
+					Authorization: `Bearer ${accessToken.access_token}`,
+				},
+			}
+		)
+		const { animals } = petResults.data
+		setResults(animals)
+		setResultsLoading(false)
+	}
+
+	const fetchBreeds = async () => {
+		const petResults = await axios.get(
+			`https://api.petfinder.com/v2/types/${speciesParameter}/breeds`,
+			{
+				headers: {
+					Authorization: `Bearer ${accessToken.access_token}`,
+				},
+			}
+		)
+		const breeds = petResults.data.breeds
+		setBreedList([{ name: 'All' }, ...breeds])
+	}
+
+	// Fetch Pets on back or next button being clicked or filters selected
 	useEffect(() => {
 		if (accessToken === null) return
-		const fetchPets = async () => {
-			setResultsLoading(true)
-			const petResults = await axios.get(
-				`https://api.petfinder.com/v2/animals?type=${
-					speciesParameter === 'All' ? '' : speciesParameter
-				}&breed=${breedParameter === 'All' ? '' : breedParameter}&gender=${
-					genderParameter === 'All' ? '' : genderParameter
-				}&age=${ageParameter === 'All' ? '' : ageParameter}&size=${
-					sizeParameter === 'All' ? '' : sizeParameter
-				}${locationParameter && `&location=${locationParameter}`}${
-					nameParameter && `&name=${nameParameter}`
-				}`,
-				{
-					headers: {
-						Authorization: `Bearer ${accessToken.access_token}`,
-					},
-				}
-			)
-			const { animals } = petResults.data
-			setResults(animals)
-			setResultsLoading(false)
-		}
-
-		const fetchBreeds = async () => {
-			const petResults = await axios.get(
-				`https://api.petfinder.com/v2/types/${speciesParameter}/breeds`,
-				{
-					headers: {
-						Authorization: `Bearer ${accessToken.access_token}`,
-					},
-				}
-			)
-			const breeds = petResults.data.breeds
-			setBreedList([{ name: 'All' }, ...breeds])
-			console.log(breeds)
-		}
 		fetchPets()
 		fetchBreeds()
+		if (!backOrNext) {
+			setPageParameter(1)
+		}
+		setBackOrNext(false)
 	}, [
 		accessToken,
 		speciesParameter,
@@ -82,7 +92,17 @@ const PetAdoptionListing = () => {
 		sizeParameter,
 		locationParameter,
 		nameParameter,
+		pageParameter,
 	])
+
+	const handleBackOrNext = (str: string) => {
+		if (str === 'back') {
+			setPageParameter(pageParameter - 1)
+		} else if (str === 'next') {
+			setPageParameter(pageParameter + 1)
+		}
+		setBackOrNext(true)
+	}
 
 	const handleToggleFiltersMenu = () => {
 		setIsFiltersOpen(!isFiltersOpen)
@@ -101,6 +121,8 @@ const PetAdoptionListing = () => {
 
 			{/* Filter Section */}
 			<div className='relative w-fit mx-auto z-30 ' ref={domNode}>
+				{/* Add Filters */}
+
 				<button
 					className=' flex border border-pastelPurple py-1 px-2 rounded-md transition-all ease-in-out bg-pastelCream hover:bg-pastelDarkerCream justify-center items-center text-xl gap-1 '
 					onClick={handleToggleFiltersMenu}
@@ -108,6 +130,9 @@ const PetAdoptionListing = () => {
 					<PlusIcon className=' h-6' />
 					Add Filter
 				</button>
+				<button onClick={() => handleBackOrNext('back')}>back</button>
+				<button onClick={() => handleBackOrNext('next')}>next</button>
+
 				{isFiltersOpen && (
 					<div className='w-60 left-[-3.5rem] mx-auto absolute  top-[100%]  p-4 shadow-md rounded-md grid gap-2 bg-pastelCream'>
 						{/* Species */}
