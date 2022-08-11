@@ -51,18 +51,6 @@ const UserLostPets = ({ user }: Props) => {
 				setCategory={setCategory}
 				fetchPets={fetchPets}
 			/>
-			{/* <div className='grid p-4 gap-6 mx-auto justify-items-center md:grid-cols-2 lg:flex lg:justify-center lg:gap-24'>
-				{userQueryData.user.lostPets.map((pet) => {
-					return (
-						<PetQueryCard
-							pet={pet}
-							key={String(pet.id)}
-							userPets={true}
-							navigateTo={`/pets/lost-pets/${pet.id}`}
-						/>
-					)
-				})}
-			</div> */}
 
 			{lostPetsByUserAndItem ? (
 				<div className='flex p-4 gap-6 mx-auto justify-center  lg:gap-24 flex-wrap'>
