@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { animateScroll as scroll } from 'react-scroll'
 
 import { CommentData } from '../typings'
+import BackAndNextButtonsLostAndFound from './BackAndNextButtons'
 import Comment from './Comment'
 
 interface Props {
@@ -23,6 +25,7 @@ const CommentSection = ({ comments }: Props) => {
 	const handleBack = () => {
 		setLeftPointer(leftPointer - 5)
 		setRightPointer(rightPointer - 5)
+		scroll.scrollToBottom()
 	}
 	const handleNext = () => {
 		setLeftPointer(leftPointer + 5)
@@ -43,24 +46,14 @@ const CommentSection = ({ comments }: Props) => {
 					/>
 				)
 			})}
-			<div className=' w-fit mx-auto flex gap-16'>
-				{leftPointer !== 0 && (
-					<button
-						className='border border-pastelPurple py-1 px-2 transition-all ease-in-out rounded-md bg-pastelSand hover:bg-gray-200'
-						onClick={handleBack}
-					>
-						Back
-					</button>
-				)}
-				{rightPointer < amountOfComments && (
-					<button
-						onClick={handleNext}
-						className='border border-pastelPurple py-1 px-2 transition-all ease-in-out rounded-md bg-pastelSand hover:bg-gray-200'
-					>
-						Next
-					</button>
-				)}
-			</div>
+			<BackAndNextButtonsLostAndFound
+				leftPointer={leftPointer}
+				rightPointer={rightPointer}
+				handleBack={handleBack}
+				handleNext={handleNext}
+				amountOfValues={amountOfComments}
+				isLostAndFound={true}
+			/>
 		</div>
 	)
 }

@@ -86,7 +86,9 @@ const LostPet = ({ pet }: Props) => {
 			)}
 
 			<div
-				className={`${size.width > 1800 ? 'flex gap-8 justify-center' : null} `}
+				className={`${
+					size.width > 1800 ? 'flex gap-8 justify-center mb-8' : null
+				} `}
 			>
 				{/* All Boxes */}
 				<div className='grid gap-4 '>
