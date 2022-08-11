@@ -1,9 +1,10 @@
-const mongoose = require('mongoose')
+import dayjs from 'dayjs'
+import mongoose from 'mongoose'
+import { GraphQLScalarType } from 'graphql'
+
 import PetModel from '../models/PetModel'
 import UserModel from '../models/UserModel'
 import CommentModel from '../models/CommentModel'
-import { GraphQLScalarType, Kind } from 'graphql'
-import dayjs from 'dayjs'
 
 const dateScalar = new GraphQLScalarType({
 	name: 'Date',
@@ -14,12 +15,6 @@ const dateScalar = new GraphQLScalarType({
 	parseValue(value: Date) {
 		return dayjs(value)
 	},
-	// parseLiteral(ast) {
-	// 	if (ast.kind === Kind.INT) {
-	// 		return new Date(parseInt(ast.value, 10))
-	// 	}
-	// 	return null
-	// },
 })
 
 const resolvers = {
@@ -124,11 +119,9 @@ const resolvers = {
 		},
 		user: async (parent, args) => {
 			const userSub = args.sub
-			// const userId = args.id
 
 			try {
 				const user = await UserModel.findOne({ sub: userSub })
-				// const user = await UserModel.findById(userId)
 				return user
 			} catch (error) {
 				console.log(error)
@@ -159,7 +152,6 @@ const resolvers = {
 			const petData = args.input
 			if (!mongoose.Types.ObjectId.isValid(id)) return 'no pet with that id'
 			try {
-				// const existingPet = await PetModel.findById(id)
 				const updatedPet = await PetModel.findByIdAndUpdate(
 					id,
 					{
@@ -264,18 +256,6 @@ const resolvers = {
 			}
 		},
 	},
-	// Comment: {
-	// 	user: async (parent, args) => {
-	// 		const userId = parent.user
-	// 		try {
-	// 			const user = await UserModel.findById(userId)
-	// 			console.log('lalalalalal', user)
-	// 			return user
-	// 		} catch (error) {
-	// 			console.log(error)
-	// 		}
-	// 	},
-	// },
 }
 
 export default resolvers

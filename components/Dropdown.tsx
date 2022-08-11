@@ -1,8 +1,7 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 
 interface Props {
 	data?: string[]
-	// data?: { label: string; value: string }[]
 	setFunction: (
 		data: string,
 		title: string

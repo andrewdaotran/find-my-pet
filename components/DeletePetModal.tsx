@@ -30,7 +30,7 @@ const DeletePetModal = ({
 
 	const handleConfirm = () => {
 		setAgree(true)
-		// deletePet()
+		deletePet()
 	}
 
 	const handleCancel = () => {

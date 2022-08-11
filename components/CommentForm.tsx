@@ -1,14 +1,10 @@
 import { useMutation } from '@apollo/client'
-import React, { useContext, useEffect, useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
+import React, { useContext, useState } from 'react'
+
+import InputEmptyError from './InputEmptyError'
 import { CREATE_COMMENT } from '../apollo/commentQueries'
 import UserContext from '../context/userContext'
-import InputEmptyError from './InputEmptyError'
-
-interface InputError {
-	isEmpty: boolean
-	throwErrorMessage: boolean
-}
 
 interface Props {
 	petId: string
@@ -18,10 +14,12 @@ const CommentInput = ({ petId }: Props) => {
 	const { user } = useContext(UserContext)
 	const [isCommentSubmitted, setIsCommentSubmitted] = useState<boolean>(false)
 	const [commentValue, setCommentValue] = useState<string>('')
-	const [createComment, { data: commentData, loading: commentLoading }] =
-		useMutation(CREATE_COMMENT, {
+	const [createComment, { loading: commentLoading }] = useMutation(
+		CREATE_COMMENT,
+		{
 			onCompleted: () => handleCommentSubmissionMessage(),
-		})
+		}
+	)
 	const {
 		register,
 		handleSubmit,

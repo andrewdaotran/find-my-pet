@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { GetServerSideProps } from 'next'
-import React from 'react'
 
 import { SinglePetAdoptionData } from '../../../typings'
 import PetAdoptionSinglePage from '../../../components/PetAdoptionSinglePage'
@@ -10,8 +9,6 @@ interface Props {
 }
 
 const AdoptionPet = ({ pet }: Props) => {
-	console.log(pet)
-
 	return (
 		<>
 			<PetAdoptionSinglePage pet={pet} />

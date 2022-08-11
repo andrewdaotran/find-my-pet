@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const PetSchema = mongoose.Schema({
 	name: String,
@@ -14,10 +14,6 @@ const PetSchema = mongoose.Schema({
 	city: String,
 	state: String,
 	user: String,
-	// 	comments: {
-	//    type: Schema.Types.ObjectId,
-	//    ref: 'users'
-	//  }
 	comments: [
 		{
 			value: String,
@@ -34,4 +30,4 @@ const PetModel = mongoose.models['Pets']
 	? mongoose.model('Pets')
 	: mongoose.model('Pets', PetSchema)
 
-module.exports = PetModel
+export default PetModel

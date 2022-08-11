@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react'
 import Link from 'next/link'
 import { useUser } from '@auth0/nextjs-auth0'
-import { USER_QUERY } from '../apollo/userQueries'
 import { useQuery } from '@apollo/client'
+
+import { USER_QUERY } from '../apollo/userQueries'
 import UserContext from '../context/userContext'
 
 const Navbar = ({ children }) => {
@@ -44,7 +45,6 @@ const Navbar = ({ children }) => {
 									<h1 className=''>logo</h1>
 								</a>
 							</Link>
-							{/* {userData && auth0User && !loading ? ( */}
 							{user.id ? (
 								<Link href={`/user/${user.id}`}>
 									<a>{user.name}</a>

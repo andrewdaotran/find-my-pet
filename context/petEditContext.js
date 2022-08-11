@@ -35,7 +35,6 @@ export const PetEditContextProvider = ({ children }) => {
 			species: 'Dog',
 			breed: '',
 			dateLostOrFound: format(new Date(), 'yyyy-MM-dd'),
-			// dateLost: format(new Date(), 'yyyy-MM-dd'),
 			description: '',
 			image: '',
 			isReturned: '',

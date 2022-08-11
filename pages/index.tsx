@@ -1,22 +1,13 @@
-import PetPageRedirectBox from '../components/PetPageRedirectBox'
-
-import Link from 'next/link'
-import { boxData, userBoxData } from '../utils'
-import UserContext from '../context/userContext'
 import { useContext } from 'react'
 
-const { useUser } = require('@auth0/nextjs-auth0')
+import PetPageRedirectBox from '../components/PetPageRedirectBox'
+import { boxData, userBoxData } from '../utils'
+import UserContext from '../context/userContext'
 
-const {
-	ApolloClient,
-	InMemoryCache,
-	ApolloProvider,
-	// useMutation,
-	// gql,
-} = require('@apollo/client')
+import { useUser } from '@auth0/nextjs-auth0'
 
 export default function Home() {
-	const { user, isLoading, error } = useUser()
+	const { user } = useUser()
 	const { user: userData } = useContext(UserContext)
 
 	return (
@@ -60,5 +51,3 @@ export default function Home() {
 		</div>
 	)
 }
-
-// export const getServerSideProps = async () => {}

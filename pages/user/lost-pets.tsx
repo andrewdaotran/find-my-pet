@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
 import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0'
+
 import { addApolloState, initializeApollo } from '../../apollo/apollo-client'
 import { USER_LOST_PETS_QUERY } from '../../apollo/userQueries'
 import { useLazyQuery, useQuery } from '@apollo/client'
-
 import { PetData, UserData } from '../../typings'
 import PetQueryCard from '../../components/PetQueryCard'
 import PetSearchInput from '../../components/PetSearchInput'
-import {
-	FOUND_PETS_BY_USER_AND_ITEM_QUERY,
-	LOST_PETS_BY_USER_AND_ITEM_QUERY,
-} from '../../apollo/petQueries'
+import { LOST_PETS_BY_USER_AND_ITEM_QUERY } from '../../apollo/petQueries'
 import { convertCase } from '../../utils'
 
 interface Props {
@@ -79,7 +76,6 @@ const UserLostPets = ({ user }: Props) => {
 							<PetQueryCard
 								pet={pet}
 								key={String(pet.id)}
-								userPets={true}
 								navigateTo={`/pets/lost-pets/${pet.id}`}
 							/>
 						)

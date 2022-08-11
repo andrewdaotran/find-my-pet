@@ -2,6 +2,7 @@ import { PlusIcon } from '@heroicons/react/solid'
 import axios from 'axios'
 import { animateScroll as scroll } from 'react-scroll'
 import React, { useContext, useEffect, useState } from 'react'
+
 import Dropdown from '../../../components/Dropdown'
 import PetAdoptionQueryCard from '../../../components/PetAdoptionQueryCard'
 import {
@@ -68,7 +69,6 @@ const PetAdoptionListing = () => {
 			setRightPointer(pagination.count_per_page)
 		}
 		setResultsLoading(false)
-		console.log(petResults)
 	}
 
 	const fetchBreeds = async () => {
@@ -146,7 +146,6 @@ const PetAdoptionListing = () => {
 					</button>
 
 					{isFiltersOpen && (
-						// left-[-3.5rem]
 						<div className='w-60  mx-auto absolute  top-[100%]  p-4 shadow-md rounded-md grid gap-2 bg-pastelCream'>
 							{/* Species */}
 							<div className='grid gap-1'>

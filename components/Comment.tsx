@@ -15,22 +15,13 @@ interface Props {
 }
 
 const Comment = ({ value, timestamp, userName, userId, commentId }: Props) => {
-	// console.log(commentId)
 	const { user } = useContext(UserContext)
 	TimeAgo.setDefaultLocale(en.locale)
 	TimeAgo.addLocale(en)
 	const timeAgo = new TimeAgo('en-US')
 	const dateAgo = timeAgo.format(new Date(timestamp), 'round-minute')
 
-	const [
-		deleteComment,
-		{
-			loading: deleteCommentLoading,
-			error: deleteCommentError,
-			called: deleteCommentCalled,
-			reset: deleteCommentReset,
-		},
-	] = useMutation(DELETE_COMMENT)
+	const [deleteComment] = useMutation(DELETE_COMMENT)
 
 	const handleDeleteComment = () => {
 		deleteComment({

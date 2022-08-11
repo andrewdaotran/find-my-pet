@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0'
-import { addApolloState, initializeApollo } from '../../apollo/apollo-client'
-import { USER_FOUND_PETS_QUERY } from '../../apollo/userQueries'
 import { useLazyQuery, useQuery } from '@apollo/client'
 
+import { addApolloState, initializeApollo } from '../../apollo/apollo-client'
+import { USER_FOUND_PETS_QUERY } from '../../apollo/userQueries'
 import { PetData, UserData } from '../../typings'
 import PetQueryCard from '../../components/PetQueryCard'
-import Dropdown from '../../components/Dropdown'
-import { convertCase, userSearchCategory } from '../../utils'
+import { convertCase } from '../../utils'
 import { FOUND_PETS_BY_USER_AND_ITEM_QUERY } from '../../apollo/petQueries'
 import PetSearchInput from '../../components/PetSearchInput'
 
@@ -21,10 +20,8 @@ const UserFoundPets = ({ user }: Props) => {
 	const { data: userQueryData } = useQuery(USER_FOUND_PETS_QUERY, {
 		variables: { sub: user.sub },
 	})
-	const [
-		fetchPetsByUserAndItem,
-		{ data: foundPetsByUserAndItem, error, refetch, called },
-	] = useLazyQuery(FOUND_PETS_BY_USER_AND_ITEM_QUERY)
+	const [fetchPetsByUserAndItem, { data: foundPetsByUserAndItem }] =
+		useLazyQuery(FOUND_PETS_BY_USER_AND_ITEM_QUERY)
 
 	const fetchPets = () => {
 		fetchPetsByUserAndItem({
@@ -52,7 +49,6 @@ const UserFoundPets = ({ user }: Props) => {
 
 			{foundPetsByUserAndItem ? (
 				<div className='flex p-4 gap-6 mx-auto justify-center  lg:gap-24 flex-wrap'>
-					{/* <div className='grid p-4  gap-6 mx-auto justify-items-center'> */}
 					{foundPetsByUserAndItem.foundPetsByUserAndItem[0] ? (
 						foundPetsByUserAndItem.foundPetsByUserAndItem.map(
 							(pet: PetData) => {
@@ -80,7 +76,6 @@ const UserFoundPets = ({ user }: Props) => {
 							<PetQueryCard
 								pet={pet}
 								key={String(pet.id)}
-								userPets={true}
 								navigateTo={`/pets/found-pets/${pet.id}`}
 							/>
 						)

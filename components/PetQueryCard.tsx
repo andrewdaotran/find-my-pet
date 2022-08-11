@@ -2,20 +2,16 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import React, { useContext } from 'react'
-
 import { PetData } from '../typings'
 
 interface Props {
 	pet: PetData
-	userPets?: boolean
 	navigateTo: string
 }
 
-const PetQueryCard = ({ pet, userPets, navigateTo }: Props) => {
+const PetQueryCard = ({ pet, navigateTo }: Props) => {
 	return (
 		<div className=' w-[21rem] bg-white border border-pastelPurple shadow-md rounded-md'>
-			{/* <div className=''> */}
 			<div className=' w-[21rem -1px] h-56 relative mb-4  '>
 				<Link href={navigateTo}>
 					<a>
@@ -63,7 +59,6 @@ const PetQueryCard = ({ pet, userPets, navigateTo }: Props) => {
 					: {`${pet.city}, ${pet.state}`}
 				</h3>
 			</div>
-			{/* </div> */}
 		</div>
 	)
 }

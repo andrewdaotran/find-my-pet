@@ -1,5 +1,4 @@
-// import { gql } from 'apollo-server-micro'
-const { gql } = require('apollo-server-micro')
+import { gql } from 'apollo-server-micro'
 
 const typeDefs = gql`
 	scalar Date

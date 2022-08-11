@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import React, { useContext, useRef, useState } from 'react'
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form'
+
 import { CREATE_PET, UPDATE_PET } from '../apollo/petQueries'
 import UserContext from '../context/userContext'
 import PetEditContext from '../context/petEditContext'
@@ -37,7 +38,6 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm<FieldValues>()
-	// } = useForm<InputForm>()
 	const { submitModalPopup } = useContext(FormSubmissionContext)
 	const { ref, ...fields } = register('image')
 
@@ -52,7 +52,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 		},
 	] = useMutation(CREATE_PET)
 
-	const [updatePet, { data: updatedPetData }] = useMutation(UPDATE_PET)
+	const [updatePet] = useMutation(UPDATE_PET)
 
 	const handleCreateOrEditPet: SubmitHandler<InputForm> = (data) => {
 		if (isNewPet) {
@@ -91,7 +91,6 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 						lostOrFound: pet.lostOrFound,
 						city: convertCase(pet.city),
 						state: pet.state,
-						// user: user.id,
 					},
 				},
 			})
@@ -448,7 +447,6 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							<button
 								onClick={handleCancelEditPet}
 								className='py-1 px-2 rounded-md border border-pastelPurple  hover:bg-red-300 transition ease-in-out'
-								// bg-pastelRed
 							>
 								Cancel Edit
 							</button>

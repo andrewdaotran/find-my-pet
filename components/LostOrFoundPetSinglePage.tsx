@@ -25,7 +25,6 @@ interface RemovePetPopup {
 }
 
 const LostOrFoundPetSinglePage = ({ pet }: Props) => {
-	console.log(pet.lostOrFound)
 	const [isUserPost, setIsUserPost] = useState<boolean>(false)
 	const [isEditingPet, setIsEditingPet] = useState<boolean>(false)
 	const [isLargeWindow, setIsLargeWindow] = useState<boolean>(false)

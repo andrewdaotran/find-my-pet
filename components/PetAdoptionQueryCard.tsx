@@ -1,4 +1,3 @@
-import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -6,16 +5,13 @@ import { PetAdoptionData } from '../typings'
 
 interface Props {
 	pet: PetAdoptionData
-	userPets?: boolean
+
 	navigateTo: string
 }
 
-const PetQueryCard = ({ pet, userPets, navigateTo }: Props) => {
-	// console.log(pet)
-
+const PetQueryCard = ({ pet, navigateTo }: Props) => {
 	return (
 		<div className=' w-[300px]  bg-white rounded-md border border-pastelPurple shadow-md '>
-			{/* <div className=''> */}
 			<div className=' w-[298px] h-[350px] relative mb-4 '>
 				<Link href={navigateTo}>
 					<a>
@@ -66,7 +62,6 @@ const PetQueryCard = ({ pet, userPets, navigateTo }: Props) => {
 					: {pet.attributes.spayed_neutered ? 'Yes' : 'No'}
 				</h3>
 			</div>
-			{/* </div> */}
 		</div>
 	)
 }

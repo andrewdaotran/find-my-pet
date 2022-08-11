@@ -33,16 +33,7 @@ const PetAdoptionSinglePage = ({ pet }: Props) => {
 		}, 2000)
 	}
 
-	const [isLargeWindow, setIsLargeWindow] = useState<boolean>(false)
 	const size = useWindowSize()
-
-	useEffect(() => {
-		if (size.width > 1800) {
-			setIsLargeWindow(true)
-		} else {
-			setIsLargeWindow(false)
-		}
-	}, [size])
 
 	return (
 		<div className='relative'>

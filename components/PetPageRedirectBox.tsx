@@ -13,7 +13,6 @@ const PetPageRedirectBox = ({
 	redirect,
 	backgroundColor,
 }: Props) => {
-	const url = `http://localhost:3000/${redirect}`
 	return (
 		<Link href={`${redirect}`}>
 			<a>

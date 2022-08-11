@@ -4,8 +4,7 @@ import { PetData } from '../../../typings'
 import PetQueryCard from '../../../components/PetQueryCard'
 import { LostPetsByItemQuery, LostPetsQuery } from '../../../apollo/petQueries'
 import { useLazyQuery, useQuery } from '@apollo/client'
-import Dropdown from '../../../components/Dropdown'
-import { convertCase, userSearchCategory } from '../../../utils'
+import { convertCase } from '../../../utils'
 import PetSearchInput from '../../../components/PetSearchInput'
 
 interface Props {}
@@ -17,7 +16,7 @@ const LostPets = ({}: Props) => {
 		data: { lostPets },
 	} = useQuery(LostPetsQuery)
 
-	const [fetchPetsByItem, { data: lostPetsByItem, error, refetch, called }] =
+	const [fetchPetsByItem, { data: lostPetsByItem }] =
 		useLazyQuery(LostPetsByItemQuery)
 
 	const fetchPets = () => {
@@ -29,7 +28,6 @@ const LostPets = ({}: Props) => {
 		})
 		setSearch('')
 	}
-	// return <div>hello</div>
 	return (
 		<>
 			<div className='flex justify-center my-4'>
