@@ -228,6 +228,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							className='border border-black rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
 							value={pet.breed}
 							onChange={(e) => editPet(e.target.value, 'breed')}
+							placeholder='Pitbull'
 						/>
 					</div>
 					{/* Name */}
@@ -242,6 +243,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							className='border border-black rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
 							value={pet.name}
 							onChange={(e) => editPet(e.target.value, 'name')}
+							placeholder='Nebula'
 						/>
 					</div>
 					{/* Gender */}
@@ -271,6 +273,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							className='border border-black rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
 							value={pet.age}
 							onChange={(e) => editPet(e.target.value, 'age')}
+							placeholder='Enter age in years'
 						/>
 					</div>
 				</div>
@@ -290,6 +293,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							}`}
 							value={pet.description}
 							onChange={(e) => editPet(e.target.value, 'description')}
+							placeholder='Nebula is a shorthaired, shy dog. She is very affectionate once she warms up to you. '
 						/>
 
 						{errors.description && (
@@ -297,32 +301,6 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 						)}
 					</div>
 
-					{/* State */}
-					<div className='grid  gap-1 '>
-						<h4 className=''>
-							{pet.lostOrFound === 'Lost' ||
-							pet.lostOrFound === 'Set Lost or Found' ? (
-								<>
-									<span className='font-bold'>State Lost</span>
-									<span className='text-red-500'>*</span> :
-								</>
-							) : (
-								<>
-									<span className='font-bold'>State Found</span>
-									<span className='text-red-500'>*</span> :
-								</>
-							)}
-						</h4>
-						<div className=' w-full'>
-							<Dropdown
-								data={statesList}
-								setFunction={editPet}
-								value={pet.state}
-								title='state'
-								isForm={true}
-							/>
-						</div>
-					</div>
 					{/* City */}
 					<div className='grid  gap-1'>
 						<h4 className=''>
@@ -346,7 +324,35 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							className='border border-black rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
 							value={pet.city}
 							onChange={(e) => editPet(e.target.value, 'city')}
+							placeholder='Auburn'
 						/>
+
+						{/* State */}
+						<div className='grid  gap-1 '>
+							<h4 className=''>
+								{pet.lostOrFound === 'Lost' ||
+								pet.lostOrFound === 'Set Lost or Found' ? (
+									<>
+										<span className='font-bold'>State Lost</span>
+										<span className='text-red-500'>*</span> :
+									</>
+								) : (
+									<>
+										<span className='font-bold'>State Found</span>
+										<span className='text-red-500'>*</span> :
+									</>
+								)}
+							</h4>
+							<div className=' w-full'>
+								<Dropdown
+									data={statesList}
+									setFunction={editPet}
+									value={pet.state}
+									title='state'
+									isForm={true}
+								/>
+							</div>
+						</div>
 
 						{errors.city && (
 							<InputEmptyError
