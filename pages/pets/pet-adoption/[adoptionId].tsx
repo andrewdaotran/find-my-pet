@@ -11,6 +11,7 @@ interface Props {
 
 const AdoptionPet = ({ pet }: Props) => {
 	console.log(pet)
+
 	return (
 		<>
 			<PetAdoptionSinglePage pet={pet} />
@@ -25,8 +26,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 	const { data: accessToken } = await axios.get(
 		process.env.NEXT_PUBLIC_ACCESS_TOKEN_URL
 	)
-	// console.log(accessToken)
-	// console.log(adoptionId)
 
 	const petResult = await axios.get(
 		`https://api.petfinder.com/v2/animals/${adoptionId}`,
@@ -37,7 +36,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 		}
 	)
 	const petData = petResult.data.animal
-	// const petPagination = petResult.data.pagination
 
 	return {
 		props: { pet: petData },

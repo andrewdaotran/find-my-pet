@@ -16,9 +16,8 @@ interface Clipboard {
 	value: string
 	copied: boolean
 }
-// { pet }: Props
 
-const PetAdoptionSinglePage = ({ pet }) => {
+const PetAdoptionSinglePage = ({ pet }: Props) => {
 	const [clipboard, setClipboard] = useState<Clipboard>({
 		value: pet.contact.email,
 		copied: false,
@@ -46,7 +45,6 @@ const PetAdoptionSinglePage = ({ pet }) => {
 	}, [size])
 
 	return (
-		// <h3>hello</h3>
 		<div className='relative'>
 			<div
 				className={`${
@@ -63,7 +61,7 @@ const PetAdoptionSinglePage = ({ pet }) => {
 					>
 						<Image
 							src={
-								(pet.photos.length !== 0 && pet.photos[0].full) ||
+								(pet.photos.length > 0 && pet.photos[0].full) ||
 								'/No-image-available.png'
 							}
 							layout='fill'
@@ -115,7 +113,11 @@ const PetAdoptionSinglePage = ({ pet }) => {
 					{/* Description Box */}
 					<div className='border border-pastelPurple w-[21rem] sm:w-[30rem] md:w-[42rem] mx-auto bg-white p-4 grid justify-items-center gap-4 '>
 						<h3 className='text-xl'>About</h3>
-
+						<h3>
+							{`Date Published: ${dayjs(pet.published_at).format(
+								'MMM DD, YYYY'
+							)}`}
+						</h3>
 						<h3 className='whitespace-pre-line bg-backgroundGrey border border-pastelPurple w-full p-4 '>
 							{pet.description}{' '}
 							<span>

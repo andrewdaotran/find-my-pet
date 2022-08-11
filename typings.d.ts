@@ -114,7 +114,14 @@ export interface SinglePetAdoptionData {
 	name: string
 	description: string
 	organization_animal_id: string
-	photos: [[Object]]
+	photos: [
+		{
+			full: string
+			large: string
+			medium: string
+			small: string
+		}
+	]
 	primary_photo_cropped: {
 		small: string
 		medium: string
@@ -128,7 +135,14 @@ export interface SinglePetAdoptionData {
 	contact: {
 		email: string
 		phone: string
-		address: [Object]
+		address: {
+			address1: string
+			address2: string
+			city: string
+			country: string
+			postcode: string
+			state: string
+		}
 	}
 	_links: { self: [Object]; type: [Object]; organization: [Object] }
 }

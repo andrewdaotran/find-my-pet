@@ -152,7 +152,7 @@ const FoundPet = ({ pet }: Props) => {
 						<h3 className='whitespace-pre-line bg-backgroundGrey border border-pastelPurple w-full p-4'>
 							{pet.description}
 						</h3>
-						{!isMarkedButtonPressed && (
+						{isUserPost && !isMarkedButtonPressed && (
 							<button
 								className='border border-pastelPurple transition ease-in-out bg-pastelRed hover:bg-red-300 py-1 px-2 rounded-md'
 								onClick={() => handleDeletePet('delete')}
