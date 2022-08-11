@@ -2,8 +2,6 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import React, { useContext } from 'react'
-
 import { PetAdoptionData } from '../typings'
 
 interface Props {
@@ -14,6 +12,7 @@ interface Props {
 
 const PetQueryCard = ({ pet, userPets, navigateTo }: Props) => {
 	// console.log(pet)
+
 	return (
 		<div className=' w-[300px]  bg-white rounded-md border border-pastelPurple shadow-md '>
 			{/* <div className=''> */}
@@ -32,10 +31,10 @@ const PetQueryCard = ({ pet, userPets, navigateTo }: Props) => {
 					</a>
 				</Link>
 			</div>
-			<div className=' grid justify-items-center gap-2 mb-4'>
+			<div className=' grid justify-items-center gap-2 mb-4  '>
 				<Link href={`/pets/pet-adoption/${pet.id}`}>
-					<a>
-						<h3 className='text-2xl font-bold text-center max-w-[200px]'>
+					<a className=' focus:outline-gamboge  focus:rounded-md'>
+						<h3 className='text-2xl font-bold text-center max-w-[200px] '>
 							{pet.name}
 						</h3>
 					</a>

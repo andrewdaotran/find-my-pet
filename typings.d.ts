@@ -83,6 +83,56 @@ export interface PetAdoptionData {
 	url: string
 }
 
+export interface SinglePetAdoptionData {
+	id: number
+	organization_id: string
+	url: string
+	type: string
+	species: string
+	breeds: {
+		primary: string
+		secondary: string
+		mixed: boolean
+		unknown: boolean
+	}
+	colors: {
+		primary: string
+		secondary: string
+		tertiary: stringstring
+	}
+	age: string
+	gender: string
+	size: string
+	attributes: {
+		spayed_neutered: boolean
+		house_trained: boolean
+		declawed: boolean
+		special_needs: boolean
+		shots_current: boolean
+	}
+
+	name: string
+	description: string
+	organization_animal_id: string
+	photos: [[Object]]
+	primary_photo_cropped: {
+		small: string
+		medium: string
+		large: string
+		full: string
+	}
+
+	status: string
+	status_changed_at: string
+	published_at: string
+	contact: {
+		email: string
+		phone: string
+		address: [Object]
+	}
+	_links: { self: [Object]; type: [Object]; organization: [Object] }
+}
+
 export interface CommentData {
 	id: string
 	value: string

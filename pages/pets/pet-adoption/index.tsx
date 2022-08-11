@@ -68,6 +68,7 @@ const PetAdoptionListing = () => {
 			setRightPointer(pagination.count_per_page)
 		}
 		setResultsLoading(false)
+		console.log(petResults)
 	}
 
 	const fetchBreeds = async () => {
@@ -137,7 +138,7 @@ const PetAdoptionListing = () => {
 				<div className='relative w-fit z-30 ' ref={filtersButton}>
 					{/* Add Filters */}
 					<button
-						className=' flex border border-black py-1 px-2 rounded-md transition-all ease-in-out bg-pastelCream hover:bg-pastelDarkerCream justify-center items-center text-xl gap-1 focus:border-gamboge'
+						className=' flex border border-black py-1 px-2 rounded-md transition-all ease-in-out bg-pastelCream hover:bg-pastelDarkerCream justify-center items-center text-xl gap-1 focus:border-gamboge outline-none'
 						onClick={handleToggleFiltersMenu}
 					>
 						<PlusIcon className=' h-6' />
@@ -238,27 +239,32 @@ const PetAdoptionListing = () => {
 						setFunction={setLimitParameter}
 						backgroundColor={'bg-pastelCream'}
 					/>
-					<h3 className='text-lg'>posts</h3>
+					<h3 className='text-xl'>posts</h3>
 				</div>
 			</div>
+
+			{results && (
+				<div className='mt-8'>
+					<BackAndNextButtons
+						leftPointer={pageParameter}
+						rightPointer={rightPointer}
+						handleBack={() => handleBackOrNext('back')}
+						handleNext={() => handleBackOrNext('next')}
+						amountOfValues={totalPosts}
+						isLostAndFound={false}
+						currentPage={pageParameter}
+						resultsLoading={resultsLoading}
+					/>
+				</div>
+			)}
 
 			<div className='flex p-4 gap-6 mx-auto justify-center lg:gap-24 flex-wrap mt-4'>
 				{resultsLoading ? (
 					<h2 className='text-center'>Loading...</h2>
 				) : results && results.length > 1 ? (
-					<div className='grid gap-4'>
-						<div className=''>
-							<BackAndNextButtons
-								leftPointer={pageParameter}
-								rightPointer={rightPointer}
-								handleBack={() => handleBackOrNext('back')}
-								handleNext={() => handleBackOrNext('next')}
-								amountOfValues={totalPosts}
-								isLostAndFound={false}
-							/>
-						</div>
+					<div className='grid gap-8'>
 						{/* Animal Results Displayed */}
-						<div className='flex p-4 gap-6 mx-auto justify-center lg:gap-24 flex-wrap mt-4'>
+						<div className='flex p-4 gap-6 mx-auto justify-center lg:gap-24 flex-wrap'>
 							{results.map((pet: PetAdoptionData) => {
 								return (
 									<PetAdoptionQueryCard
@@ -277,6 +283,8 @@ const PetAdoptionListing = () => {
 								handleNext={() => handleBackOrNext('next')}
 								amountOfValues={totalPosts}
 								isLostAndFound={false}
+								currentPage={pageParameter}
+								resultsLoading={resultsLoading}
 							/>
 						</div>
 					</div>

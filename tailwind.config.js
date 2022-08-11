@@ -24,6 +24,7 @@ module.exports = {
 				pastelPurple: '#CDDAFD',
 				pastelLighterPurple: '#E1E8FA',
 				gamboge: '#E09D37',
+				lighterGamboge: '#D9B379',
 				backgroundGrey: '#F0F0F0',
 			},
 		},
