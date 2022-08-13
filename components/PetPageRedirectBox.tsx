@@ -18,7 +18,7 @@ const PetPageRedirectBox = ({
 			<a>
 				<div className=''>
 					<div
-						className={`border border-black p-2 shadow-md rounded-md h-32 ${backgroundColor}`}
+						className={`border border-pastelPurple p-2 shadow-md rounded-md h-32 ${backgroundColor} w-[18rem] md:w-[15rem] lg:w-[20rem]`}
 					>
 						<div className='grid justify-items-center gap-2'>
 							<h1 className='text-xl font-bold'>{title}</h1>

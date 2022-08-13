@@ -43,7 +43,7 @@ const Dropdown = ({
 			value={value}
 			className={`${
 				backgroundColor && backgroundColor
-			} border border-black rounded-md px-2 py-2 cursor-pointer  w-full focus:border-gamboge outline-none`}
+			} border border-pastelPurple rounded-md px-2 py-2 cursor-pointer  w-full focus:border-gamboge outline-none`}
 		>
 			{isBreedList
 				? breedData.map((category) => {

@@ -43,7 +43,7 @@ const BackAndNextButtons = ({
 			</button>
 
 			{currentPage && (
-				<div className='border border-pastelPurple flex justify-center items-center bg-pastelCream rounded-md px-3 col-start-2 col-end-3 text-xl'>
+				<div className='border border-pastelPurple flex justify-center items-center bg-pastelCream rounded-md  col-start-2 col-end-3 text-xl'>
 					<h3>{String(currentPage)}</h3>
 				</div>
 			)}
@@ -52,7 +52,7 @@ const BackAndNextButtons = ({
 				onClick={handleNext}
 				className={`text-xl border border-pastelPurple py-1 px-1 transition-all ease-in-out rounded-md bg-pastelCream hover:bg-pastelDarkerCream disabled:hidden ${
 					currentPage ? 'col-start-3 col-end-4' : 'col-start-2 col-end-3'
-				}  flex justify-center items-center pl-4 focus:border-gamboge outline-none`}
+				}  flex justify-center items-center pl-5 focus:border-gamboge outline-none`}
 				disabled={
 					rightPointer < amountOfValues || resultsLoading ? false : true
 				}

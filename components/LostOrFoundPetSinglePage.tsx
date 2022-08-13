@@ -165,15 +165,32 @@ const LostOrFoundPetSinglePage = ({ pet }: Props) => {
 
 					{/* Comment Form */}
 					<div className='w-[21rem] 6	sm:w-[30rem] 	md:w-[42rem]  border border-pastelPurple mx-auto p-4 bg-white '>
-						<h3 className='text-center text-xl mb-4'>Submit a Comment</h3>
-						<CommentForm petId={pet.id} />
-						{isFormSubmitted && (
-							<FormSubmissionModal isNewPet={false} isComment={true} />
+						{user.name ? (
+							<>
+								<h3 className='text-center text-xl mb-4'>Submit a Comment</h3>
+								<CommentForm petId={pet.id} />
+								{isFormSubmitted && (
+									<FormSubmissionModal isNewPet={false} isComment={true} />
+								)}
+							</>
+						) : (
+							<h3 className='text-center text-xl'>
+								Please Log In to Submit a Comment
+							</h3>
 						)}
 					</div>
+
 					{/* Comment Section */}
 					<div className='w-[21rem] 6	sm:w-[30rem] 	md:w-[42rem]  border border-pastelPurple mx-auto p-4 bg-white '>
-						<h3 className='text-center text-xl mb-4'>Comments</h3>
+						<h3
+							className={`text-center text-xl ${
+								pet.comments.length > 0 && 'mb-4'
+							}`}
+						>
+							{pet.comments.length > 0
+								? 'Comments'
+								: 'There Are Currently No Comments On This Post'}
+						</h3>
 						<CommentSection comments={pet.comments} />
 					</div>
 				</div>

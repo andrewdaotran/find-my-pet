@@ -12,10 +12,10 @@ export default function Home() {
 
 	return (
 		<div className=' mx-6  grid justify-items-center mt-12 md:mt-32 '>
-			<h1 className='justify-center text-3xl mb-12'>
+			<h1 className='justify-center text-5xl mb-12 text-center'>
 				Welcome to the <span className='text-red-500'>Find My Pet</span> App
 			</h1>
-			<div className='grid p-4 sm:grid-cols-2 gap-6 md:grid-cols-3'>
+			<div className='grid p-4 sm:grid-cols-1 gap-6 md:grid-cols-3'>
 				<PetPageRedirectBox
 					{...boxData.foundPets}
 					backgroundColor='bg-pastelRed'
@@ -32,7 +32,7 @@ export default function Home() {
 
 			{/* render out user boxes if user is logged in */}
 			{user ? (
-				<div className='grid p-4 sm:grid-cols-3 gap-6'>
+				<div className='grid p-4 sm:grid-cols-1 gap-6 md:grid-cols-3'>
 					<PetPageRedirectBox
 						{...userBoxData.foundPets}
 						backgroundColor='bg-pastelLightGreen'

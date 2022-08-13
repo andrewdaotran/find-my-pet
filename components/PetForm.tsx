@@ -185,7 +185,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							type='date'
 							value={pet.dateLostOrFound}
 							onChange={(e) => editPet(e.target.value, 'dateLostOrFound')}
-							className='cursor-pointer  border border-black rounded-md px-2 py-1  w-full outline-none focus:border-gamboge '
+							className='cursor-pointer  border border-pastelPurple rounded-md px-2 py-1  w-full outline-none focus:border-gamboge '
 						/>
 
 						{errors.dateLostOrFound && (
@@ -224,7 +224,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							{...register('breed')}
 							disabled={petLoading && true}
 							type='text'
-							className='border border-black rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
+							className='border border-pastelPurple rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
 							value={pet.breed}
 							onChange={(e) => editPet(e.target.value, 'breed')}
 							placeholder='Pitbull'
@@ -239,7 +239,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							{...register('name')}
 							disabled={petLoading && true}
 							type='text'
-							className='border border-black rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
+							className='border border-pastelPurple rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
 							value={pet.name}
 							onChange={(e) => editPet(e.target.value, 'name')}
 							placeholder='Nebula'
@@ -269,7 +269,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							{...register('age')}
 							disabled={petLoading && true}
 							type='text'
-							className='border border-black rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
+							className='border border-pastelPurple rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
 							value={pet.age}
 							onChange={(e) => editPet(e.target.value, 'age')}
 							placeholder='Enter age in years'
@@ -287,7 +287,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 						<textarea
 							{...register('description', { required: true })}
 							disabled={petLoading && true}
-							className={`focus:border-gamboge border border-black rounded-md resize-none h-56 w-full  px-2 py-1 outline-none ${
+							className={`focus:border-gamboge border border-pastelPurple rounded-md resize-none h-56 w-full  px-2 py-1 outline-none ${
 								!isNewPet && !isUpdatingImage ? 'md:h-[20.5rem]' : 'md:h-56 '
 							}`}
 							value={pet.description}
@@ -320,7 +320,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 							{...register('city', { required: true })}
 							disabled={petLoading && true}
 							type='text'
-							className='border border-black rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
+							className='border border-pastelPurple rounded-md  px-2 py-1 outline-none  w-full focus:border-gamboge'
 							value={pet.city}
 							onChange={(e) => editPet(e.target.value, 'city')}
 							placeholder='Auburn'
@@ -409,25 +409,6 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 					)}
 				</div>
 
-				{/* Image Preview */}
-				{pet.image && (
-					<div className=' col-span-2  mx-auto grid justify-items-center mt-2 md:mt-4'>
-						<div className='grid gap-1 '>
-							<h4 className='font-bold'>Image Preview:</h4>
-							<div className='border border-pastelPurple w-[21rem] h-56 relative'>
-								<Image src={pet.image} layout='fill' className='object-cover' />
-							</div>
-						</div>
-						<button
-							disabled={petLoading && true}
-							onClick={handleRemoveImage}
-							className='border border-pastelLighterPurple mt-4 px-2 py-1 bg-pastelSand hover:bg-gray-200 transition-all ease-in-out  rounded-md '
-						>
-							Remove Image
-						</button>
-					</div>
-				)}
-
 				{/* Loading Message */}
 				{petLoading && (
 					<div className='mt-4 text-center  col-span-2 '>
@@ -451,6 +432,25 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 								Cancel Edit
 							</button>
 						)}
+					</div>
+				)}
+
+				{/* Image Preview */}
+				{pet.image && (
+					<div className=' col-span-2  mx-auto grid justify-items-center mt-2 md:mt-4'>
+						<div className='grid gap-1 '>
+							<h4 className='font-bold'>Image Preview:</h4>
+							<div className='border border-pastelPurple w-[21rem] h-56 relative'>
+								<Image src={pet.image} layout='fill' className='object-cover' />
+							</div>
+						</div>
+						<button
+							disabled={petLoading && true}
+							onClick={handleRemoveImage}
+							className='border border-pastelLighterPurple mt-4 px-2 py-1 bg-pastelSand hover:bg-gray-200 transition-all ease-in-out  rounded-md '
+						>
+							Remove Image
+						</button>
 					</div>
 				)}
 			</form>

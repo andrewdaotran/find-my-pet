@@ -31,7 +31,7 @@ const LostPets = ({}: Props) => {
 	return (
 		<>
 			<div className='flex justify-center my-4'>
-				<h2 className='text-5xl'>Lost Pets</h2>
+				<h2 className='sm:text-7xl text-5xl text-center'>Lost Pets</h2>
 			</div>
 
 			<PetSearchInput

@@ -37,7 +37,7 @@ const FoundPets = ({}: Props) => {
 	return (
 		<>
 			<div className='flex justify-center my-4'>
-				<h2 className='text-5xl'>Found Pets</h2>
+				<h2 className='sm:text-7xl text-5xl text-center'>Found Pets</h2>
 			</div>
 			<PetSearchInput
 				search={search}
@@ -48,7 +48,7 @@ const FoundPets = ({}: Props) => {
 			/>
 
 			{foundPetsByItem ? (
-				<div className='flex p-4 gap-6 mx-auto justify-center  lg:gap-24 flex-wrap'>
+				<div className='flex p-4 gap-6 mx-auto justify-center  lg:gap-24 flex-wrap '>
 					{foundPetsByItem.foundPetsByItem[0] ? (
 						foundPetsByItem.foundPetsByItem.map((pet: PetData) => {
 							return (

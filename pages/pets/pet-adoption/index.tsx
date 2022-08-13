@@ -130,7 +130,9 @@ const PetAdoptionListing = () => {
 	return (
 		<>
 			<div className='flex justify-center my-4 gap-4 mt-10'>
-				<h2 className='text-5xl text-center'>Pets Available for Adoption</h2>
+				<h2 className='sm:text-7xl text-5xl text-center'>
+					Pets Available for Adoption
+				</h2>
 			</div>
 
 			<div className='flex mx-auto w-fit gap-4 mt-10 '>
@@ -138,7 +140,7 @@ const PetAdoptionListing = () => {
 				<div className='relative w-fit z-30 ' ref={filtersButton}>
 					{/* Add Filters */}
 					<button
-						className=' flex border border-black py-1 px-2 rounded-md transition-all ease-in-out bg-pastelCream hover:bg-pastelDarkerCream justify-center items-center text-xl gap-1 focus:border-gamboge outline-none'
+						className=' flex border border-pastelPurple py-1 px-2 rounded-md transition-all ease-in-out bg-pastelCream hover:bg-pastelDarkerCream justify-center items-center text-xl gap-1 focus:border-gamboge outline-none'
 						onClick={handleToggleFiltersMenu}
 					>
 						<PlusIcon className=' h-6' />
@@ -257,9 +259,9 @@ const PetAdoptionListing = () => {
 				</div>
 			)}
 
-			<div className='flex p-4 gap-6 mx-auto justify-center lg:gap-24 flex-wrap mt-4'>
+			<div className='flex p-4 gap-6 mx-auto justify-center items-center lg:gap-24 flex-wrap mt-4 '>
 				{resultsLoading ? (
-					<h2 className='text-center'>Loading...</h2>
+					<h2 className='text-center text-3xl '>Loading...</h2>
 				) : results && results.length > 1 ? (
 					<div className='grid gap-8'>
 						{/* Animal Results Displayed */}

@@ -38,7 +38,7 @@ const UserLostPets = ({ user }: Props) => {
 	}
 	return (
 		<div className=''>
-			<h2 className='sm:text-7xl text-4xl text-center mt-6 mb-2 lg:mb-6'>
+			<h2 className='sm:text-7xl text-5xl text-center mt-6 mb-2 lg:mb-6'>
 				Your Lost Pets
 			</h2>
 			<PetSearchInput
