@@ -40,19 +40,16 @@ const User = ({ user, userIdParams }: Props) => {
 
 	return (
 		<div>
-			<div className='grid md:p-4 sm:grid-cols-2 gap-6 max-w-2xl mx-auto  justify-center mt-4 sm:w-[40rem] mb-4 md:mb-10'>
-				<div className='w-[22rem] sm:w-full'>
-					<PetPageRedirectBox
-						{...userBoxData.foundPets}
-						backgroundColor='bg-pastelLightGreen'
-					/>
-				</div>
-				<div className='w-[22rem] sm:w-full'>
-					<PetPageRedirectBox
-						{...userBoxData.lostPets}
-						backgroundColor='bg-pastelRed'
-					/>
-				</div>
+			<div className='flex md:p-4 sm:grid-cols-2 gap-6 max-w-2xl mx-auto  justify-center items-center mt-4 sm:w-[40rem] mb-4 md:mb-10'>
+				<PetPageRedirectBox
+					{...userBoxData.foundPets}
+					backgroundColor='bg-pastelLightGreen'
+				/>
+
+				<PetPageRedirectBox
+					{...userBoxData.lostPets}
+					backgroundColor='bg-pastelGreen'
+				/>
 			</div>
 
 			<PetForm isNewPet={true} />

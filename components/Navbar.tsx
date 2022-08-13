@@ -55,8 +55,6 @@ const Navbar = ({ children }) => {
 		}
 	}, [userData])
 
-	console.log(windowSize.width)
-
 	return (
 		<>
 			<nav className=' bg-pastelCream border-b border-pastelPurple relative'>
