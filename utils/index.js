@@ -1,5 +1,7 @@
 import Compressor from 'compressorjs'
 
+export const revalidate = 120
+
 export const convertCase = (str) => {
 	var lower = String(str).toLowerCase()
 	return lower.replace(/(^| )(\w)/g, function (x) {

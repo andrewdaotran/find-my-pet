@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next'
 import { gql } from '@apollo/client'
 
+import { revalidate } from '../../../utils'
 import { initializeApollo } from '../../../apollo/apollo-client'
 import { PET_QUERY } from '../../../apollo/petQueries'
 import { PetData } from '../../../typings'
@@ -55,6 +56,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	return {
 		props: { pet: data.pet },
-		revalidate: 120,
+		revalidate,
 	}
 }

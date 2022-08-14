@@ -114,20 +114,6 @@ const Navbar = ({ children }) => {
 											</div>
 										)
 									})}
-									{/* <div className='flex  rounded-md py-2 px-3 transition-colors ease-in-out hover:bg-pastelDarkerCream cursor-pointer'>
-										<Link href={`/pets/lost-pets`}>
-											<a>
-												<h1 className=''>Lost Pets</h1>
-											</a>
-										</Link>
-									</div> */}
-									{/* <div className='flex  rounded-md py-2 px-3 transition-colors ease-in-out hover:bg-pastelDarkerCream cursor-pointer'>
-										<Link href={`/pets/found-pets`}>
-											<a>
-												<h1 className=''>Found Pets</h1>
-											</a>
-										</Link>
-									</div> */}
 								</>
 							)}
 						</div>
