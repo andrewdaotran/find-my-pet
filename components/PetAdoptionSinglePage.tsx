@@ -114,6 +114,7 @@ const PetAdoptionSinglePage = ({ pet }: Props) => {
 							<span>
 								<a
 									target='_blank'
+									rel='noreferrer'
 									href={pet.url}
 									className='  w-fit inline-flex items-center justify-center text-gamboge hover:text-lighterGamboge transition ease-in-out'
 								>
