@@ -17,7 +17,8 @@ function createApolloClient() {
 	return new ApolloClient({
 		ssrMode: typeof window === 'undefined',
 		link: new HttpLink({
-			uri: process.env.NEXT_PUBLIC_SERVER_URL, // Server URL (must be absolute)
+			uri: `${process.env.VERCEL_URL}/api/graphql`,
+			// process.env.NEXT_PUBLIC_SERVER_URL, // Server URL (must be absolute)
 
 			credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
 		}),

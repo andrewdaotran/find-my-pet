@@ -21,7 +21,8 @@ export default AdoptionPet
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 	const adoptionId = query.adoptionId
 	const { data: accessToken } = await axios.get(
-		process.env.NEXT_PUBLIC_ACCESS_TOKEN_URL
+		`${process.env.VERCEL_URL}/api/pet-finder-oauth-token`
+		// process.env.NEXT_PUBLIC_ACCESS_TOKEN_URL
 	)
 
 	const petResult = await axios.get(
