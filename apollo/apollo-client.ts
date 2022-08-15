@@ -19,7 +19,7 @@ function createApolloClient() {
 		link: new HttpLink({
 			// uri: `http://${url}/api/graphql`,
 			// uri: `${process.env.VERCEL_URL}/api/graphql`,
-			uri: `${process.env.BASE_URL}/api/graphql`, // Server URL (must be absolute)
+			uri: `${process.env.BASE_URL}api/graphql`, // Server URL (must be absolute)
 			// `${process.env.VERCEL_URL}/api/graphql`,
 
 			credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
