@@ -69,8 +69,9 @@ const LostOrFoundPetSinglePage = ({ pet }: Props) => {
 		setIsMarkedButtonPressed(true)
 	}
 
+	console.log(size.width)
 	return (
-		<div className='relative'>
+		<div className='relative '>
 			{removePetPopup.value && (
 				<DeletePetModal
 					isMarkedReturned={removePetPopup.type === 'returned' ? true : false}
@@ -85,7 +86,9 @@ const LostOrFoundPetSinglePage = ({ pet }: Props) => {
 
 			<div
 				className={`${
-					size.width > 1800 ? 'flex gap-8 justify-center mb-8' : null
+					size.width > 1800 && isUserPost
+						? 'flex gap-8 justify-center mb-8 '
+						: null
 				} `}
 			>
 				{/* All Boxes */}

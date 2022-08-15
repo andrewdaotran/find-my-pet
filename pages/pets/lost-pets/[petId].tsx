@@ -48,6 +48,8 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+	// console.log(process.env.VERCEL)
+	console.log(process.env.VERCEL_URL)
 	const apolloClient = initializeApollo()
 	const { data } = await apolloClient.query({
 		query: PET_QUERY,

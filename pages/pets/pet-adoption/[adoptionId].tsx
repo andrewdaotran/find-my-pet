@@ -18,10 +18,14 @@ const AdoptionPet = ({ pet }: Props) => {
 
 export default AdoptionPet
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-	const adoptionId = query.adoptionId
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const host = context.req.headers.host
+	const adoptionId = context.query.adoptionId
 	const { data: accessToken } = await axios.get(
-		`${process.env.VERCEL_URL}/api/pet-finder-oauth-token`
+		`http://${host}/api/pet-finder-oauth-token`
+
+		// `${process.env.VERCEL_URL}/api/pet-finder-oauth-token`
+		// `${process.env.VERCEL_URL}/api/pet-finder-oauth-token`
 		// process.env.NEXT_PUBLIC_ACCESS_TOKEN_URL
 	)
 
