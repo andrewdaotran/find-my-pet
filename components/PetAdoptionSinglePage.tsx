@@ -57,6 +57,7 @@ const PetAdoptionSinglePage = ({ pet }: Props) => {
 							}
 							layout='fill'
 							className='object-contain'
+							alt={pet.name}
 						/>
 					</div>
 					{/* Info Box */}

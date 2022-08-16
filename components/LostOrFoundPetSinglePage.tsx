@@ -99,7 +99,12 @@ const LostOrFoundPetSinglePage = ({ pet }: Props) => {
 			sm:w-[30rem] sm:h-[20rem]
 			md:w-[42rem] md:h-[28rem] mt-8 '
 					>
-						<Image src={pet.image} layout='fill' className='object-cover' />
+						<Image
+							src={pet.image}
+							layout='fill'
+							className='object-cover'
+							alt={pet.name}
+						/>
 					</div>
 					{/* Info Box */}
 					<div className='border border-pastelPurple w-[21rem] sm:w-[30rem] md:w-[42rem] mx-auto bg-white p-4 grid justify-items-center gap-4 '>

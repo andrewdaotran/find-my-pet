@@ -23,6 +23,7 @@ const PetQueryCard = ({ pet, navigateTo }: Props) => {
 							}
 							layout='fill'
 							className='rounded-t-md object-cover '
+							alt={pet.name}
 						/>
 					</a>
 				</Link>

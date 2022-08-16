@@ -441,7 +441,12 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 						<div className='grid gap-1 '>
 							<h4 className='font-bold'>Image Preview:</h4>
 							<div className='border border-pastelPurple w-[21rem] h-56 relative'>
-								<Image src={pet.image} layout='fill' className='object-cover' />
+								<Image
+									src={pet.image}
+									layout='fill'
+									className='object-cover'
+									alt={pet.name}
+								/>
 							</div>
 						</div>
 						<button
