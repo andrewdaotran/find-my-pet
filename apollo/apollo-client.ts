@@ -18,7 +18,8 @@ function createApolloClient() {
 		ssrMode: typeof window === 'undefined',
 		link: new HttpLink({
 			// uri: `http://${url}/api/graphql`,
-			uri: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/graphql`,
+			uri: `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/graphql`,
+			// uri: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/graphql`,
 			// uri: `${process.env.BASE_URL}api/graphql`, // Server URL (must be absolute)
 			// `${process.env.VERCEL_URL}/api/graphql`,
 

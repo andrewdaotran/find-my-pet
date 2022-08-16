@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const host = context.req.headers.host
 	const adoptionId = context.query.adoptionId
 	const { data: accessToken } = await axios.get(
-		`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/pet-finder-oauth-token`
+		`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/pet-finder-oauth-token`
 		// `${process.env.BASE_URL}/api/pet-finder-oauth-token`
 		// `http://${host}/api/pet-finder-oauth-token`
 
