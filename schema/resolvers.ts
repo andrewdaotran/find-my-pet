@@ -21,7 +21,6 @@ const resolvers = {
 	Date: dateScalar,
 	Query: {
 		dateNow: (parent, { date }) => {
-			console.log('date', date)
 			return date
 		},
 		pets: async () => {
@@ -206,7 +205,6 @@ const resolvers = {
 		},
 		deleteComment: async (parent, args) => {
 			const commentId = args.id
-			console.log(commentId)
 			try {
 				const comment = await CommentModel.findByIdAndDelete(commentId)
 

@@ -69,7 +69,6 @@ const LostOrFoundPetSinglePage = ({ pet }: Props) => {
 		setIsMarkedButtonPressed(true)
 	}
 
-	console.log(size.width)
 	return (
 		<div className='relative '>
 			{removePetPopup.value && (

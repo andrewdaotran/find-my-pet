@@ -22,8 +22,6 @@ const FoundPet = ({ pet }: Props) => {
 export default FoundPet
 
 export const getStaticPaths = async () => {
-	// console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
-	console.log(process.env.VERCEL_URL)
 	const apolloClient = initializeApollo()
 	const { data } = await apolloClient.query({
 		query: gql`
