@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React from 'react'
 
 import { PetData } from '../typings'
 import useWindowSize from '../custom-hooks/useWindowSize'

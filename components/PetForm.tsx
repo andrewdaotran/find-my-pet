@@ -129,6 +129,7 @@ const PetForm = ({ isNewPet, setIsEditingPet, isLargeWindow }: Props) => {
 
 	const handleCloseModal = () => {
 		petReset()
+		clearPet()
 	}
 
 	return petLoading || !petCalled ? (
