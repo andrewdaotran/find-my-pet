@@ -1,9 +1,8 @@
 <h1 align="center">Find My Pet</h1>
-<hr>
+
 I wanted to help owners who had lost their pets and individuals who have found a lost pet to be able to go to one place and post about the pet to bring them home. Secondly, I wanted to help adoptable pets find their forever home.
 
 <h2 align="left">**How It's Made:**</h2>
-<hr>
 
 **Tech used:** NextJS, TypeScript, MongoDB, TailwindCSS, GraphQL, ContextAPI, PetFinder API
 
