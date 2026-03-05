@@ -1,21 +1,78 @@
-<h1 align="center">Find My Pet</h1>
+# 🐾 Find My Pet
 
-I wanted to help owners who had lost their pets and individuals who have found a lost pet to be able to go to one place and post about the pet to bring them home. Secondly, I wanted to help adoptable pets find their forever home.
+> A full-stack pet finding platform designed to reunite lost pets with their families and help adoptable pets find loving homes.
 
-<h2 align="left">How It's Made:</h2>
+---
 
-**Tech used:** NextJS, TypeScript, MongoDB, TailwindCSS, GraphQL, ContextAPI, PetFinder API
+## 🚀 Project Overview
 
-For my full stack projects I had previously used React with client side rendering and a separate directory for my server and database. NextJS allowed me to server side render my pages that needed to be updated more frequently and statically generated the pages that were better suited to be static, such as the individual lost or found pet pages created by the users. NextJS also gives me an api route where I can build my server and also gives me out of the box routing so I no longer have to use the cumbersome React Router. The pages directory for routing is incredibly intuitive and has no learning curve.
+**Find My Pet** is a community-driven web application that enables users to:
 
-This Find My Pet project became a project where I wanted to implement all the new techonologies I was learning to really give myself real life experience and to cement the skills. I had used TypeScript before but not to the degree and scale of this project. Previously with just JavaScript I had times where I would sit and fix bugs for long periods of time that ended up being silly mistakes that TypeScript could have caught right away. I found that the setup to use TypeScript as well as the boiler plate type definitions that one doesn't need when using normal JavaScript are well worth the extra work as it gives me less work to do in the long run.
+- 🐶 Post lost pets
+- 🐱 Report found pets
+- 🏡 Browse pets available for adoption
+- 📍 Search listings by geographic area
 
-Previously I used Redux and Redux Toolkit as my state management tools but I did notice Redux feels like overkill for a smaller project like this. Because of this, I decided to learn how to use the native Context API and it gave me everything I needed in a state management tool. I found that the learning curve is not as high as Redux yet it gives small projects everything one needs. For small projects I will continue to use Context and I will weigh my options between Redux and Context for a future, larger project.
+The platform is designed to make local pet discovery fast, organized, and accessible — because every pet deserves a safe home.
 
-I have grown to love using the CSS framework TailwindCSS because it elminates the usage of an extra file when styling my pages. React firstly allowed me to bring HTML into my JavaScript files and now TailwindCSS brought the missing piece I was craving. Although to the untrained eye the inline CSS is a bit more difficult to read but after using it for so long, I can now easily read and adjust my styles. Having HTML, CSS, and JavaScript is now incredibly invaluable to me.
+---
 
-Lastly with my back end I chose to learn and implement a GraphQL API instead of my normal RESTful API. I still used MongoDB as my database because of my familiarity with it but I really enjoyed the ability to eliminate overfetching and only grab the data I really needed. I also really enjoyed not having to write separate routes for my endpoints and instead I just had to write my logic as a Query or a Mutation. I will say the learning curve for GraphQL and the Apollo Client was a little higher than I anticipated but it was worth it. Along with the API that I created, I wanted to query an external API that worked well with my project as well. Luckily I found a PetFinder API that displays adoptable pets. This gave me the ability to work with an external API as well as help pets find a forever home.
+## 🧱 Tech Stack
 
-<h2 align="left">Lessons Learned:</h2>
+### 🖥 Frontend
 
-Implementing several new technologies in one project definitely had some high highs and some low lows. I found myself fixing more bugs that I had never seen before and spending more time than I had liked concurrently watching tutorials or on Stack Overflow but I noticed that solving these issues and implementing what I was learning right away made me learn much more than any stand alone tutorial could have. I got to experience real life problems and solutions and the nitty gritty details that no external lecture would typically get into. I am extremely glad and proud of the work I produced and the technologies I learned. I am now extremely confident in my ability to go into any project or job and learn the technologies expected of me and be successful.
+Built with:
+
+- ⚡ **Next.js** – Server-side rendering and optimized routing
+- 🧩 **TypeScript** – Type-safe components and scalable architecture
+- 🌐 **Context API** – Global state management
+- 🎨 **TailwindCSS** – Utility-first styling for responsive and modern UI
+
+Frontend Features:
+- Area-based filtering system
+- Dynamic routing for pet profiles
+- Responsive mobile-first design
+- Real-time UI updates with GraphQL queries
+
+---
+
+### 🔌 Backend
+
+Powered by:
+
+- 🍃 **MongoDB** – Flexible NoSQL database for pet listings and user data
+- 🔎 **GraphQL** – Efficient and structured API layer for querying and mutating pet data
+- 🐕 **Petfinder API** – External integration to fetch adoptable pets in real-time
+
+Backend Responsibilities:
+- CRUD operations for lost/found pet posts
+- Area-based search queries
+- User authentication and post management
+- External API aggregation for adoptable pets
+
+---
+
+## 🐾 Core Features
+
+### 🔍 Lost Pet Search
+Users can:
+- Post detailed information about lost pets
+- Upload images
+- Specify last known location
+- Filter results by area
+
+### 🐕 Found Pet Listings
+Community members can:
+- Post pets they’ve found
+- Provide location details
+- Add photos and descriptions
+- Help reunite pets with owners
+
+### 🏡 Adoptable Pets
+- Pulls live data from the Petfinder API
+- Displays pets available for adoption by area
+- Provides direct links to adoption organizations
+
+### 📍 Location-Based Filtering
+- Search by city, ZIP code, or region
+- Organized listings to improve visibility and recovery speed
